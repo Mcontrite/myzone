@@ -1,0 +1,24 @@
+{{ define "layout/addnewarticle" }}
+<a id="addnewarticle" role="button" class="btn btn-primary btn-block mb-3" href="#">发新帖</a>
+<a id="addnewsaying" role="button" class="btn btn-primary btn-block mb-3" href="#">发说说</a>
+<script>
+    var jnewarticle = $("#addnewarticle")
+    jnewarticle.on("click", function () {
+        if (!{{.islogin}}) {
+            $.alert("请先登录")
+            return
+        }
+        
+        location.href="/newarticle.html"
+    })
+    var jnewsaying = $("#addnewsaying")
+    jnewsaying.on("click", function () {
+        if (!{{.islogin}}) {
+            $.alert("请先登录")
+            return
+        }
+        
+        location.href="/newsaying.html"
+    })
+</script>
+{{end}}

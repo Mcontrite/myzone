@@ -1,0 +1,91 @@
+{{ template "layout/header" .}}
+<main id="body">
+    <div class="container">
+        <div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
+            <a role="button" class="btn btn-secondary" data-active="menu-my" href="/my.html">个人资料</a>
+            <a role="button" class="btn btn-secondary active" data-active="menu-my-article"
+                href="/my_article.html">论坛帖子</a>
+        </div>
+        <div class="row">
+            <!-- 左侧菜单 -->
+            <div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <img class="avatar-4" src="{{.sessions.Useravatar}}">
+                        <br>{{.sessions.Username}}
+                    </div>
+                    <div class="list-group list-group-flush text-center">
+                        <a href="/my.html" class="list-group-item list-group-item-action" data-active="menu-my">个人资料</a>
+                        <a href="/my_article.html" class="list-group-item list-group-item-action active"
+                            data-active="menu-my-article">论坛帖子</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="col-lg-10" id="my_main">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/my_article.html" data-active="my-article">主题</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/my_favorite.html" data-active="my-favorite">收藏 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/my_reply.html" data-active="my-reply">帖子</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled replylist mb-0">
+
+
+                            {{range .replys}}
+                            <li class="media reply" data-pid="8" data-uid="2">
+                                <a href="?user-2.htm" class="mr-3" tabindex="-1">
+                                    <img class="avatar-3" src="{{.Article.User.Avatar}}">
+                                </a>
+                                <div class="media-body">
+                                    <div class="d-flex justify-content-between small text-muted">
+                                        <div>
+                                            <span style="padding-bottom:0;margin-bottom:0;color:; ">
+                                                <i class="iconfont icon-v1" style="font-size: !important;">
+                                                    {{.Article.User.Group.Name}}</i>
+                                            </span>
+                                            <span class="username">
+                                                <a href="?user-2.htm"
+                                                    class="text-muted font-weight-bold">{{.Article.User.Username}}</a>
+                                            </span>
+                                            <span
+                                                class="date text-grey ml-2">{{.Article.CreatedAt.Unix | strtime}}</span>
+                                        </div>
+                                        <div class="text-right text-grey">
+                                            <style>
+                                                .haya-reply-like .haya-reply-like-loved {
+                                                    color: var(--secondary) !important;
+                                                }
+                                            </style>
+                                            <a href="?reply-update-8.htm" class="text-grey reply_update mr-3"><i
+                                                    class="icon-edit" title="编辑"></i> <span class="d-none">编辑</span></a>
+                                            <a data-href="?reply-delete-8.htm" data-confirm-text="确定删除吗？"
+                                                href="javascript:void(0);"
+                                                class="text-grey reply_delete _confirm mr-3"><i class="icon-remove"
+                                                    title="删除"></i> <span class="d-none">删除</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="message mt-1 break-all">
+                                        <h6><a href="?article-2.htm" target="_blank">{{.Article.Title}}</a></h6>
+                                        <p>{{.Reply.Message | unescaped}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{ template "layout/footer" .}}

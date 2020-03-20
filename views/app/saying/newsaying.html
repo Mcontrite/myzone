@@ -1,0 +1,180 @@
+{{ template "layout/header" .}}
+{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
+<style>
+    .tagactive {
+        color: #9B703F;
+        font-weight: bold;
+        background-color: papayawhip;
+    }
+</style>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<main id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        发表主题
+                    </div>
+                    <div class="card-body">
+                        <form action="/api/saying" method="post" id="sayingform">
+                            <div class="form-group">
+                                <div class="edui-container" style="width: 100%; z-index: 999;">
+                                    <div class="edui-editor-body message">
+                                        <textarea class="form-control" placeholder="内容" name="message" id="message"
+                                                  style="height: 300px; display: none;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ template "layout/captcha" .}}
+
+                            <div class="d-flex justify-content-between">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary" id="sayingsubmit"
+                                            data-loading-text="正在提交..."> 提交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3"
+                   href="javascript:history.back();">返回</a>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    //判断是否已登录  如未登录 跳转到登录页
+    if (!{{.islogin }}) {
+        location.href = "/login.html"
+    }
+
+    CKEDITOR.replace('message', {
+        language: 'zh-cn',
+        disallowedContent: '<script >',
+        // toolbar: [['Smiley']],
+        // toolbarCanCollapse: true,
+        toolbarStartupExpanded: false,
+        toolbar: [
+            {name: 'document', items: ['Source', '-', 'Preview']},
+            {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo']},
+            {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'RemoveFormat']},
+            {name: 'colors', items: ['TextColor']},
+            {
+                name: 'paragraph',
+                items: ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
+            },
+            {name: 'links', items: ['Link', 'Unlink']},
+            {name: 'insert', items: ['Image', 'Smiley', 'Table', 'HorizontalRule', 'SpecialChar']},
+            '/',
+            {name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize']},
+            {name: 'tools', items: ['Maximize', 'ShowBlocks']},
+        ],
+        height: '25rem',
+        resize_minHeight: '5rem',
+        image_previewText: " ",
+        upload_hidden: false,
+        removeDialogTabs: 'image:advanced;image:Link',
+        filebrowserImageUploadUrl: "/api/image/upload",
+        filebrowserUploadUrl: "/api/image/upload",
+        //enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
+        //shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
+        extraPlugins: 'uploadimage',
+        // extraPlugins:['codesnippet','uploadimage'],
+        codeSnippet_theme: 'zenburn'
+    });
+
+    var qrform = $("#sayingform")
+    var jsubmit = $('#sayingsubmit');
+    var maxSize = 1 * 1024 * 1024
+
+    qrform.on("keydown", function () {
+        if (event.keyCode == 13) {
+            return false;
+        }
+    })
+
+    jsubmit.on('click', function () {
+        // 验证验证码
+        var captcha = getCaptcha()
+        var captchaKey = getCaptchaKey()
+        captchaPass = virefyCaptcha(captcha, captchaKey)
+        if (captcha.length == 0) {
+            $.alert("验证码不能为空")
+            return
+        } else {
+            if (captchaPass != 200) {
+                $.alert("验证码错误")
+                refreshCaptcha()
+                return
+            }
+        }
+
+        var ckmessage = CKEDITOR.instances.message.getData();
+        if (ckmessage.length < 1) {
+            $.alert("内容不能为空切不能小于1字")
+            return
+        }
+
+        qrform.reset();
+        jsubmit.button('loading');
+        var replydata = qrform.serializeObject();
+        replydata.message = ckmessage
+        console.log(replydata)
+        // return;
+
+        $.xpost(qrform.attr('action'), replydata, function (code, message) {
+            console.log(code, ":", message)
+            // return;
+            if (code == 200) {
+                afterAddNewSaying()
+                $.alert(message);
+                setTimeout(function () {
+                    location.href = "/"
+                }, 1000)
+            } else {
+                $.alert(message)
+                return
+            }
+        });
+
+        return false;
+    });
+
+    function afterAddNewSaying() {
+        var jsubmit = $('#replysubmit')
+        jsubmit.button('reset');
+    }
+
+    function trimChar(str, char, type) {
+        if (char) {
+            if (type == 'left') {
+                return str.replace(new RegExp('^\\' + char + '+', 'g'), '');
+            } else if (type == 'right') {
+                return str.replace(new RegExp('\\' + char + '+$', 'g'), '');
+            }
+            return str.replace(new RegExp('^\\' + char + '+|\\' + char + '+$', 'g'), '');
+        }
+        return str.replace(/^\s+|\s+$/g, '');
+    }
+
+    function randomChar(num) {
+        var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+        var tmp = "";
+        var timestamp = new Date().getTime();
+        for (var i = 0; i < num; i++) {
+            tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+        }
+        return "newsaying" + timestamp + tmp
+    }
+
+    $('form[method="POST"]').append('<input type="hidden" name="xss_token" value="' + "uid" + {{.sessions.Userid }} +randomChar(11) + '" />');
+
+    function toggleclass(ele) {
+        $(ele).toggleClass("tagactive")
+    }
+</script>
+
+
+{{ template "layout/footer" .}}
