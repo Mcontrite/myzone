@@ -1,10 +1,9 @@
 package model
 
-// 我的帖子表
 type Reply struct {
 	Model
 	UserID       int    `gorm:"default:0" json:"user_id"`        //用户ID
-	ArticleID    int    `gorm:"default:0" json:"article_id"`     //主题id
+	ArticleID    int    `gorm:"default:0" json:"article_id"`     //文章id
 	QuoteReplyId int    `gorm:"default:0" json:"quote_reply_id"` //引用哪个Aid，可能不存在
 	Message      string `gorm:"default:''" json:"message"`       //内容原始数据
 	MessageFmt   string `gorm:"default:''" json:"message_fmt"`   //过滤后的html内容

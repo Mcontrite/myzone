@@ -29,6 +29,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="media">
+                                <div class="media-body">
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon icon-lock icon-fw"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="确认密码" name="checkpassword"
+                                            id="checkpassword">
+                                    </div>
+                                </div>
+                            </div>
                             {{ template "layout/captcha" .}}
                             <div class="form-group">
                                 <button type="button" class="btn btn-primary btn-block" id="registersubmit"
@@ -59,12 +70,11 @@
         var jusername = $('#username').val();
         var jpassword = $('#password').val();
         var isused = 0
-
         // 验证用户名
-        reg = /^[a-zA-Z]\w{3,17}$/
+        reg = /^[a-zA-Z]\w{2,17}$/
         matchResult = jusername.match(reg)
         if (!matchResult) {
-            $.alert("用户名只能包5-17位的字母数字下划线必须以字母开头")
+            $.alert("用户名只能包3-17位的字母数字下划线必须以字母开头")
             return
         } else {
             reg = /admin|guest|myzone|root/gi
@@ -97,14 +107,10 @@
             }
         }
 
-
-        // 验证用户密码
-        // reg = /^(?![A-Za-z]+$)(?![A-Z\d]+$)(?![A-Z\W]+$)(?![a-z\d]+$)(?![a-z\W]+$)(?![\d\W]+$)\S{8,}$/
-        // matchResult = jpassword.match(reg)
-        // if (!matchResult) {
-        //     $.alert("用户密码必须包含8位以上大小写字母和数字及特殊字符组合")
-        //     return
-        // }
+        if($("#password").val() != $("#checkpassword").val()){
+            $.alert("两次密码输入不一致！")
+            return 
+        }
 
         // 验证验证码
         var captcha = getCaptcha()

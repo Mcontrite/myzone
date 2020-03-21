@@ -4,7 +4,6 @@ import (
 	"html"
 	"myzone/model"
 	"myzone/package/setting"
-	saying_service "myzone/service/saying"
 	"myzone/service/user"
 	"net/http"
 	"strconv"
@@ -25,23 +24,19 @@ func Saying(c *gin.Context) {
 	sessions := user.GetSessions(c)
 	commentlist, _ := model.GetSayingCommentListByTid(sayingId, 500, 1)
 	commentlistLen := len(commentlist)
-	isfav, _ := model.CheckFavourite(sessions.Userid, sayingId)
-	userNewestSayings, _ := saying_service.GetUserSayings(saying.UserID)
 	model.UpdateSayingViewsCnt(sayingId)
 	description := setting.ServerSetting.Sitebrief
 	c.HTML(
 		http.StatusOK,
 		"saying.html",
 		gin.H{
-			"saying":              saying,
-			"fcomment":            fcomment,
-			"islogin":             islogin,
-			"sessions":            sessions,
-			"commentlist":         commentlist,
-			"comment_list_len":    commentlistLen,
-			"user_newest_sayings": userNewestSayings,
-			"isfav":               isfav,
-			"description":         description,
+			"saying":           saying,
+			"fcomment":         fcomment,
+			"islogin":          islogin,
+			"sessions":         sessions,
+			"commentlist":      commentlist,
+			"comment_list_len": commentlistLen,
+			"description":      description,
 		},
 	)
 }

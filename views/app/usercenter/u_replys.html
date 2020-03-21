@@ -4,7 +4,7 @@
         <!-- 手机导航 / Mobile navigation -->
         <div class="btn-group mb-3 d-lg-none" role="group" id="user_mobile_nav">
             <a role="button" class="btn btn-secondary" data-active="menu-user" href="?user-1.htm">个人资料</a>
-            <a role="button" class="btn btn-secondary active" data-active="menu-user-article" href="?user-article-1.htm">论坛帖子</a>
+            <a role="button" class="btn btn-secondary active" data-active="menu-user-article" href="?user-article-1.htm">论坛回复</a>
         </div>
         <div class="row">
             <!-- PC 导航 / Mobile navigation -->
@@ -16,7 +16,7 @@
                     </div>
                     <div class="list-group list-group-flush text-center" id="user_nav">
                         <a href="/user/{{.userinfo.ID}}/info.html" class="list-group-item list-group-item-action" data-active="menu-user">个人资料</a>
-                        <a href="/user/{{.userinfo.ID}}/article.html" class="list-group-item list-group-item-action active" data-active="menu-user-article">论坛帖子</a>
+                        <a href="/user/{{.userinfo.ID}}/article.html" class="list-group-item list-group-item-action active" data-active="menu-user-article">论坛回复</a>
                     </div>
                 </div>
             </div>
@@ -25,16 +25,15 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="/user/{{.userinfo.ID}}/article.html" data-active="user-article">主题</a>
+                                <a class="nav-link" href="/user/{{.userinfo.ID}}/article.html" data-active="user-article">文章</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/user/{{.userinfo.ID}}/reply.html" data-active="user-reply">帖子</a>
+                                <a class="nav-link active" href="/user/{{.userinfo.ID}}/reply.html" data-active="user-reply">回复</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled replylist">
-
                             {{range .replys}}
                             <li class="media reply" data-pid="1" data-uid="1">
                                 <a href="?user-1.htm" class="mr-3" tabindex="-1">

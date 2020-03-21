@@ -12,10 +12,10 @@ type User struct {
 	Password     string    `gorm:"default:''" json:"password"`     //密码
 	Avatar       string    `gorm:"default:''" json:"avatar"`       //用户头像
 	ArticlesCnt  int       `gorm:"default:0" json:"articles_cnt"`  //发帖数
-	ReplysCnt    int       `gorm:"default:0" json:"replys_cnt"`    //回帖数
+	ReplysCnt    int       `gorm:"default:0" json:"replys_cnt"`    //回复数
 	SayingsCnt   int       `gorm:"default:0" json:"sayings_cnt"`   //发帖数
-	CommentsCnt  int       `gorm:"default:0" json:"comments_cnt"`  //回帖数
-	FavouriteCnt int       `gorm:"default:0" json:"favourite_cnt"` //收藏帖子数
+	CommentsCnt  int       `gorm:"default:0" json:"comments_cnt"`  //回复数
+	FavouriteCnt int       `gorm:"default:0" json:"favourite_cnt"` //收藏数
 	CreateIp     string    `gorm:"default:''" json:"create_ip"`    //创建时IP
 	LoginIp      string    `gorm:"default:''" json:"login_ip"`     //登录时IP
 	LoginDate    time.Time `json:"login_date"`                     //登录时间

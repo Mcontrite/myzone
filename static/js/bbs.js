@@ -102,7 +102,7 @@ jmobile_collapsing_bavbar.on('touchmove', function(e) {
 
 
 
-// 删除帖子 / Delete post
+// 删除 / Delete post
 $('body').on('click', '.post_delete', function() {
 	var jthis = $(this);
 	var href = jthis.data('href');

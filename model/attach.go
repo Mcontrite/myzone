@@ -3,8 +3,8 @@ package model
 type Attach struct {
 	Model
 	UserID       int    `gorm:"default:0" json:"user_id"`       //用户id
-	ArticleID    int    `gorm:"default:0" json:"article_id"`    //主题id
-	ReplyID      int    `gorm:"default:0" json:"reply_id"`      //帖子id
+	ArticleID    int    `gorm:"default:0" json:"article_id"`    //文章id
+	ReplyID      int    `gorm:"default:0" json:"reply_id"`      //回复id
 	Comment      string `gorm:"default:''" json:"comment"`      //文件注释 方便于搜索
 	Filename     string `gorm:"default:''" json:"filename"`     //文件名称，会过滤，并且截断，保存后的文件名，不包含URL前缀 upload_url
 	Orgfilename  string `gorm:"default:''" json:"orgfilename"`  //上传的原文件名

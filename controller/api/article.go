@@ -168,7 +168,7 @@ func UpdateArticle(c *gin.Context) {
 }
 
 // 添加附件
-// 直接添加到表中，因为以及各有了帖子  所以可以直接添加
+// 直接添加到表中，因为以及各有了文章  所以可以直接添加
 func AddarticleAttach(c *gin.Context) {
 	// 获取文件内容
 	// 获取articleid replyid uid
@@ -176,7 +176,7 @@ func AddarticleAttach(c *gin.Context) {
 	// 在attach表中添加一天新的记录
 }
 
-// 删除帖子的附件  知己额删除  提供好attach的id  就能删除
+// 删除的附件  知己额删除  提供好attach的id  就能删除
 func DelarticleAttach(c *gin.Context) {
 	// 删除数据内容  删除文件内容
 	// 获取articleid

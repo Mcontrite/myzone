@@ -206,7 +206,7 @@
                                             <div class="text-muted mt-2 small">
                                                 <div class="d-flex justify-content-between">
                                                     <div>
-                                                        <button id="replysubmit" type="button" class="btn btn-sm btn-secondary" id="submit" data-loading-text="正在提交..."> 回帖 </button>
+                                                        <button id="replysubmit" type="button" class="btn btn-sm btn-secondary" id="submit" data-loading-text="正在提交..."> 回复 </button>
                                                     </div>
                                                     <div>
                                                         <a class="icon-mail-forward text-muted" href="#" id="advanced_reply"> 高级回复</a>
@@ -246,11 +246,11 @@
                             <tbody>
                                 <tr align="center">
                                     <td>
-                                        <span class="text-muted">主题数</span><br>
+                                        <span class="text-muted">文章数</span><br>
                                         <b>{{.article.User.ArticlesCnt}}</b>
                                     </td>
                                     <td>
-                                        <span class="text-muted">帖子数</span><br>
+                                        <span class="text-muted">回复数</span><br>
                                         <b>{{.article.User.ReplysCnt}}</b>
                                     </td>
                                     <td>
@@ -265,7 +265,7 @@
                 {{/*用户的列表*/}}
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">作者最近主题：</h6>
+                        <h6 class="card-title">作者最近文章：</h6>
                         <ul class="small break-all">
                             {{range .user_newest_articles}}
                             <li class="line-height-2">
@@ -358,7 +358,7 @@ function addNewReplyElement() {
                 '<div class="d-flex justify-content-between small text-muted">' +
         '           <div> ' +
                         '<span style="padding-bottom:0;margin-bottom:0;color:; ">' +
-                            '<i class="iconfont icon-v1" style="font-size: !important;">管理员组 </i> ' +
+                            '<i class="iconfont icon-v1" style="font-size: !important;">管理员 </i> ' +
                         '</span>' +
                         '<span class="username">' +
                             '<a href="?user-2.htm" class="text-muted font-weight-bold">zhang</a>' +

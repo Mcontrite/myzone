@@ -42,7 +42,7 @@ func AddReply(c *gin.Context) {
 	}
 	newReply, err := model.AddReply(reply)
 	if err != nil {
-		logging.Info("回复帖子入库错误", err.Error())
+		logging.Info("回复入库错误", err.Error())
 		code = rcode.ERROR_SQL_INSERT_FAIL
 		app.JsonErrResponse(c, code)
 		return

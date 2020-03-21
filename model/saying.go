@@ -6,7 +6,7 @@ type Saying struct {
 	Model
 	UserID         int       `gorm:"default:0" json:"user_id"`          //
 	ViewsCnt       int       `gorm:"default:0" json:"views_cnt"`        //查看次数, 剥离出去，单独的服务，避免 cache 失效
-	CommentsCnt    int       `gorm:"default:0" json:"comments_cnt"`     //回帖数
+	CommentsCnt    int       `gorm:"default:0" json:"comments_cnt"`     //回复数
 	LastDate       time.Time `json:"last_date"`                         //最后回复时间
 	FirstCommentID int       `gorm:"default:0" json:"first_comment_id"` //首贴 pid
 	LastCommentID  int       `gorm:"default:0" json:"last_comment_id"`  //最后回复的 pid

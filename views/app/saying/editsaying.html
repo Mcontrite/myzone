@@ -7,7 +7,7 @@
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        更新主题
+                        更新文章
                     </div>
                     <div class="card-body">
                         <form action="/api/saying/{{.saying.ID}}/update" method="post" id="sayingform">
@@ -25,7 +25,7 @@
                             {{ template "layout/captcha" .}}
                             <div class="d-flex justify-content-between">
                                 <div class="text-right">
-                                    <button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 更新主题
+                                    <button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 更新文章
                                     </button>
                                 </div>
                             </div>

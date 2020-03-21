@@ -1,5 +1,4 @@
 {{ template "layout/header" .}}
-{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
 <style>
     .tagactive {
         color: #9B703F;
@@ -14,7 +13,7 @@
             <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        发表主题
+                        发表说说
                     </div>
                     <div class="card-body">
                         <form action="/api/saying" method="post" id="sayingform">
@@ -131,7 +130,7 @@
                 afterAddNewSaying()
                 $.alert(message);
                 setTimeout(function () {
-                    location.href = "/"
+                    location.href = "/sayings"
                 }, 1000)
             } else {
                 $.alert(message)

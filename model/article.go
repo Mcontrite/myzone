@@ -5,9 +5,9 @@ import "time"
 type Article struct {
 	Model
 	UserID       int       `gorm:"default:0" json:"user_id"`        //
-	Title        string    `gorm:"default:''" json:"title"`         // 主题
+	Title        string    `gorm:"default:''" json:"title"`         // 文章
 	ViewsCnt     int       `gorm:"default:0" json:"views_cnt"`      //查看次数, 剥离出去，单独的服务，避免 cache 失效
-	ReplysCnt    int       `gorm:"default:0" json:"replys_cnt"`     //回帖数
+	ReplysCnt    int       `gorm:"default:0" json:"replys_cnt"`     //回复数
 	FavouriteCnt int       `gorm:"default:0" json:"favourite_cnt"`  //被收藏数
 	ImagesNum    int       `gorm:"default:0" json:"images_num"`     //附件中包含的图片数
 	FilesNum     int       `gorm:"default:0" json:"files_num"`      //附件中包含的文件数

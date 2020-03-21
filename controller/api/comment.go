@@ -28,7 +28,7 @@ func AddComment(c *gin.Context) {
 	}
 	newComment, err := model.AddComment(comment)
 	if err != nil {
-		logging.Info("回复帖子入库错误", err.Error())
+		logging.Info("评论入库错误", err.Error())
 		code = rcode.ERROR_SQL_INSERT_FAIL
 		app.JsonErrResponse(c, code)
 		return

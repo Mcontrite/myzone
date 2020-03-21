@@ -19,9 +19,6 @@ import (
 )
 
 func InitRouter() *gin.Engine {
-	// 写入日志的文件
-	/*f, _ := os.Create("log/gin.log")
-	gin.DefaultWriter = io.MultiWriter(f)*/
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
@@ -54,6 +51,10 @@ func InitRouter() *gin.Engine {
 	// 用户前端页面
 	web := r.Group("")
 	{
+		// 首页
+		web.GET("/", webservice.Index)
+		web.GET("/articles", webservice.Index)
+		web.GET("/sayings", webservice.SayingIndex)
 		// 注册页
 		web.GET("/register.html", webservice.Register)
 		// 登录页
@@ -62,17 +63,14 @@ func InitRouter() *gin.Engine {
 		web.GET("/logout", apiservice.UserLogout)
 		web.GET("/password/forget.html", webservice.ForgetPassword)
 		web.GET("/password/reset.html", webservice.ResetForgetPassword)
-		// 首页
-		web.GET("/", webservice.Index)
-		web.GET("/index.html", webservice.Index)
-		web.GET("/default.html", webservice.Index)
-		// 主题：新建页
+
+		// 文章：新建页
 		web.GET("/newarticle.html", webservice.NewArticle)
 		web.GET("/newsaying.html", webservice.NewSaying)
-		// 主题：编辑页
+		// 文章：编辑页
 		web.GET("/article/:id/edit.html", webservice.EditArticle)
 		web.GET("/saying/:id/edit.html", webservice.EditSaying)
-		// 主题：详情页
+		// 文章：详情页
 		web.GET("/article/:id/detail.html", webservice.Article)
 		web.GET("/saying/:id/detail.html", webservice.Saying)
 		// 高级回复
@@ -89,12 +87,12 @@ func InitRouter() *gin.Engine {
 		web.GET("/my_avatar.html", webservice.MyAvatar)
 		// 修改用户名
 		web.GET("/my_rename.html", webservice.MyUsername)
-		// 我的帖子列表
+		// 我的文章说说列表
 		web.GET("/my_article.html", webservice.MyArticle)
 		web.GET("/my_saying.html", webservice.MySaying)
 		// 我的收藏列表
 		web.GET("/my_favorite.html", webservice.MyFavorite)
-		// 我的回帖列表
+		// 我的回复列表
 		web.GET("/my_reply.html", webservice.MyReply)
 		web.GET("/my_comment.html", webservice.MyComment)
 		// 查看其它用户内容
@@ -103,7 +101,7 @@ func InitRouter() *gin.Engine {
 		web.GET("/user/:id/saying.html", webservice.UserSaying)
 		web.GET("/user/:id/reply.html", webservice.UserReply)
 		web.GET("/user/:id/comment.html", webservice.UserComment)
-		// 前台管理员对帖子进行操作的模态框
+		// 前台管理员进行操作的模态框
 		web.GET("/mod/article/delete.html", webservice.DeleteMod)
 		web.GET("/mod/saying/delete.html", webservice.DeleteMod)
 	}
@@ -135,15 +133,15 @@ func InitRouter() *gin.Engine {
 		api.POST("/user/:id/avatar/reset", apiservice.ResetUserAvatar)
 		// 用户：重设用户名
 		api.POST("/user/:id/name/reset", apiservice.ResetUserName)
-		// 主题：发表
+		// 文章：发表
 		api.POST("/article", xss.XSS(), apiservice.AddArticle)
 		api.POST("/saying", xss.XSS(), apiservice.AddSaying)
-		// 主题：发表
+		// 文章：发表
 		api.POST("/article/:id/favourite", apiservice.Addarticlefavourite)
-		// 主题：删除
+		// 文章：删除
 		api.POST("/article/:id/delete", apiservice.DeleteArticles)
 		api.POST("/saying/:id/delete", apiservice.DeleteSayings)
-		// 主题：修改
+		// 文章：修改
 		api.POST("/article/:id/update", apiservice.UpdateArticle)
 		api.POST("/saying/:id/update", apiservice.UpdateSaying)
 		// 添加评论

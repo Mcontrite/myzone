@@ -15,6 +15,8 @@ func GetUserSayings(uid int) (sayings []model.Saying, err error) {
 func AfterAddNewSaying(saying *model.Saying) {
 	sayingID := saying.ID
 	userID := saying.UserID
+	oldUserInfo, _ := model.GetUserByID(saying.UserID)
+	model.UpdateUserSayingsCnt(saying.UserID, oldUserInfo.SayingsCnt+1)
 	model.AddMySaying(userID, int(sayingID))
 }
 

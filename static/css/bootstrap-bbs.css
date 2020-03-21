@@ -258,7 +258,7 @@ li.quote {
   font-size: 1.1rem;
 }
 
-/* 回帖输入框 */
+/* 回复输入框 */
 #message {
   height: 2.4rem;
   transition: height 0.2s;

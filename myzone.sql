@@ -19,8 +19,8 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `z_attach`;
 CREATE TABLE `z_attach` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '附件id',
-  `article_id` int(11) NOT NULL DEFAULT '0' COMMENT '主题id',
-  `reply_id` int(11) NOT NULL DEFAULT '0' COMMENT '帖子id',
+  `article_id` int(11) NOT NULL DEFAULT '0' COMMENT '文章id',
+  `reply_id` int(11) NOT NULL DEFAULT '0' COMMENT '回复id',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
   `filesize` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '文件尺寸，单位字节',
   `width` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'width > 0 则为图片',
@@ -66,9 +66,9 @@ CREATE TABLE `z_group` (
   `id` smallint(6) unsigned NOT NULL,
   `name` char(20) NOT NULL DEFAULT '' COMMENT '用户组名称',
   `allowread` int(11) NOT NULL DEFAULT '0' COMMENT '允许访问',
-  `allowarticle` int(11) NOT NULL DEFAULT '0' COMMENT '允许发主题',
+  `allowarticle` int(11) NOT NULL DEFAULT '0' COMMENT '允许发文章',
   `allowsaying` int(11) NOT NULL DEFAULT '0' COMMENT '允许发说说',
-  `allowreply` int(11) NOT NULL DEFAULT '0' COMMENT '允许回帖',
+  `allowreply` int(11) NOT NULL DEFAULT '0' COMMENT '允许回复',
   `allowcomment` int(11) NOT NULL DEFAULT '0' COMMENT '允许评论',
   `allowattach` int(11) NOT NULL DEFAULT '0' COMMENT '允许上传文件',
   `allowdown` int(11) NOT NULL DEFAULT '0' COMMENT '允许下载文件',
@@ -86,9 +86,9 @@ CREATE TABLE `z_group` (
 -- ----------------------------
 -- Records of z_group
 -- ----------------------------
-INSERT INTO `z_group` VALUES ('0', '游客组', '1', '0', '0', '1', '1', '0', '1', '0', '0', '0', '0', null, null, null);
-INSERT INTO `z_group` VALUES ('1', '管理员组', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null);
-INSERT INTO `z_group` VALUES ('2', '待验证用户组', '1', '0', '0', '1', '1', '0', '1', '0', '0', '0', '0', null, null, null);
+INSERT INTO `z_group` VALUES ('0', '游客', '1', '0', '0', '1', '1', '0', '1', '0', '0', '0', '0', null, null, null);
+INSERT INTO `z_group` VALUES ('1', '管理员', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null);
+
 
 -- ----------------------------
 -- Table structure for z_kv
@@ -131,7 +131,7 @@ CREATE TABLE `z_my_reply` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`,`reply_id`),
   KEY `tid` (`article_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='我的回帖';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='我的回复';
 
 
 -- ----------------------------
@@ -147,7 +147,7 @@ CREATE TABLE `z_my_comment` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`,`comment_id`),
   KEY `tid` (`saying_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='我的回帖';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='我的回复';
 
 
 -- ----------------------------
@@ -163,7 +163,7 @@ CREATE TABLE `z_my_article` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_z_my_article_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='我的主题，每个主题不管回复多少次，只记录一次。大表，需要分区';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='我的文章，每个文章不管回复多少次，只记录一次。大表，需要分区';
 
 
 -- ----------------------------
@@ -179,15 +179,15 @@ CREATE TABLE `z_my_saying` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_z_my_saying_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='我的主题，每个主题不管回复多少次，只记录一次。大表，需要分区';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='我的文章，每个文章不管回复多少次，只记录一次。大表，需要分区';
 
 -- ----------------------------
 -- Table structure for z_reply
 -- ----------------------------
 DROP TABLE IF EXISTS `z_reply`;
 CREATE TABLE `z_reply` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '帖子id',
-  `article_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '主题id',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '回复id',
+  `article_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文章id',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `isfirst` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否为首帖，与 article.firstpid 呼应',
   `userip` varchar(50) NOT NULL DEFAULT '0' COMMENT '发帖时用户ip ip2long()',
@@ -204,7 +204,7 @@ CREATE TABLE `z_reply` (
   KEY `tid` (`article_id`,`id`),
   KEY `uid` (`user_id`),
   KEY `idx_z_reply_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论坛帖子数据';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论坛回复数据';
 
 -- ----------------------------
 
@@ -213,7 +213,7 @@ CREATE TABLE `z_reply` (
 -- ----------------------------
 DROP TABLE IF EXISTS `z_comment`;
 CREATE TABLE `z_comment` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '帖子id',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论id',
   `saying_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '说说id',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `isfirst` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否为首帖，与 saying.firstpid 呼应',
@@ -308,13 +308,13 @@ CREATE TABLE `z_table_day` (
 -- ----------------------------
 DROP TABLE IF EXISTS `z_article`;
 CREATE TABLE `z_article` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主题id',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `userip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '发帖时用户ip ip2long()，主要用来清理',
-  `title` char(128) NOT NULL DEFAULT '' COMMENT ' 主题',
+  `title` char(128) NOT NULL DEFAULT '' COMMENT ' 文章',
   `last_date` timestamp NULL DEFAULT NULL COMMENT '最后回复时间',
   `views_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '查看次数, 剥离出去，单独的服务，避免 cache 失效',
-  `replys_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回帖数',
+  `replys_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复数',
   `images_num` tinyint(6) NOT NULL DEFAULT '0' COMMENT '附件中包含的图片数',
   `files_num` tinyint(6) NOT NULL DEFAULT '0' COMMENT '附件中包含的文件数',
   `first_reply_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '首贴 pid',
@@ -329,18 +329,18 @@ CREATE TABLE `z_article` (
   KEY `fid` (`id`),
   KEY `fid_2` (`last_reply_id`),
   KEY `idx_z_article_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论坛主题';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论坛文章';
 -- ----------------------------
 -- Table structure for z_saying
 -- ----------------------------
 DROP TABLE IF EXISTS `z_saying`;
 CREATE TABLE `z_saying` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主题id',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `userip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '发帖时用户ip ip2long()，主要用来清理',
   `last_date` timestamp NULL DEFAULT NULL COMMENT '最后回复时间',
   `views_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '查看次数, 剥离出去，单独的服务，避免 cache 失效',
-  `comments_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回帖数',
+  `comments_cnt` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复数',
   `first_comment_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '首贴 pid',
   `last_user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最近参与的 uid',
   `last_comment_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后回复的 pid',
@@ -364,7 +364,7 @@ CREATE TABLE `z_user` (
   `password` char(100) NOT NULL DEFAULT '' COMMENT '密码',
   `articles_cnt` int(11) NOT NULL DEFAULT '0' COMMENT '发帖数',
   `sayings_cnt` int(11) NOT NULL DEFAULT '0' COMMENT '说说数',
-  `replys_cnt` int(11) NOT NULL DEFAULT '0' COMMENT '回帖数',
+  `replys_cnt` int(11) NOT NULL DEFAULT '0' COMMENT '回复数',
   `comments_cnt` int(11) NOT NULL DEFAULT '0' COMMENT '评论数',
   `create_ip` varchar(20) NOT NULL DEFAULT '0' COMMENT '创建时IP',
   `create_date` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',

@@ -16,6 +16,8 @@ func AfterAddNewArticle(article *model.Article) {
 	articleID := article.ID
 	userID := article.UserID
 	model.AddMyArticle(userID, int(articleID))
+	oldUserInfo, _ := model.GetUserByID(article.UserID)
+	model.UpdateUserArticlesCnt(article.UserID, oldUserInfo.ArticlesCnt+1)
 }
 
 func DelArticles(tids []string) (err error) {
