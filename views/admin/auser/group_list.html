@@ -1,51 +1,51 @@
 {{ template "layout/adminheader" .}}
 <main id="body">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="btn-group mb-3" role="group">
-                    <a role="button" class="btn btn-secondary" href="/admin/user/list.html">用户列表</a>
-                    <a role="button" class="btn btn-secondary active" href="/admin/user/group.html">用户组</a>
-                    <a role="button" class="btn btn-secondary" href="/admin/user/create.html">创建用户</a>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <form action="?group-list.htm" method="post" id="form">
-                            <!--
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="btn-group mb-3" role="group">
+					<a role="button" class="btn btn-secondary" href="/admin/user/list.html">用户列表</a>
+					<a role="button" class="btn btn-secondary active" href="/admin/user/group.html">用户组</a>
+					<a role="button" class="btn btn-secondary" href="/admin/user/create.html">创建用户</a>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<form action="?group-list.htm" method="post" id="form">
+							<!--
                             <h5 class="card-title">用户组列表</h5>
                             -->
-                            <div class="table-responsive arrlist">
-                                <table class="table" style="min-width: 800px">
-                                    <thead>
-                                    <tr>
-                                        <th width="100" class="text-center">用户组ID</th>
-                                        <th>用户组名</th>
-                                        <th class="text-center">编辑</th>
-                                        <th class="text-center">删除</th>
-                                    </tr>
-                                    </thead><thead>
-                                    </thead><tbody>
-                                    {{range .groupList}}
-                                    <tr align="center" rowid="{{.ID}}">
-                                        <td class="50"><input type="text" class="form-control" name="_gid[0]" value="{{.ID}}" placeholder="用户组ID"></td>
-                                        <td><input type="text" class="form-control" name="name[0]" value="{{.Name}}" placeholder="用户组名"></td>                                        
-                                        <td><a class="btn row_edit" role="btn">编辑</a></td>
-                                        <td><a class="btn row_edit" role="btn">删除</a></td>
-                                    </tr>
-                                    {{end}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p><a role="button" class="btn row_add">[+]增加一行</a></p>
-                            <p class="text-center">
-                                <button type="submit" class="btn btn-primary" id="submit" data-loading-text="正在提交..." style="width: 10rem;">确定</button>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</main>>
-{{ template "layout/adminfooter" .}}
+							<div class="table-responsive arrlist">
+								<table class="table" style="min-width: 800px">
+									<thead>
+										<tr>
+											<th width="100" class="text-center">用户组ID</th>
+											<th>用户组名</th>
+											<th class="text-center">编辑</th>
+											<th class="text-center">删除</th>
+										</tr>
+									</thead>
+									<thead>
+									</thead>
+									<tbody>
+										{{range .groupList}}
+										<tr align="center" rowid="{{.ID}}">
+											<td class="50"><input type="text" class="form-control" name="_gid[0]" value="{{.ID}}" placeholder="用户组ID"></td>
+											<td><input type="text" class="form-control" name="name[0]" value="{{.Name}}" placeholder="用户组名"></td>
+											<td><a class="btn row_edit" role="btn">编辑</a></td>
+											<td><a class="btn row_edit" role="btn">删除</a></td>
+										</tr>
+										{{end}}
+									</tbody>
+								</table>
+							</div>
+							<p><a role="button" class="btn row_add">[+]增加一行</a></p>
+							<p class="text-center">
+								<button type="submit" class="btn btn-primary" id="submit" data-loading-text="正在提交..." style="width: 10rem;">确定</button>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>> {{ template "layout/adminfooter" .}}

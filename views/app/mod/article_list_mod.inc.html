@@ -1,14 +1,13 @@
 {{ define "mod/article_list_mod.inc" }}
 {{if eq .sessions.Isadmin "1"}}
 <div class="text-center">
-    <label class="mr-3">
-        <input type="checkbox" data-target='input[name="modtid"]' class="checkall mt-2 mr-2" value="" aria-label="全选" />全选
-    </label>
-
-    <div class="btn-group mod-button my-3" role="group" aria-label="">
-
-        <button class="btn btn-secondary delete" data-modal-url="/mod/article/delete.html" data-modal-title="删除" data-modal-arg=".articlelist" data-modal-size="md">删除</button>
-    </div>
+	<label class="mr-3">
+		<input type="checkbox" data-target='input[name="modtid"]' class="checkall mt-2 mr-2" value="" aria-label="全选" />全选
+	</label>
+	<div class="btn-group mod-button my-3" role="group" aria-label="">
+		<button class="btn btn-secondary delete" data-modal-url="/mod/article/delete.html" data-modal-title="删除"
+		 data-modal-arg=".articlelist" data-modal-size="md">删除</button>
+	</div>
 </div>
 {{end}}
 {{end}}

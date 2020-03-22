@@ -1,28 +1,24 @@
 {{ template "layout/adminheader" .}}
-
 <main id="body">
-    <div class="container">
-
-        <div class="row line-height-3">
-            <div class="col-12">
-                <h3>后台首页</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">站点统计信息</h5>
-                        <div class="row">
-                            <div class="col-md-4"><span class="text-muted">文章数：</span>{{.counts.articles}}</div>
-                            <div class="col-md-4"><span class="text-muted">回复数：</span>{{.counts.replys}}</div>
-                            <div class="col-md-4"><span class="text-muted">用户数：</span>{{.counts.users}}</div>
-                            <div class="col-md-4"><span class="text-muted">附件总数：</span>{{.counts.attachs}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row line-height-3">
+			<div class="col-12">
+				<h3>后台首页</h3>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">站点统计信息</h5>
+						<div class="row">
+							<div class="col-md-4"><span class="text-muted">文章数：</span>{{.counts.articles}}</div>
+							<div class="col-md-4"><span class="text-muted">回复数：</span>{{.counts.replys}}</div>
+							<div class="col-md-4"><span class="text-muted">用户数：</span>{{.counts.users}}</div>
+							<div class="col-md-4"><span class="text-muted">附件总数：</span>{{.counts.attachs}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </main>
-
 <script>
-
 </script>
 {{ template "layout/adminfooter" .}}

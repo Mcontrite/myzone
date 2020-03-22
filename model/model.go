@@ -50,9 +50,7 @@ func init() {
 	db.AutoMigrate(&Saying{})
 	db.AutoMigrate(&Comment{})
 	db.AutoMigrate(&MyArticle{})
-	db.AutoMigrate(&MyReply{})
 	db.AutoMigrate(&MySaying{})
-	db.AutoMigrate(&MyComment{})
 	db.AutoMigrate(&MyFavourite{})
 }
 
