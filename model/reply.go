@@ -8,7 +8,6 @@ type Reply struct {
 	Message      string `gorm:"default:''" json:"message"`       //内容原始数据
 	MessageFmt   string `gorm:"default:''" json:"message_fmt"`   //过滤后的html内容
 	Isfirst      int    `gorm:"default:0" json:"isfirst"`        //是否为首帖
-	ImagesNum    int    `gorm:"default:0" json:"images"`         //附件中包含的图片数
 	FilesNum     int    `gorm:"default:0" json:"files"`          //附件中包含的文件数
 	Doctype      int    `gorm:"default:0" json:"doctype"`        //类型，0: html, 1: txt; 2: markdown; 3: ubb
 	UserIP       string `gorm:"default:''" json:"userip"`        //发帖时用户ip

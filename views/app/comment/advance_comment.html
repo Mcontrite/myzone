@@ -1,5 +1,4 @@
 {{ template "layout/header" .}}
-{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
 <script src="/static/ckeditor/ckeditor.js"></script>
 <main id="body">
 	<div class="container">
@@ -26,7 +25,6 @@
 					</div>
 				</div>
 			</div>
-			<a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3" href="javascript:history.back();">返回</a>
 		</div>
 	</div>
 </main>
@@ -34,8 +32,7 @@
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
 		disallowedContent: '<script >',
-		// toolbar: [['Smiley']],
-		// toolbarCanCollapse: true,
+		
 		toolbarStartupExpanded: false,
 		toolbar: [{
 			name: 'document',
@@ -72,10 +69,7 @@
 		removeDialogTabs: 'image:advanced;image:Link',
 		filebrowserImageUploadUrl: "/api/image/upload",
 		filebrowserUploadUrl: "/api/image/upload",
-		//enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
-		//shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
 		extraPlugins: 'uploadimage',
-		// extraPlugins:['codesnippet','uploadimage'],
 		codeSnippet_theme: 'zenburn'
 	});
 	var qrform = $("#advance_reply_form")
@@ -88,7 +82,7 @@
 	})
 	jsubmit.on('click', function() {
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
-			$.alert("亲，写点什么再提交吧 ^_^")
+			$.alert("写点什么再提交吧 ^_^")
 			return;
 		}
 		qrform.reset();
@@ -101,9 +95,9 @@
 			if (code == 200) {
 				$.alert("回复成功")
 				setTimeout(function() {
-					// addNewReplyElement()
+					
 					history.back()
-				}, 2000)
+				}, 1000)
 			} else if (code < 0) {
 				$.alert(message);
 				jsubmit.button('reset');

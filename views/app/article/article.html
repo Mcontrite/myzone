@@ -7,10 +7,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9 main">
-				<ol class="breadcrumb d-none d-md-flex">
-					<li class="breadcrumb-item"><a href="/" aria-label="首页"><i class="icon-home"></i></a></li>
-					<li class="breadcrumb-item active"><a href="#" title="{{.article.Title}}">{{.article.Title}}</a></li>
-				</ol>
 				<div class="card card-article">
 					<div class="card-body">
 						<div class="media">
@@ -34,22 +30,20 @@
 											{{.article.ViewsCnt}}
 										</span>
 									</div>
-									{{/*如果是作者本人操作*/}}
-									{{/*{{if islogin}}*/}} {{if eq .freply.UserID .sessions.Userid}}
+									{{if eq .freply.UserID .sessions.Userid}}
 									<div>
 										<a href="/article/{{.article.ID}}/edit.html" class="text-grey mr-2 reply_update"><i class="icon-edit"></i> 编辑</a>
 										<a data-href="/article/{{.article.ID}}/delete.html" href="javascript:void(0);" class="text-grey reply_delete"
 										 isfirst="1"><i class="icon-remove"></i> 删除</a>
 									</div>
 									{{end}}
-									{{/*{{end}}*/}}
 								</div>
 							</div>
 						</div>
 						<hr>
 						<div style="overflow-x: scroll;" class="message break-all" isfirst="1">
 							{{.freply.Message | unescaped}}
-							{{/*{{.attachsdddd}}*/}} </div>
+						</div>
 						{{if .attachs}}
 						<fieldset class="fieldset">
 							<legend>上传的附件：</legend>
@@ -92,8 +86,8 @@
 									</button>
 									{{else}}
 										<button onclick="myfavourite({{.article.ID}}, this)" class="btn btn-outline-secondary js-haya-favorite-tip"
-										 data-tid="{{.article.ID}}" title="收藏本帖">
-											<i class="icon icon-star-o" aria-label="收藏本帖"></i>
+										 data-tid="{{.article.ID}}" title="收藏文章">
+											<i class="icon icon-star-o" aria-label="收藏文章"></i>
 											<span class="haya-favorite-btn">收藏</span>
 										</button>
 										{{end}}
@@ -103,15 +97,15 @@
 								</span>
 								{{else}}<span class="btn-group haya-favoriter-info" role="group">
 										<button onclick="$.alert('首先请登录')" class="btn btn-outline-secondary js-haya-favorite-tip" data-tid="{{.article.ID}}"
-										 title="收藏本帖">
-											<i class="icon icon-star-o" aria-label="收藏本帖"></i>
+										 title="收藏文章">
+											<i class="icon icon-star-o" aria-label="收藏文章"></i>
 											<span class="haya-favorite-btn">收藏</span>
 										</button>
 										<button class="btn btn-outline-secondary js-haya-favorite-show-users" data-tid="{{.article.ID}}" title="点击查看收藏详情">
 											<span class="haya-favorite-user-count">{{.article.FavouriteCnt}}</span>
 										</button>
-									</span>
-									{{end}}
+										</span>
+								{{end}}
 							</div>
 						</div>
 					</div>
@@ -197,8 +191,6 @@
 											<div class="message mt-1">
 												<textarea class="form-control" id="editor1" placeholder="内容" name="message"></textarea>
 											</div>
-											{{/*<br>*/}}
-											{{ template "layout/captcha" .}}
 											<div class="text-muted mt-2 small">
 												<div class="d-flex justify-content-between">
 													<div>
@@ -218,19 +210,14 @@
 								<li class="reply newreply media">
 									<a role="button" class="btn btn-default btn-block xn-back col-lg-6 mx-auto mb-3" target="_blank" href="/login.html">登录可回复</a>
 								</li>
-								{{end}}
+							{{end}}
 						</ul>
 					</div>
 				</div>
-				<div class="d-none articlelist"><input type="checkbox" name="modtid" value="2" checked=""></div>
-				{{if .islogin}}
-				{{ template "mod/article_list_mod.inc" .}}
-				{{end}}
-				<a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3" href="javascript:history.back();">返回</a>
+				
 			</div>
 			<div class="col-lg-3 d-none d-lg-block aside">
 				{{ template "layout/addnewarticle" .}}
-				{{/*用户信息*/}}
 				<div class="card card-user-info">
 					<div class="m-3 text-center">
 						<a href="?user-1.htm" tabindex="-1">
@@ -259,21 +246,6 @@
 						</table>
 					</div>
 				</div>
-				{{/*用户的列表*/}}
-				<div class="card">
-					<div class="card-body">
-						<h6 class="card-title">作者最近文章：</h6>
-						<ul class="small break-all">
-							{{range .user_newest_articles}}
-							<li class="line-height-2">
-								<a href="/article/{{.ID}}/detail.html">
-									{{.Title}}
-								</a>
-							</li>
-							{{end}}
-						</ul>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -292,22 +264,8 @@
 	var jsubmit = $('#replysubmit');
 	jsubmit.on('click', function() {
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
-			$.alert("亲，写点什么再提交吧 ^_^")
+			$.alert("写点什么再提交吧 ^_^")
 			return;
-		}
-		// 验证验证码
-		var captcha = getCaptcha()
-		var captchaKey = getCaptchaKey()
-		captchaPass = virefyCaptcha(captcha, captchaKey)
-		if (captcha.length == 0) {
-			$.alert("验证码不能为空")
-			return
-		} else {
-			if (captchaPass != 200) {
-				$.alert("验证码错误")
-				refreshCaptcha();
-				return
-			}
 		}
 		qrform.reset();
 		jsubmit.button('loading');
@@ -319,9 +277,8 @@
 			if (code == 200) {
 				$.alert("回复成功")
 				setTimeout(function() {
-					// addNewReplyElement()
 					location.reload()
-				}, 2000)
+				}, 1000)
 			} else if (code < 0) {
 				$.alert(message);
 				jsubmit.button('reset');
@@ -332,7 +289,6 @@
 		});
 		return false;
 	});
-
 	function addNewReplyElement() {
 		var jsubmit = $('#replysubmit')
 		var s = '<ul>' + '<li class="media reply" data-pid="5" data-uid="2">' +
@@ -341,7 +297,7 @@
 			'<div class="d-flex justify-content-between small text-muted">' + '           <div> ' +
 			'<span style="padding-bottom:0;margin-bottom:0;color:; ">' +
 			'<i class="iconfont icon-v1" style="font-size: !important;">管理员 </i> ' + '</span>' + '<span class="username">' +
-			'<a href="?user-2.htm" class="text-muted font-weight-bold">zhang</a>' + '</span>' +
+			'<a href="?user-2.htm" class="text-muted font-weight-bold">{{.sessions.username}}</a>' + '</span>' +
 			'<span class="date text-grey ml-2">2小时前</span>' + '</div> ' + '<div class="text-right text-grey"> ' +
 			'<style>.haya-reply-like .haya-reply-like-loved {color: var(--secondary) !important;}</style> ' +
 			'<a href="javascript:void(0)" data-tid="1" data-pid="5" class="text-grey reply_reply mr-3">' +

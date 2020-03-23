@@ -9,7 +9,6 @@ type Article struct {
 	ViewsCnt     int       `gorm:"default:0" json:"views_cnt"`      //查看次数, 剥离出去，单独的服务，避免 cache 失效
 	ReplysCnt    int       `gorm:"default:0" json:"replys_cnt"`     //回复数
 	FavouriteCnt int       `gorm:"default:0" json:"favourite_cnt"`  //被收藏数
-	ImagesNum    int       `gorm:"default:0" json:"images_num"`     //附件中包含的图片数
 	FilesNum     int       `gorm:"default:0" json:"files_num"`      //附件中包含的文件数
 	LastDate     time.Time `json:"last_date"`                       //最后回复时间
 	FirstReplyID int       `gorm:"default:0" json:"first_reply_id"` //首贴 rid
@@ -30,7 +29,7 @@ func GetArticleList(page int) (articles []Article, err error) {
 	if page <= 1 {
 		page = 1
 	}
-	err = db.Preload("User").Model(&Article{}).Order("created_at desc").Offset((page - 1) * PAGE_SIZE).Limit(PAGE_SIZE).Find(&articles).Error
+	err = db.Preload("User").Model(&Article{}).Order("updated_at desc").Offset((page - 1) * PAGE_SIZE).Limit(PAGE_SIZE).Find(&articles).Error
 	return
 }
 

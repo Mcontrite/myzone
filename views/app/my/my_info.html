@@ -1,10 +1,6 @@
 {{ template "layout/header" .}}
 <main id="body">
 	<div class="container">
-		<div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
-			<a role="button" class="btn btn-secondary active" data-active="menu-my" href="/my.html">个人资料</a>
-			<a role="button" class="btn btn-secondary" data-active="menu-my-article" href="/my.html?action=5">论坛回复</a>
-		</div>
 		<div class="row">
 			<!-- 左侧菜单 -->
 			<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
@@ -15,7 +11,7 @@
 					</div>
 					<div class="list-group list-group-flush text-center">
 						<a href="/my.html" class="list-group-item list-group-item-action active" data-active="menu-my">个人资料</a>
-						<a href="/my_article.html" class="list-group-item list-group-item-action" data-active="menu-my-article">论坛回复</a>
+						<a href="/my_article.html" class="list-group-item list-group-item-action" data-active="menu-my-article">文章回复</a>
 					</div>
 				</div>
 			</div>
@@ -40,15 +36,18 @@
 					</div>
 					<div class="card-body">
 						<div class="row line-height-4">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<span class="text-muted">文章数：</span>{{.userinfo.ArticlesCnt}}<br>
 								<span class="text-muted">回复数：</span>{{.userinfo.ReplysCnt}}<br>
-								<span class="text-muted">收藏数：</span><a href="?my-favorites.htm" target="_blank">{{.userinfo.ReplysCnt}}</a><br>
+								<span class="text-muted">收藏数：</span><a href="?my-favorites.htm" target="_blank">{{.userinfo.FavouriteCnt}}</a><br>
 							</div>
-							<div class="col-md-6">
-								<span class="text-muted">用户组：</span>{{.userinfo.Group.Name}} <br>
-								<span class="text-muted">创建时间：</span>{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
-								<span class="text-muted">最后登录：</span>{{.userinfo.LoginDate.Format "2006-01-02"}} <br>
+							<div class="col-md-4">
+								<span class="text-muted">说说数：</span>{{.userinfo.SayingsCnt}}<br>
+								<span class="text-muted">评论数：</span>{{.userinfo.CommentsCnt}}<br>
+							</div>
+							<div class="col-md-4">
+								<span class="text-muted">注册时间：</span>{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
+								<span class="text-muted">上次登录：</span>{{.userinfo.LoginDate.Format "2006-01-02"}} <br>
 							</div>
 						</div>
 					</div>

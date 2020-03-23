@@ -4,7 +4,6 @@ import (
 	"html"
 	"myzone/model"
 	"myzone/package/setting"
-	article_service "myzone/service/article"
 	"myzone/service/user"
 	"net/http"
 	"strconv"
@@ -27,23 +26,21 @@ func Article(c *gin.Context) {
 	replylistLen := len(replylist)
 	attachs, _ := model.GetAttachsByReplyId(int(freply.ID))
 	isfav, _ := model.CheckFavourite(sessions.Userid, articleId)
-	userNewestArticles, _ := article_service.GetUserArticles(article.UserID)
 	model.UpdateArticleViewsCnt(articleId)
 	description := setting.ServerSetting.Sitebrief
 	c.HTML(
 		http.StatusOK,
 		"article.html",
 		gin.H{
-			"article":              article,
-			"freply":               freply,
-			"islogin":              islogin,
-			"sessions":             sessions,
-			"replylist":            replylist,
-			"reply_list_len":       replylistLen,
-			"user_newest_articles": userNewestArticles,
-			"attachs":              attachs,
-			"isfav":                isfav,
-			"description":          description,
+			"article":        article,
+			"freply":         freply,
+			"islogin":        islogin,
+			"sessions":       sessions,
+			"replylist":      replylist,
+			"reply_list_len": replylistLen,
+			"attachs":        attachs,
+			"isfav":          isfav,
+			"description":    description,
 		},
 	)
 }

@@ -1,5 +1,5 @@
 {{ template "layout/header" .}}
-{{/*列表 {{.myarticles}}*/}} <main id="body">
+<main id="body">
 	<main id="body">
 		<div class="container">
 			<!-- 手机导航 / Mobile navigation -->
@@ -55,7 +55,7 @@
 												<span class="date text-grey hidden-sm">{{.Article.CreatedAt.Unix | strtime}}</span>
 												<span>
 													<span class="text-grey mx-2">←</span>
-													<span class="username text-grey mr-1" uid="2">zhang</span>
+													<span class="username text-grey mr-1" uid="2">{{.sessions.username}}</span>
 													<span class="text-grey">3天前</span>
 												</span>
 											</div>

@@ -61,9 +61,6 @@ func InitRouter() *gin.Engine {
 		web.GET("/login.html", webservice.Login)
 		// 登出页面
 		web.GET("/logout", apiservice.UserLogout)
-		web.GET("/password/forget.html", webservice.ForgetPassword)
-		web.GET("/password/reset.html", webservice.ResetForgetPassword)
-
 		// 文章：新建页
 		web.GET("/newarticle.html", webservice.NewArticle)
 		web.GET("/newsaying.html", webservice.NewSaying)
@@ -76,9 +73,6 @@ func InitRouter() *gin.Engine {
 		// 高级回复
 		web.GET("/article/:id/areply.html", webservice.ArticleAddReply)
 		web.GET("/saying/:id/acomment.html", webservice.SayingAddComment)
-
-		web.GET("/reply/:id/edit.html", webservice.EditReply)
-		web.GET("/comment/:id/edit.html", webservice.EditComment)
 		// 我的信息概览
 		web.GET("/my.html", webservice.MyInfo)
 		// 修改密码

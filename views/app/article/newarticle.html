@@ -1,5 +1,4 @@
 {{ template "layout/header" .}}
-{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
 <style> .tagactive {
         color: #9B703F;
         font-weight: bold;
@@ -41,7 +40,7 @@
 						</form>
 					</div>
 				</div>
-				<a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3" href="javascript:history.back();">返回</a>
+				
 			</div>
 		</div>
 	</div>
@@ -54,8 +53,7 @@
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
 		disallowedContent: '<script >',
-		// toolbar: [['Smiley']],
-		// toolbarCanCollapse: true,
+		
 		toolbarStartupExpanded: false,
 		toolbar: [{
 			name: 'document',
@@ -91,18 +89,15 @@
 		upload_hidden: false,
 		removeDialogTabs: 'image:advanced;image:Link',
 		filebrowserImageUploadUrl: "/api/image/upload",
-		filebrowserUploadUrl: "/api/image/upload",
-		//enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
-		//shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
-		extraPlugins: 'uploadimage',
-		// extraPlugins:['codesnippet','uploadimage'],
+		filebrowserUploadUrl: "/api/image/upload",		
+		extraPlugins: 'uploadimage',		
 		codeSnippet_theme: 'zenburn'
 	});
 	var qrform = $("#articleform")
 	var jsubmit = $('#articlesubmit');
 	var attachUploader = $("#add_attach");
 	var jattachparent = $('.attachlist_parent');
-	var maxSize = 1 * 1024 * 1024
+	var maxSize = 2 * 1024 * 1024
 	qrform.on("keydown", function() {
 		if (event.keyCode == 13) {
 			return false;
@@ -136,12 +131,12 @@
 		}
 		var cktitle = $("#title2").val()
 		if (cktitle.length <= 1) {
-			$.alert("标题不能为空切不能小于1个字")
+			$.alert("标题不能为空且不能小于1个字")
 			return
 		}
 		var ckmessage = CKEDITOR.instances.message.getData();
 		if (ckmessage.length < 10) {
-			$.alert("内容不能为空切不能小于10字")
+			$.alert("内容不能为空且不能小于10字")
 			return
 		}
 		qrform.reset();
@@ -158,7 +153,6 @@
 				afterAddNewArticle()
 				$.alert(message);
 				setTimeout(function() {
-					//                    href = "/forum/" + $("#select_forum_id").val() + "/list.html"
 					location.href = "/"
 				}, 1000)
 			} else {
@@ -190,10 +184,10 @@
 		var fd = new FormData()
 		attachfile = attachUploader[0].files[0]
 		var filesSize = attachfile.size
-		// 禁止上传大于1m的文件
+		
 		console.log(attachfile.size)
 		if (filesSize > maxSize) {
-			$.alert("文件大于1M，不能上传")
+			$.alert("文件大于2M，不能上传")
 			return
 		}
 		fd.append("upload", attachfile)
@@ -213,13 +207,9 @@
 						jattachparent.append(
 							'<fieldset class="fieldset"><legend>上传的附件</legend><ul class="attachlist"><ul></fieldset>');
 					}
-					// 添加福建区域
 					message = res.data
 					addAttachLi(message.url, message.filetype, 1, message.orgfilename)
 					$.alert("上传成功")
-					/*setTimeout(function(){
-					    location.reload()
-					}, 5000)*/
 				} else {
 					$.alert(res.message)
 					return

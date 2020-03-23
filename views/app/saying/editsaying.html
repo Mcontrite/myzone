@@ -1,12 +1,11 @@
 {{ template "layout/header" .}}
-{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
 <script src="/static/ckeditor/ckeditor.js"></script>
 <main id="body">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-10 mx-auto">
 				<div class="card">
-					<div class="card-header"> 更新文章 </div>
+					<div class="card-header"> 更新说说 </div>
 					<div class="card-body">
 						<form action="/api/saying/{{.saying.ID}}/update" method="post" id="sayingform">
 							<input type="hidden" name="doctype" value="0">
@@ -20,10 +19,9 @@
 									</div>
 								</div>
 							</div>
-							{{ template "layout/captcha" .}}
 							<div class="d-flex justify-content-between">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 更新文章 </button>
+									<button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 更新说说 </button>
 								</div>
 							</div>
 						</form>
@@ -42,7 +40,7 @@
 	    $.alert("您没有权限编辑")
 	    setTimeout(function () {
 	        location.href = "/"
-	    },2000)
+	    },1000)
 	}
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
@@ -82,11 +80,8 @@
 		upload_hidden: false,
 		removeDialogTabs: 'image:advanced;image:Link',
 		filebrowserImageUploadUrl: "/api/image/upload",
-		filebrowserUploadUrl: "/api/image/upload",
-		//enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
-		//shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
-		extraPlugins: 'uploadimage',
-		// extraPlugins:['codesnippet','uploadimage'],
+		filebrowserUploadUrl: "/api/image/upload",		
+		extraPlugins: 'uploadimage',		
 		codeSnippet_theme: 'zenburn'
 	});
 	var qrform = $("#sayingform")
@@ -97,22 +92,7 @@
 		jsubmit.button('loading');
 		var replydata = qrform.serializeObject();
 		replydata.message = CKEDITOR.instances.message.getData();
-		console.log(replydata)
-		// 验证验证码
-		var captcha = getCaptcha()
-		var captchaKey = getCaptchaKey()
-		captchaPass = virefyCaptcha(captcha, captchaKey)
-		if (captcha.length == 0) {
-			$.alert("验证码不能为空")
-			return
-		} else {
-			if (captchaPass != 200) {
-				$.alert("验证码错误")
-				refreshCaptcha()
-				jsubmit.button('reset');
-				return
-			}
-		}
+		console.log(replydata)		
 		$.xpost(qrform.attr('action'), replydata, function(code, message) {
 			console.log(code, ":", message)
 			if (code == 200) {

@@ -1,5 +1,4 @@
 {{ template "layout/header" .}}
-{{/*<script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>*/}}
 <script src="/static/ckeditor/ckeditor.js"></script>
 <main id="body">
 	<div class="container">
@@ -23,7 +22,6 @@
 									</div>
 								</div>
 							</div>
-							{{ template "layout/captcha" .}}
 							<div class="d-flex justify-content-between">
 								<div class="attachlist_parent">
 									<a class="small text-left" href="javascript:void(0)">
@@ -69,7 +67,7 @@
 	    $.alert("您没有权限编辑")
 	    setTimeout(function () {
 	        location.href = "/"
-	    },2000)
+	    },1000)
 	}
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
@@ -110,38 +108,22 @@
 		removeDialogTabs: 'image:advanced;image:Link',
 		filebrowserImageUploadUrl: "/api/image/upload",
 		filebrowserUploadUrl: "/api/image/upload",
-		//enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
-		//shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
+		
 		extraPlugins: 'uploadimage',
-		// extraPlugins:['codesnippet','uploadimage'],
+		
 		codeSnippet_theme: 'zenburn'
 	});
 	var qrform = $("#articleform")
 	var jsubmit = $('#articlesubmit');
 	var attachUploader = $("#add_attach");
 	var jattachparent = $('.attachlist_parent');
-	var maxSize = 1 * 1024 * 1024
+	var maxSize = 2 * 1024 * 1024
 	jsubmit.on('click', function() {
 		qrform.reset();
 		jsubmit.button('loading');
 		var replydata = qrform.serializeObject();
 		replydata.message = CKEDITOR.instances.message.getData();
 		console.log(replydata)
-		// 验证验证码
-		var captcha = getCaptcha()
-		var captchaKey = getCaptchaKey()
-		captchaPass = virefyCaptcha(captcha, captchaKey)
-		if (captcha.length == 0) {
-			$.alert("验证码不能为空")
-			return
-		} else {
-			if (captchaPass != 200) {
-				$.alert("验证码错误")
-				refreshCaptcha()
-				jsubmit.button('reset');
-				return
-			}
-		}
 		$.xpost(qrform.attr('action'), replydata, function(code, message) {
 			console.log(code, ":", message)
 			if (code == 200) {
@@ -182,11 +164,10 @@
 		var fd = new FormData()
 		attachfile = attachUploader[0].files[0]
 		console.log(attachfile)
-		var filesSize = attachfile.size
-		// 禁止上传大于1m的文件
+		var filesSize = attachfile.size		
 		console.log(attachfile.size)
 		if (filesSize > maxSize) {
-			$.alert("文件大于1M，不能上传")
+			$.alert("文件大于2M，不能上传")
 			return
 		}
 		fd.append("upload", attachfile)
@@ -208,13 +189,10 @@
 						jattachparent.append(
 							'<fieldset class="fieldset"><legend>上传的附件</legend><ul class="attachlist"><ul></fieldset>');
 					}
-					// 添加福建区域
+					
 					message = res.data
 					addAttachLi(message.url, message.filetype, 1, message.orgfilename)
 					$.alert("上传成功")
-					/*setTimeout(function(){
-					    location.reload()
-					}, 2000)*/
 				} else {
 					$.alert(res.message)
 					return

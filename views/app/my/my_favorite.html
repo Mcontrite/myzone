@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
 			<a role="button" class="btn btn-secondary" data-active="menu-my" href="/my.html">个人资料</a>
-			<a role="button" class="btn btn-secondary active" data-active="menu-my-article" href="/my_article.html">论坛回复</a>
+			<a role="button" class="btn btn-secondary active" data-active="menu-my-article" href="/my_article.html">文章回复</a>
 		</div>
 		<div class="row">
 			<!-- 左侧菜单 -->
@@ -15,7 +15,7 @@
 					</div>
 					<div class="list-group list-group-flush text-center">
 						<a href="/my.html" class="list-group-item list-group-item-action" data-active="menu-my">个人资料</a>
-						<a href="/my_article.html" class="list-group-item list-group-item-action active" data-active="menu-my-article">论坛回复</a>
+						<a href="/my_article.html" class="list-group-item list-group-item-action active" data-active="menu-my-article">文章回复</a>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 											<span class="username text-grey mr-1  hidden-sm" uid="{{.User.ID}}">{{.User.Username}}</span>
 											<span class="date text-grey hidden-sm">{{.Article.CreatedAt.Unix | strtime}}</span>
 											{{/*<span> <span class="text-grey mx-2">←</span>
-                                                <span class="username text-grey mr-1" uid="2">zhang</span>
+                                                <span class="username text-grey mr-1" uid="2">{{.sessions.username}}</span>
                                                 <span class="text-grey">3天前</span>
                                             </span>*/}}
 											<span class="ml-3">

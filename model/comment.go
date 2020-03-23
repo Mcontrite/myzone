@@ -17,7 +17,7 @@ func GetCommentList(page int) (comments []Comment, err error) {
 	if page <= 1 {
 		page = 1
 	}
-	err = db.Preload("User").Model(&Comment{}).Where("isfirst = ?", 1).Order("created_at desc").Offset((page - 1) * PAGE_SIZE).Limit(PAGE_SIZE).Find(&comments).Error
+	err = db.Preload("User").Model(&Comment{}).Where("isfirst = ?", 1).Order("updated_at desc").Offset((page - 1) * PAGE_SIZE).Limit(PAGE_SIZE).Find(&comments).Error
 	return
 }
 

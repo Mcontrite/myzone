@@ -21,7 +21,6 @@
 									</div>
 								</div>
 							</div>
-							{{ template "layout/captcha" .}}
 							<div class="d-flex justify-content-between">
 								<div class="text-right">
 									<button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 提交 </button>
@@ -30,7 +29,7 @@
 						</form>
 					</div>
 				</div>
-				<a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3" href="javascript:history.back();">返回</a>
+				
 			</div>
 		</div>
 	</div>
@@ -43,8 +42,7 @@
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
 		disallowedContent: '<script >',
-		// toolbar: [['Smiley']],
-		// toolbarCanCollapse: true,
+		
 		toolbarStartupExpanded: false,
 		toolbar: [{
 			name: 'document',
@@ -80,11 +78,8 @@
 		upload_hidden: false,
 		removeDialogTabs: 'image:advanced;image:Link',
 		filebrowserImageUploadUrl: "/api/image/upload",
-		filebrowserUploadUrl: "/api/image/upload",
-		//enterMode:CKEDITOR.ENTER_BR, //屏蔽换行符<br>
-		//shiftEnterMode:CKEDITOR.ENTER_P, //屏蔽段落<p>
-		extraPlugins: 'uploadimage',
-		// extraPlugins:['codesnippet','uploadimage'],
+		filebrowserUploadUrl: "/api/image/upload",		
+		extraPlugins: 'uploadimage',		
 		codeSnippet_theme: 'zenburn'
 	});
 	var qrform = $("#sayingform")
@@ -96,23 +91,9 @@
 		}
 	})
 	jsubmit.on('click', function() {
-		// 验证验证码
-		var captcha = getCaptcha()
-		var captchaKey = getCaptchaKey()
-		captchaPass = virefyCaptcha(captcha, captchaKey)
-		if (captcha.length == 0) {
-			$.alert("验证码不能为空")
-			return
-		} else {
-			if (captchaPass != 200) {
-				$.alert("验证码错误")
-				refreshCaptcha()
-				return
-			}
-		}
 		var ckmessage = CKEDITOR.instances.message.getData();
 		if (ckmessage.length < 1) {
-			$.alert("内容不能为空切不能小于1字")
+			$.alert("内容不能为空且不能小于1字")
 			return
 		}
 		qrform.reset();
