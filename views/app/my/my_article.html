@@ -34,13 +34,13 @@
 					<div class="card-body">
 						<ul class="list-unstyled articlelist mb-0">
 							{{range .myarticles}}
-							<li class="media article tap  " data-href="?article-2.htm" data-tid="2">
-								<a href="?user-2.htm" tabindex="-1" class="ml-1 mt-1 mr-3">
+							<li class="media article tap" data-href="/article/{{.ID}}/detail.html" data-tid="2">
+								<a href="#" tabindex="-1" class="ml-1 mt-1 mr-3">
 									<img class="avatar-3" src="{{.User.Avatar}}">
 								</a>
 								<div class="media-body">
 									<div class="title break-all">
-										<a href="?article-2.htm">{{.Article.Title}}</a>
+										<a href="/article/{{.ID}}/detail.html">{{.Article.Title}}</a>
 									</div>
 									<div class="d-flex justify-content-between small mt-1">
 										<div>

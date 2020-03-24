@@ -37,9 +37,10 @@
 					</div>
 					<div class="card-body">
 						<ul class="list-unstyled replylist mb-0">
+							{{$sesid := .sessions.Userid}}
 							{{range .replys}}
 							<li class="media reply" data-pid="8" data-uid="2">
-								<a href="?user-2.htm" class="mr-3" tabindex="-1">
+								<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="mr-3" tabindex="-1">
 									<img class="avatar-3" src="{{.Article.User.Avatar}}">
 								</a>
 								<div class="media-body">
@@ -50,7 +51,7 @@
 													{{.Article.User.Group.Name}}</i>
 											</span>
 											<span class="username">
-												<a href="?user-2.htm" class="text-muted font-weight-bold">{{.Article.User.Username}}</a>
+												<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="text-muted font-weight-bold">{{.Article.User.Username}}</a>
 											</span>
 											<span class="date text-grey ml-2">{{.Article.CreatedAt.Unix | strtime}}</span>
 										</div>
@@ -63,7 +64,7 @@
 										</div>
 									</div>
 									<div class="message mt-1 break-all">
-										<h6><a href="?article-2.htm" target="_blank">{{.Article.Title}}</a></h6>
+										<h6><a href="/article/{{.ID}}/detail.html" target="_blank">{{.Article.Title}}</a></h6>
 										<p>{{.Reply.Message | unescaped}}</p>
 									</div>
 								</div>

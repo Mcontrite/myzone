@@ -662,3 +662,6 @@
 {"client_ip":"127.0.0.1","latency_time":18989500,"level":"info","msg":"","req_method":"GET","req_uri":"/user/2/info.html","status_code":200,"time":"2020-03-23 19:58:09"}
 {"client_ip":"127.0.0.1","latency_time":25987000,"level":"info","msg":"","req_method":"GET","req_uri":"/user/2/reply.html","status_code":200,"time":"2020-03-23 20:09:58"}
 {"client_ip":"127.0.0.1","latency_time":22986200,"level":"info","msg":"","req_method":"GET","req_uri":"/user/2/info.html","status_code":200,"time":"2020-03-23 20:09:59"}
+{"client_ip":"127.0.0.1","latency_time":1000100,"level":"info","msg":"","req_method":"GET","req_uri":"/upload/avatar/3/20200323/logo2.jpg","status_code":304,"time":"2020-03-23 20:28:15"}
+{"client_ip":"127.0.0.1","latency_time":18986500,"level":"info","msg":"","req_method":"GET","req_uri":"/user/2/info.html","status_code":200,"time":"2020-03-23 20:28:16"}
+{"client_ip":"127.0.0.1","latency_time":61117900,"level":"info","msg":"","req_method":"GET","req_uri":"/user/2/reply.html","status_code":200,"time":"2020-03-23 20:28:39"}

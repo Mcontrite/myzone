@@ -10,7 +10,8 @@
 				<div class="card card-article">
 					<div class="card-body">
 						<div class="media">
-							<a href="?user-1.htm" tabindex="-1">
+							{{$sesid := .sessions.Userid}}
+							<a href="{{if eq .article.UserID $sesid}} /my.html {{else}}/user/{{.article.UserID}}/info.html{{end}}" tabindex="-1">
 								<img class="avatar-3 mr-3" src="{{.article.User.Avatar}}">
 							</a>
 							<div class="media-body">
@@ -20,7 +21,9 @@
 								<div class="d-flex justify-content-between small">
 									<div>
 										<span class="username">
-											<a href="?user-1.htm" class="text-muted font-weight-bold">{{.article.User.Username}}</a>
+											<a href="{{if eq .article.UserID $sesid}} /my.html {{else}}/user/{{.article.UserID}}/info.html{{end}}" class="text-muted font-weight-bold">
+												{{.article.User.Username}}
+											</a>
 										</span>
 										<span class="date text-grey ml-2">
 											{{.article.CreatedAt.Unix | strtime}}
@@ -124,7 +127,7 @@
 							{{$isadmin := .session.Isadmin}}
 							{{range $index,$reply := .replylist}}
 							<li class="media reply" data-pid="2" data-uid="2">
-								<a href="?user-2.htm" class="mr-3" tabindex="-1">
+								<a href="{{if eq $reply.UserID $sesid}} /my.html {{else}}/user/{{$reply.UserID}}/info.html{{end}}" class="mr-3" tabindex="-1">
 									<img class="avatar-3" src="{{$reply.User.Avatar}}">
 								</a>
 								<div class="media-body">
@@ -220,10 +223,10 @@
 				{{ template "layout/addnewarticle" .}}
 				<div class="card card-user-info">
 					<div class="m-3 text-center">
-						<a href="?user-1.htm" tabindex="-1">
+						<a href="{{if eq .article.UserID $sesid}} /my.html {{else}}/user/{{.article.UserID}}/info.html{{end}}" tabindex="-1">
 							<img class="avatar-5" src="{{.article.User.Avatar}}">
 						</a>
-						<h5><a href="?user-1.htm">{{.article.User.Username}}</a></h5>
+						<h5><a href="{{if eq .article.UserID $sesid}} /my.html {{else}}/user/{{.article.UserID}}/info.html{{end}}">{{.article.User.Username}}</a></h5>
 					</div>
 					<div class="card-footer p-2">
 						<table class="w-100 small">

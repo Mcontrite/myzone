@@ -203,7 +203,7 @@ CREATE TABLE `z_reply` (
   KEY `tid` (`article_id`,`id`),
   KEY `uid` (`user_id`),
   KEY `idx_z_reply_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论坛回复数据';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='文章回复数据';
 
 -- ----------------------------
 
