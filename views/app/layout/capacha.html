@@ -1,21 +1,12 @@
 {{ define "layout/captcha" }}
-<div class="media">
-	<div class="media-body col-lg-4 p-0">
-		<div id="captchagroup" class="form-group input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text"><i class="icon-barcode"></i></span>
-			</div>
-			<input type="text" class="form-control" placeholder="验证码" name="captcha">
-			{{/*<input type="hidden" class="form-control" name="captchakey" value="captchakey-value">*/}}
-		</div>
-	</div>
-	<div class="align-self-center ml-1">
-		<div class="form-group input-group">
-			<img id="captchaimg" src="?vcode.htm" width="150" height="32" class="vcode" onclick="refreshCaptcha()" style="cursor:pointer"
-			 title="点击更新" nofollow="">
-		</div>
-	</div>
+<label for="usernameo">验证码</label>
+<div id="captchagroup" class="contact-input">
+	<input type="text" class="validate" name="captcha">
 </div>
+<div class="contact-input">
+	<img id="captchaimg" src="?vcode.htm" style="width: 250px;height: 50px;" onclick="refreshCaptcha()" style="cursor:pointer" title="点击更新" nofollow="">
+</div>
+
 <script>
 	var captchaimg = $("#captchaimg")
 	refreshCaptcha()

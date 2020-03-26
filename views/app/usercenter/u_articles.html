@@ -1,70 +1,73 @@
 {{ template "layout/header" .}}
-<main id="body">
-	<main id="body">
-		<div class="container">
-			<div class="row">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
+	<div class="container">
+		<div class="row">
+			<div class="col m9 s12">
+				<div class="sidebar-title left-align">
+					<a href="/my.html"><h2>个人资料</h2></a>
+				</div>
 				{{$sesid := .sessions.Userid}}
-				<!-- PC 导航 / Mobile navigation -->
-				<div class="col-lg-2 hidden-md hidden-sm" id="user_aside">
-					<div class="card">
-						<div class="card-body text-center">
-							<img class="avatar-4" src="{{.userinfo.Avatar}}">
-							<br>{{.userinfo.Username}}
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m6 s12">
+							<div class="ppic left">
+								<img src="{{.sessions.Useravatar}}" alt="Image">
+								<h4>{{.sessions.Username}}</h4>
+							</div>
+							<div class="contact-things">
+								
+								<div class="c-text p-0">
+									<div class="card-body">
+										<ul class="list-unstyled articlelist">
+											{{range .myarticles}}
+											<li class="media article tap top_3 " data-href="/article/{{.ID}}/detail.html" data-tid="1">
+												<!-- <a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" tabindex="-1" class="ml-1 mt-1 mr-3">
+													<img class="avatar-3" src="{{.User.Avatar}}">
+												</a> -->
+												<div class="media-body">
+													<div class="title break-all">
+														<i class="icon-top-3"></i>
+														<a href="/article/{{.ID}}/detail.html"><span class="huux_article_hlight_style1">{{.Article.Title}}</span></a>
+													</div>
+													<div class="d-flex justify-content-between small mt-1">
+														<div>
+															<span style="padding-bottom:0;margin-bottom:0;color:; ">
+																<i class="iconfont icon-v1" style="font-size: !important;"></i>
+															</span>
+															<span class="username text-grey mr-1  hidden-sm" uid="{{.User.ID}}">{{.User.Username}}</span>
+															<span class="date text-grey hidden-sm">{{.Article.CreatedAt.Unix | strtime}}</span>
+														</div>
+														<div class="text-muted small">
+															<span class="ml-2"><i class="icon-eye"></i>{{.Article.ViewsCnt}}</span>
+															<span class="ml-2"><i class="icon-comment-o"></i>{{.Article.ReplysCnt}}</span>
+															<span class="ml-2" title="0 收藏">
+																<i class="icon-star-o" aria-hidden="true"></i>{{.Article.FavouriteCnt}}</span>
+														</div>
+													</div>
+												</div>
+											</li>
+											{{end}}
+										</ul>
+									</div>				
+								</div>
+							</div>
 						</div>
-						<div class="list-group list-group-flush text-center" id="user_nav">
-							<a href="/user/{{.userinfo.ID}}/info.html" class="list-group-item list-group-item-action" data-active="menu-user">个人资料</a>
-							<a href="/user/{{.userinfo.ID}}/article.html" class="list-group-item list-group-item-action active" data-active="menu-user-article">文章回复</a>
-						</div>
+						<!-- colsm6 -->
 					</div>
+					<!-- row -->
 				</div>
-				<div class="col-lg-10" id="user_main">
-					<div class="card">
-						<div class="card-header">
-							<ul class="nav nav-tabs card-header-tabs">
-								<li class="nav-item">
-									<a class="nav-link active" href="/user/{{.userinfo.ID}}/article.html" data-active="user-article">文章</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="/user/{{.userinfo.ID}}/reply.html" data-active="user-reply">回复</a>
-								</li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<ul class="list-unstyled articlelist">
-								{{range .myarticles}}
-								<li class="media article tap top_3 " data-href="/article/{{.ID}}/detail.html" data-tid="1">
-									<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" tabindex="-1" class="ml-1 mt-1 mr-3">
-										<img class="avatar-3" src="{{.User.Avatar}}">
-									</a>
-									<div class="media-body">
-										<div class="title break-all">
-											<i class="icon-top-3"></i>
-											<a href="/article/{{.ID}}/detail.html"><span class="huux_article_hlight_style1">{{.Article.Title}}</span></a>
-										</div>
-										<div class="d-flex justify-content-between small mt-1">
-											<div>
-												<span style="padding-bottom:0;margin-bottom:0;color:; ">
-													<i class="iconfont icon-v1" style="font-size: !important;"></i>
-												</span>
-												<span class="username text-grey mr-1  hidden-sm" uid="{{.User.ID}}">{{.User.Username}}</span>
-												<span class="date text-grey hidden-sm">{{.Article.CreatedAt.Unix | strtime}}</span>
-											</div>
-											<div class="text-muted small">
-												<span class="ml-2"><i class="icon-eye"></i>{{.Article.ViewsCnt}}</span>
-												<span class="ml-2"><i class="icon-comment-o"></i>{{.Article.ReplysCnt}}</span>
-												<span class="ml-2" title="0 收藏">
-													<i class="icon-star-o" aria-hidden="true"></i>{{.Article.FavouriteCnt}}</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								{{end}}
-							</ul>
-						</div>
-					</div>
-				</div>
+				<!-- /.contact-me -->
 			</div>
+			<!-- colm9 -->
+			
+			
 		</div>
-	</main>
-</main>
+		<!-- row -->
+	</div>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
+
 {{ template "layout/footer" .}}

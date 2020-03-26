@@ -1,67 +1,104 @@
 {{ template "layout/header" .}}
-<main id="body">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
-		
 		<div class="row">
-			<!-- 左侧菜单 -->
-			<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
-				<div class="card">
-					<div class="card-body text-center">
-						<img class="avatar-4" src="{{.sessions.Useravatar}}">
-						<br>{{.sessions.Username}}
-					</div>
-					<div class="list-group list-group-flush text-center">
-						<a href="/my.html" class="list-group-item list-group-item-action active" data-active="menu-my">个人资料</a>
-						<a href="/my_article.html" class="list-group-item list-group-item-action" data-active="menu-my-article">文章回复</a>
-					</div>
+			<div class="col m9 s12">
+				<div class="sidebar-title left-align">
+					<a href="/my.html"><h2>个人资料</h2></a>
 				</div>
-			</div>
-			<!-- 右侧内容 -->
-			<div class="col-lg-10" id="my_main">
-				<div class="card">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<a class="nav-link" href="/my.html" data-active="my_profile">基本资料</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/my_password.html" data-active="my_password">密码</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/my_avatar.html" data-active="my_avatar">头像</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="/my_rename.html" data-active="my_rename">更改用户名</a>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<div class="col-lg-6 mx-auto">
-							<form action="/api/user/{{.sessions.Userid}}/name/reset" method="post" id="form">
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
-									</div>
-									<input type="text" class="form-control" placeholder="当前用户名→{{.sessions.Username}}" name="old_username" id="old_username"
-									 disabled="">
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m6 s12">
+							<div class="ppic left">
+								<img src="{{.sessions.Useravatar}}" alt="Image">
+								<h4>{{.sessions.Username}}</h4>
+							</div>
+							<div class="contact-things">
+								
+								<div class="c-text p-0">
+									<div class="card-body">
+										<div class="col-lg-6 mx-auto">
+											<form action="/api/user/{{.sessions.Userid}}/name/reset" method="post" id="form">
+												<div class="form-group input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
+													</div>
+													<input type="text" class="form-control" placeholder="当前用户名→{{.sessions.Username}}" name="old_username" id="old_username"
+													 disabled="">
+												</div>
+												<div class="form-group input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
+													</div>
+													<input type="text" class="form-control" placeholder="请输入新用户名" name="user_name" id="new_username">
+												</div>
+												<div>
+													<button type="button" class="btn btn-primary btn-block" id="submit" data-loading-text="正在提交...">重置用户名</button>
+												</div>
+											</form>
+										</div>
+									</div>				
 								</div>
-								<div class="form-group input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
-									</div>
-									<input type="text" class="form-control" placeholder="请输入新用户名" name="user_name" id="new_username">
-								</div>
-								<div>
-									<button type="button" class="btn btn-primary btn-block" id="submit" data-loading-text="正在提交...">重置用户名</button>
-								</div>
-							</form>
+							</div>
 						</div>
+						<!-- colsm6 -->
 					</div>
+					<!-- row -->
 				</div>
+				<!-- /.contact-me -->
 			</div>
+			<!-- colm9 -->
+			<div class="col m3 s12">
+				<div class="sidebar-title left-align">
+					<h2>Get Social</h2>
+				</div>
+				<ul class="social-link">
+					<li>
+						<a href="#" class="facebook">
+							<span class="s-icon left"><i class="icofont icofont-social-facebook"></i></span>
+							<span class="s-name">Facebook</span>
+							<span class="s-likes right">53K</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="twitter">
+							<span class="s-icon left"><i class="icofont icofont-social-twitter"></i></span>
+							<span class="s-name">Twitter</span>
+							<span class="s-likes right">652</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="google-plus">
+							<span class="s-icon left"><i class="icofont icofont-social-google-plus"></i></span>
+							<span class="s-name">Google+</span>
+							<span class="s-likes right">25K</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="instagram">
+							<span class="s-icon left"><i class="icofont icofont-social-instagram"></i></span>
+							<span class="s-name">Instagram</span>
+							<span class="s-likes right">10K</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="dribbble">
+							<span class="s-icon left"><i class="icofont icofont-social-dribbble"></i></span>
+							<span class="s-name">Dribbble</span>
+							<span class="s-likes right">543</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- colm3 -->
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
 <script>
 	var jform = $('#form');
 	var jsubmit = $('#submit');

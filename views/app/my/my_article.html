@@ -1,70 +1,71 @@
 {{ template "layout/header" .}}
-<main id="body">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
 		<div class="row">
-			<!-- 左侧菜单 -->
-			<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
-				<div class="card">
-					<div class="card-body text-center">
-						<img class="avatar-4" src="{{.sessions.Useravatar}}">
-						<br>{{.sessions.Username}}
-					</div>
-					<div class="list-group list-group-flush text-center">
-						<a href="/my.html" class="list-group-item list-group-item-action" data-active="menu-my">个人资料</a>
-						<a href="/my_article.html" class="list-group-item list-group-item-action active" data-active="menu-my-article">文章回复</a>
-					</div>
+			<div class="col m9 s12">
+				<div class="sidebar-title left-align">
+					<a href="/my.html"><h2>个人资料</h2></a>
 				</div>
-			</div>
-			<!-- 右侧内容 -->
-			<div class="col-lg-10" id="my_main">
-				<div class="card">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<a class="nav-link active" href="/my_article.html" data-active="my-article">文章</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/my_favorite.html" data-active="my-favorite">收藏 </a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/my_reply.html" data-active="my-reply">回复</a>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<ul class="list-unstyled articlelist mb-0">
-							{{range .myarticles}}
-							<li class="media article tap" data-href="/article/{{.ID}}/detail.html" data-tid="2">
-								<a href="#" tabindex="-1" class="ml-1 mt-1 mr-3">
-									<img class="avatar-3" src="{{.User.Avatar}}">
-								</a>
-								<div class="media-body">
-									<div class="title break-all">
-										<a href="/article/{{.ID}}/detail.html">{{.Article.Title}}</a>
-									</div>
-									<div class="d-flex justify-content-between small mt-1">
-										<div>
-											<span style="padding-bottom:0;margin-bottom:0;color:; ">
-												<i class="iconfont icon-v1" style="font-size: !important;"></i>
-											</span>
-											<span class="username text-grey mr-1 " uid="{{.User.ID}}">{{.User.Username}}</span>
-											<span class="date text-grey">{{.Article.CreatedAt.Unix | strtime}}</span>
-										</div>
-										<div class="text-muted small">
-											<span class="ml-2"><i class="icon-eye"></i>{{.Article.ViewsCnt}}</span>
-											<span class="ml-2"><i class="icon-comment-o"></i>{{.Article.ReplysCnt}}</span>
-											<span class="ml-2" title="0 收藏">
-												<i class="icon-star-o" aria-hidden="true"></i>{{.Article.FavouriteCnt}}</span>
-										</div>
-									</div>
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m6 s12">
+							<div class="ppic left">
+								<img src="{{.sessions.Useravatar}}" alt="Image">
+								<h4>{{.sessions.Username}}</h4>
+							</div>
+							<div class="contact-things">
+								
+								<div class="c-text p-0">
+									<div class="card-body">
+										<ul class="list-unstyled articlelist mb-0">
+											{{range .myarticles}}
+											<li class="media article tap" data-href="/article/{{.ID}}/detail.html" data-tid="2">
+												<!-- <a href="#" tabindex="-1" class="ml-1 mt-1 mr-3">
+													<img class="avatar-3" src="{{.User.Avatar}}">
+												</a> -->
+												<div class="media-body">
+													<div class="title break-all">
+														<a href="/article/{{.ID}}/detail.html">{{.Article.Title}}</a>
+													</div>
+													<div class="d-flex justify-content-between small mt-1">
+														<div>
+															<span style="padding-bottom:0;margin-bottom:0;color:; ">
+																<i class="iconfont icon-v1" style="font-size: !important;"></i>
+															</span>
+															<span class="username text-grey mr-1 " uid="{{.User.ID}}">{{.User.Username}}</span>
+															<span class="date text-grey">{{.Article.CreatedAt.Unix | strtime}}</span>
+														</div>
+														<div class="text-muted small">
+															<span class="ml-2"><i class="icon-eye"></i>{{.Article.ViewsCnt}}</span>
+															<span class="ml-2"><i class="icon-comment-o"></i>{{.Article.ReplysCnt}}</span>
+															<span class="ml-2" title="0 收藏">
+																<i class="icon-star-o" aria-hidden="true"></i>{{.Article.FavouriteCnt}}</span>
+														</div>
+													</div>
+												</div>
+											</li>
+											{{end}}
+										</ul>
+									</div>			
 								</div>
-							</li>
-							{{end}}
-						</ul>
+							</div>
+						</div>
+						<!-- colsm6 -->
 					</div>
+					<!-- row -->
 				</div>
+				<!-- /.contact-me -->
 			</div>
+			<!-- colm9 -->
+			
+			
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
+
 {{ template "layout/footer" .}}

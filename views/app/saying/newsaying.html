@@ -1,39 +1,52 @@
 {{ template "layout/header" .}}
-<style> .tagactive {
-        color: #9B703F;
-        font-weight: bold;
-        background-color: papayawhip;
-    }
-</style>
 <script src="/static/ckeditor/ckeditor.js"></script>
-<main id="body">
-	<div class="container">
+<!-- ==================== single-blog-section start ====================-->
+<section id="single-blog-section" class="single-blog-section w100dt mb-50">
+	<div class="container">	
 		<div class="row">
-			<div class="col-lg-10 mx-auto">
-				<div class="card">
-					<div class="card-header"> 发表说说 </div>
-					<div class="card-body">
-						<form action="/api/saying" method="post" id="sayingform">
-							<div class="form-group">
+			<div class="col m1"></div>
+			<div class="col m10 s12">
+				<nav class="breadcrumb-nav w100dt">
+					<div class="page-name hide-on-small-only left">
+						<h4>写说说</h4>
+					</div>
+					<div class="nav-wrapper right">
+						<a href="/" class="breadcrumb">首页</a>
+						<a href="/newsaying.html" class="breadcrumb active">写文章</a>
+					</div>
+					<!-- /.nav-wrapper -->
+				</nav><br>
+				<div class="blogs mb-30">
+					<div class="card">
+						<form action="/api/saying" method="post" id="sayingform" class="contact-form">
+							<label for="title">说说</label>
+							<div class="contact-input">
 								<div class="edui-container" style="width: 100%; z-index: 999;">
 									<div class="edui-editor-body message">
 										<textarea class="form-control" placeholder="内容" name="message" id="message" style="height: 300px; display: none;"></textarea>
 									</div>
 								</div>
 							</div>
+							
 							<div class="d-flex justify-content-between">
-								<div class="text-right">
+								<div class="right">
 									<button type="button" class="btn btn-primary" id="sayingsubmit" data-loading-text="正在提交..."> 提交 </button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
-				
+				<!-- /.blogs -->
 			</div>
+			<!-- colm8 -->
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#single-blog-section -->
+<!-- ==================== single-blog-section end ====================-->
+
 <script>
 	//判断是否已登录  如未登录 跳转到登录页
 	if (!{{.islogin }}) {
@@ -98,16 +111,16 @@
 		}
 		qrform.reset();
 		jsubmit.button('loading');
-		var replydata = qrform.serializeObject();
-		replydata.message = ckmessage
-		console.log(replydata)
+		var commentdata = qrform.serializeObject();
+		commentdata.message = ckmessage
+		console.log(commentdata)
 		// return;
-		$.xpost(qrform.attr('action'), replydata, function(code, message) {
+		$.xpost(qrform.attr('action'), commentdata, function(code, message) {
 			console.log(code, ":", message)
 			// return;
 			if (code == 200) {
 				afterAddNewSaying()
-				$.alert(message);
+				alert(message);
 				setTimeout(function() {
 					location.href = "/sayings"
 				}, 1000)
@@ -120,7 +133,7 @@
 	});
 
 	function afterAddNewSaying() {
-		var jsubmit = $('#replysubmit')
+		var jsubmit = $('#sayingsubmit')
 		jsubmit.button('reset');
 	}
 

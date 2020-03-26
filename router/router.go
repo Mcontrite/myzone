@@ -36,6 +36,7 @@ func InitRouter() *gin.Engine {
 		"plus1":       selfPlus,
 		"numplusplus": numPlusPlus,
 		"strip":       Long2IPString,
+		"truncate":    Truncate,
 	})
 	// 避免404
 	r.NoRoute(func(c *gin.Context) {

@@ -1,4 +1,72 @@
 {{ template "layout/header" .}}
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
+	<div class="container">
+		<div class="row">
+			<div class="col m9 s12">
+				<div class="sidebar-title left-align">
+					<a href="/my.html"><h2>个人资料</h2></a>
+				</div>
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m6 s12">
+							<div class="ppic left">
+								<img src="{{.sessions.Useravatar}}" alt="Image">
+								<h4>{{.sessions.Username}}</h4>
+							</div>
+							<div class="contact-things">
+								
+								<div class="c-text p-0">
+									<div class="card-body">
+										<ul class="list-unstyled replylist">
+											{{$sesid := .sessions.Userid}}
+											{{range .replys}}
+											<li class="media reply" data-pid="1" data-uid="1">
+												<!-- <a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="mr-3" tabindex="-1">
+													<img class="avatar-3" src="{{.Article.User.Avatar}}">
+												</a> -->
+												<div class="media-body">
+													<div class="d-flex justify-content-between small text-muted">
+														<div>
+															<span style="padding-bottom:0;margin-bottom:0;color:; ">
+																<i class="iconfont icon-v1" style="font-size: !important;">
+																	{{.Article.User.Group.Name}} </i>
+															</span>
+															<span class="username">
+																<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="text-muted font-weight-bold">{{.Article.User.Username}}</a>
+															</span>
+															<span class="date text-grey ml-2">{{.Article.CreatedAt.Unix | strtime}}</span>
+														</div>
+													</div>
+													<div class="message mt-1 break-all">
+														<h6><a href="/article/{{.ID}}/detail.html" target="_blank">{{.Article.Title}}</a></h6>
+														<p>{{.Reply.Message | unescaped}}</p>
+													</div>
+												</div>
+											</li>
+											{{end}}
+										</ul>
+									</div>				
+								</div>
+							</div>
+						</div>
+						<!-- colsm6 -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- /.contact-me -->
+			</div>
+			<!-- colm9 -->
+			
+			
+		</div>
+		<!-- row -->
+	</div>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
+
 <main id="body">
 	<div class="container">
 		<div class="row">
@@ -27,36 +95,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="card-body">
-						<ul class="list-unstyled replylist">
-							{{$sesid := .sessions.Userid}}
-							{{range .replys}}
-							<li class="media reply" data-pid="1" data-uid="1">
-								<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="mr-3" tabindex="-1">
-									<img class="avatar-3" src="{{.Article.User.Avatar}}">
-								</a>
-								<div class="media-body">
-									<div class="d-flex justify-content-between small text-muted">
-										<div>
-											<span style="padding-bottom:0;margin-bottom:0;color:; ">
-												<i class="iconfont icon-v1" style="font-size: !important;">
-													{{.Article.User.Group.Name}} </i>
-											</span>
-											<span class="username">
-												<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="text-muted font-weight-bold">{{.Article.User.Username}}</a>
-											</span>
-											<span class="date text-grey ml-2">{{.Article.CreatedAt.Unix | strtime}}</span>
-										</div>
-									</div>
-									<div class="message mt-1 break-all">
-										<h6><a href="/article/{{.ID}}/detail.html" target="_blank">{{.Article.Title}}</a></h6>
-										<p>{{.Reply.Message | unescaped}}</p>
-									</div>
-								</div>
-							</li>
-							{{end}}
-						</ul>
-					</div>
+					
 				</div>
 			</div>
 		</div>

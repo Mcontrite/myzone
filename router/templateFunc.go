@@ -65,3 +65,12 @@ func Long2IPString(si string) string {
 	ip[3] = byte(i)
 	return ip.String()
 }
+
+// 截取字符串
+func Truncate(s string, n int) string {
+	runes := []rune(s)
+	if len(runes) > n {
+		return string(runes[:n])
+	}
+	return s
+}

@@ -15,7 +15,7 @@ type Model struct {
 	gorm.Model
 }
 
-const PAGE_SIZE int = 10
+const PAGE_SIZE int = 6
 
 func init() {
 	var (

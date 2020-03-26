@@ -1,193 +1,181 @@
 {{ template "layout/header" .}}
 <script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<main id="body">
+<!-- ==================== single-blog-section start ====================-->
+<section id="single-blog-section" class="single-blog-section w100dt mb-50">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 main">
-				<div class="card card-saying">
-					<div class="card-body">
-						<div class="media">
-							{{$sesid := .sessions.Userid}}
-							<a href="{{if eq .saying.UserID $sesid}} /my.html {{else}}/user/{{.saying.UserID}}/info.html{{end}}" tabindex="-1">
-								<img class="avatar-3 mr-3" src="{{.saying.User.Avatar}}">
-							</a>
-							<div class="media-body">
-								<div class="d-flex justify-content-between small">
-									<div>
-										<span class="username">
-											<a href="{{if eq .saying.UserID $sesid}} /my.html {{else}}/user/{{.saying.UserID}}/info.html{{end}}" class="text-muted font-weight-bold">{{.saying.User.Username}}</a>
-										</span>
-										<span class="date text-grey ml-2">
-											{{.saying.CreatedAt.Unix | strtime}}
-										</span>
-										<span class="text-grey ml-2">
-											<i class="icon-eye"></i>
-											{{.saying.ViewsCnt}}
-										</span>
-									</div>
-									{{if eq .fcomment.UserID .sessions.Userid}}
-									<div>
-										<a href="/saying/{{.saying.ID}}/edit.html" class="text-grey mr-2 comment_update"><i class="icon-edit"></i> 编辑</a>
-										<a data-href="/saying/{{.saying.ID}}/delete.html" href="javascript:void(0);" class="text-grey comment_delete"
-										 isfirst="1"><i class="icon-remove"></i> 删除</a>
-									</div>
-									{{end}}
-								</div>
-							</div>
-						</div>
-						<hr>
-						<div style="overflow-x: scroll;" class="message break-all" isfirst="1">
-							{{.fcomment.Message | unescaped}}
-						</div>
-						<div class="plugin d-flex justify-content-center mt-3">
-							<style>
-								.haya-favoriter {
-                                    position: relative;
-                                }
-                                .haya-favorite-show-users {
-                                    position: absolute;
-                                    top: 5px;
-                                    z-index: 100;
-                                    width: 100%;
-                                }
-                                .haya-favorite-show-users .haya-favorite-users {
-                                    max-height: 250px;
-                                    overflow-y: auto;
-                                }
-                            </style>
-						</div>
-					</div>
-				</div>
-				<div class="card card-commentlist">
-					<div class="card-body">
-						<div class="card-title">
-							<div class="d-flex justify-content-between">
-								<div>
-									<b>最新评论</b> (<span class="comments">{{.comment_list_len}}</span>) </div>
-								<div>
-								</div>
-							</div>
-						</div>
-						<ul class="list-unstyled commentlist">
-							{{$isadmin := .session.Isadmin}}
-							{{range $index,$comment := .commentlist}}
-							<li class="media comment" data-pid="2" data-uid="2">
-								<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" class="mr-3" tabindex="-1">
-									<img class="avatar-3" src="{{$comment.User.Avatar}}">
-								</a>
-								<div class="media-body">
-									<div class="d-flex justify-content-between small text-muted">
-										<div>
-											<span style="padding-bottom:0;margin-bottom:0;color:; ">
-												<i class="iconfont icon-v1" style="font-size: !important;">
-													{{$comment.User.Group.Name}} </i>
-											</span>
-											<span class="username">
-												<a href="/user.htm?id={{$comment.UserID}}" class="text-muted font-weight-bold">{{$comment.User.Username}}</a>
-											</span>
-											<span class="date text-grey ml-2">{{$comment.CreatedAt.Unix | strtime}}</span>
-										</div>
-										<div class="text-right text-grey">
-											<style>
-												.haya-comment-like .haya-comment-like-loved {
-                                                    color: var(--secondary) !important;
-                                                }
-                                            </style>
-											<span class="floor-parent">
-												<span class="floor mr-0">{{$index | plus1}}</span>楼 </span>
-										</div>
-									</div>
-									<div class="message mt-1 break-all">
-										{{$comment.Message | unescaped}}
-									</div>
-								</div>
-							</li>
-							{{end}}
-							{{if .sessions.Username}}
-							<li class="comment newcomment media">
-								<a href="/my.html" class="mr-3" tabindex="-1">
-									<img class="avatar-3" src="{{.sessions.Useravatar}}">
-								</a>
-								<div class="media-body">
-									<div class="d-flex justify-content-between small text-muted">
-										<div>
-											<div>{{.sessions.Username}}</div>
-										</div>
-										<div>
-											<span class="floor" id="newfloor">评论</span>上楼 </div>
-									</div>
-									<div>
-										<form action="/api/saying/{{.saying.ID}}/comment" method="post" id="quick_reply_form" class="d-block">
-											<input type="hidden" id="quotetid" name="sayingid" value="{{.saying.ID}}">
-											<input type="hidden" id="docutype" name="docutype" value="0">
-											<div class="message mt-1">
-												<textarea class="form-control" id="editor1" placeholder="内容" name="message"></textarea>
-											</div>
-											<div class="text-muted mt-2 small">
-												<div class="d-flex justify-content-between">
-													<div>
-														<button id="commentsubmit" type="button" class="btn btn-sm btn-secondary" id="submit" data-loading-text="正在提交...">
-															评论 </button>
-													</div>
-													<div>
-														<a class="icon-mail-forward text-muted" href="#" id="advanced_reply"> 高级评论</a>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</li>
-							{{else}}
-								<li class="comment newcomment media">
-									<a role="button" class="btn btn-default btn-block xn-back col-lg-6 mx-auto mb-3" target="_blank" href="/login.html">登录可评论</a>
+			<div class="col m8 s12">
+				<div class="card mb-30">
+					{{$sesid := .sessions.Userid}}
+					<div class="card">
+						<div class="card-content w100dt">
+							<ul class="post-mate-time left mb-30">
+								<li>
+									<p class="hero left">
+										 By - <a href="{{if eq .saying.UserID $sesid}} /my.html {{else}}/user/{{.saying.UserID}}/info.html{{end}}" class="l-blue">
+											 {{.saying.User.Username}}
+											</a>
+									</p>
+								</li>
+								<li>
+									<i class="icofont icofont-ui-calendar"></i>{{.saying.CreatedAt.Unix | strtime}}</li>
+							</ul>
+							<ul class="post-mate right mb-30">
+								<li class="like">
+									<a href="#">
+										<i class="icofont icofont-eye"></i>{{.saying.ViewsCnt}}</a>
+								</li>
+								<li class="comment">
+									<a href="#">
+										<i class="icofont icofont-comment"></i>{{.saying.CommentsCnt}}</a>
+								</li>
+								{{if eq .fcomment.UserID .sessions.Userid}}
+								<li class="comment">
+									<a href="/saying/{{.saying.ID}}/edit.html">
+										<i class="icofont icofont-edit"></i>编辑</a>
 								</li>
 								{{end}}
-						</ul>
+							</ul>
+							<p class="w100dt mb-10" isfirst="1">
+								<hr>{{.fcomment.Message | unescaped}}
+							</p>
+						</div>
+						<!-- /.card-content -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.blogs -->	
+				<div class="peoples-comments w100dt mb-30">
+					<div class="sidebar-title center-align">
+						<h2> 评论数 {{.saying.CommentsCnt}}</h2>
+					</div>
+					{{$isadmin := .session.Isadmin}}
+					{{range $index,$comment := .commentlist}}
+					<div class="comment-area w100dt">
+						<div class="comment w100dt mb-20">
+							<div class="left">
+								<a href="{{if eq $comment.UserID $sesid}} /my.html {{else}}/user/{{$comment.UserID}}/info.html{{end}}">
+									<img style="height: 40px; width: 40px;" src="{{$comment.User.Avatar}}" alt="Image">
+								</a>
+							</div>
+							<!-- /.ppic -->
+							<div class="pname">
+								<h4 class="mb-10">
+									<a href="#" class="card-title l-blue">{{$comment.User.Username}}</a>
+									<small class="floor mr-0">&nbsp; {{$index | plus1}} 楼&nbsp;&nbsp;&nbsp;&nbsp;</small>
+									<small><i class="icofont icofont-ui-calendar"></i>
+										{{$comment.CreatedAt.Unix | strtime}} 
+									</small>
+								</h4>
+								<p class="comment-text mb-10">{{$comment.Message | unescaped}}</p>
+							</div>
+							<!-- /.pname -->									
+						</div>
+						<!-- /.comment -->
+					</div>
+					{{end}}
+					<!-- /.comment-area -->
+				</div>
+				<!-- /.peoples-comments -->
+				<div class="leave-comment">
+					<div class="sidebar-title center-align">
+						<h2>添加评论</h2>
+					</div>
+					{{if .sessions.Username}}
+					<form action="/api/saying/{{.saying.ID}}/comment" method="post" id="quick_comment_form" class="comment-area w100dt">
+						<input type="hidden" id="quotetid" name="sayingid" value="{{.saying.ID}}">
+						<input type="hidden" id="docutype" name="docutype" value="0">
+						<div class="message mt-1">
+							<textarea class="form-control" id="editor1" placeholder="内容" name="message"></textarea>
+						</div>
+						<button id="commentsubmit" type="button" class="btn right" id="submit" data-loading-text="正在提交...">
+							评论 
+						</button>
+						<a class="right" href="#" id="advanced_comment"> 高级评论 &nbsp;</a>
+					</form>
+					{{else}}
+					<li class="comment newcomment media">
+						<a role="button" class="btn btn-default btn-block xn-back col-lg-6 mx-auto mb-3" target="_blank" href="/login.html">登录可评论</a>
+					</li>
+					{{end}}
+					<!-- /.comment-area -->
+				</div>
+				<!-- /.leave-comment -->
+			</div>
+			<!-- colm8 -->
+			<div class="col s12 m4 l4">
+				<div class="sidebar-testimonial mb-30">
+					<div class="sidebar-title center-align">
+						<h2>Hi Its Me!</h2>
+					</div>
+					<!-- /.sidebar-title -->
+					<div class="carousel carousel-slider center" data-indicators="true">
+						<div class="carousel-item">
+							<div class="item-img">
+								<span>R</span>
+							</div>
+							<h2>Rakibul Hassan</h2>
+							<small>Web Design & Development</small>
+							<p> Sedut perspiciatis unde omnis iste natus errorsit voluptatem accusantium doloremque. </p>
+						</div>
 					</div>
 				</div>
-				<div class="d-none sayinglist"><input type="checkbox" name="modtid" value="2" checked=""></div>
-				{{if .islogin}}
-				{{ template "mod/saying_list_mod.inc" .}}
-				{{end}}				
-			</div>
-			<div class="col-lg-3 d-none d-lg-block aside">
-				{{ template "layout/addnewarticle" .}}
-				<div class="card card-user-info">
-					<div class="m-3 text-center">
-						<a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}" tabindex="-1">
-							<img class="avatar-5" src="{{.saying.User.Avatar}}">
-						</a>
-						<h5><a href="{{if eq .UserID $sesid}} /my.html {{else}}/user/{{.UserID}}/info.html{{end}}">{{.saying.User.Username}}</a></h5>
+				<!-- /.sidebar-testimonial -->
+				<div class="sidebar-followme w100dt mb-30">
+					<div class="sidebar-title center-align">
+						<h2>Follow Me</h2>
 					</div>
-					<div class="card-footer p-2">
-						<table class="w-100 small">
-							<tbody>
-								<tr align="center">
-									<td>
-										<span class="text-muted">说说数</span><br>
-										<b>{{.saying.User.SayingsCnt}}</b>
-									</td>
-									<td>
-										<span class="text-muted">评论数</span><br>
-										<b>{{.saying.User.CommentsCnt}}</b>
-									</td>
-									<td>
-										<span class="text-muted">注册排名</span><br>
-										<b>{{.saying.User.ID}}</b>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<!-- /.sidebar-title -->
+					<ul class="followme-links w100dt">
+						<li class="mrb15">
+							<a href="#" class="facebook">
+								<i class="icofont icofont-social-facebook"></i>
+								<small class="Followers white-text">105 Likes</small>
+							</a>
+						</li>
+						<li class="mrb15">
+							<a href="#" class="twitter">
+								<i class="icofont icofont-social-twitter"></i>
+								<small class="Followers white-text">50 Follows</small>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="google-plus">
+								<i class="icofont icofont-social-google-plus"></i>
+								<small class="Followers white-text">39 Follows</small>
+							</a>
+						</li>
+						<li class="mrb15">
+							<a href="#" class="linkedin">
+								<i class="icofont icofont-brand-linkedin"></i>
+								<small class="Followers white-text">50 Follows</small>
+							</a>
+						</li>
+						<li class="mrb15">
+							<a href="#" class="pinterest">
+								<i class="icofont icofont-social-pinterest"></i>
+								<small class="Followers white-text">50 Follows</small>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="instagram">
+								<i class="icofont icofont-social-instagram"></i>
+								<small class="Followers white-text">39 Likes</small>
+							</a>
+						</li>
+					</ul>
 				</div>
+				<!-- /.sidebar-followme -->
 			</div>
+			<!-- colm4 -->
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#single-blog-section -->
+<!-- ==================== single-blog-section end ====================-->
+
 <script>
 	CKEDITOR.replace('message', {
 		language: 'zh-cn',
@@ -197,7 +185,7 @@
 		height: '8rem',
 		resize_minHeight: '5rem',
 	});
-	var qrform = $("#quick_reply_form")
+	var qrform = $("#quick_comment_form")
 	var jsubmit = $('#commentsubmit');
 	jsubmit.on('click', function() {
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
@@ -206,19 +194,19 @@
 		}		
 		qrform.reset();
 		jsubmit.button('loading');
-		var replydata = qrform.serializeObject();
-		replydata.message = CKEDITOR.instances.editor1.getData();
-		console.log(replydata)
-		$.xpost(qrform.attr('action'), replydata, function(code, message) {
+		var commentdata = qrform.serializeObject();
+		commentdata.message = CKEDITOR.instances.editor1.getData();
+		console.log(commentdata)
+		$.xpost(qrform.attr('action'), commentdata, function(code, message) {
 			console.log(code, ":", message)
 			if (code == 200) {
-				$.alert("评论成功")
+				alert("评论成功")
 				setTimeout(function() {
 					// addNewCommentElement()
 					location.reload()
-				}, 1000)
+				}, 500)
 			} else if (code < 0) {
-				$.alert(message);
+				alert(message);
 				jsubmit.button('reset');
 			} else {
 				jform.find('[name="' + code + '"]').alert(message).focus();
@@ -239,8 +227,8 @@
 			'<a href="?user-2.htm" class="text-muted font-weight-bold">{{.sessions.Username}}</a>' + '</span>' +
 			'<span class="date text-grey ml-2">2小时前</span>' + '</div> ' + '<div class="text-right text-grey"> ' +
 			'<style>.haya-comment-like .haya-comment-like-loved {color: var(--secondary) !important;}</style> ' +
-			'<a href="javascript:void(0)" data-tid="1" data-pid="5" class="text-grey comment_reply mr-3">' +
-			'<i class="icon-reply" title="引用"></i> ' + '<span class="d-none">引用</span>' + '</a> ' +
+			'<a href="javascript:void(0)" data-tid="1" data-pid="5" class="text-grey comment_comment mr-3">' +
+			'<i class="icon-comment" title="引用"></i> ' + '<span class="d-none">引用</span>' + '</a> ' +
 			'<a href="?comment-update-5.htm" class="text-grey comment_update mr-3">' + '<i class="icon-edit" title="编辑"></i> ' +
 			'<span class="d-none">编辑</span>' + '</a> ' +
 			'<a data-href="?comment-delete-5.htm" data-confirm-text="确定删除吗？" href="javascript:void(0);" class="text-grey comment_delete _confirm mr-3">' +
@@ -292,7 +280,7 @@
 			}
 		})
 	}
-	$("#advanced_reply").on("click", function() {
+	$("#advanced_comment").on("click", function() {
 		location.href = "/saying/{{.saying.ID}}/acomment.html"
 	})
 </script>

@@ -1,50 +1,59 @@
 {{ template "layout/header" .}}
-<main id="body">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
 		<div class="row">
-			<!-- PC 导航 / Mobile navigation -->
-			<div class="col-lg-2 hidden-md hidden-sm" id="user_aside">
-				<div class="card">
-					<div class="card-body text-center">
-						<img class="avatar-4" src="{{.userinfo.Avatar}}">
-						<br>{{.userinfo.Username}}
-					</div>
-					<div class="list-group list-group-flush text-center" id="user_nav">
-						<a href="/user/{{.userinfo.ID}}/info.html" class="list-group-item list-group-item-action active" data-active="menu-user">个人资料</a>
-						<a href="/user/{{.userinfo.ID}}/article.html" class="list-group-item list-group-item-action" data-active="menu-user-article">文章回复</a>
-					</div>
+			<div class="col m9 s12">
+				<div class="sidebar-title left-align">
+					<a href="/my.html"><h2>个人资料</h2></a>
 				</div>
-			</div>
-			<div class="col-lg-10" id="user_main">
-				<div class="card">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<a class="nav-link active" href="/user/{{.userinfo.ID}}/info.html" data-active="user-profile">基本资料</a>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<div class="row line-height-4">
-							<div class="col-md-2 col-sm-12 text-center">
-								<img class="logo-4" src="{{.userinfo.Avatar}}">
-								<br><b>{{.userinfo.Username}} </b>
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m6 s12">
+							<div class="ppic left">
+								<img src="{{.userinfo.Avatar}}" alt="Image">
+								<h4>{{.sessions.Username}}</h4>
 							</div>
-							<div class="col-4 col-sm-5">
-								<span class="text-muted">文章数：</span>{{.userinfo.ArticlesCnt}}<br>
-								<span class="text-muted">回复数：</span>{{.userinfo.ReplysCnt}}<br>
-							</div>
-							<div class="col-auto">
-								<span class="text-muted">用户组：</span>{{.userinfo.Group.Name}} <br>
-								<span class="text-muted">创建时间：</span>{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
-								<span class="text-muted">最后登录：</span>{{.userinfo.LoginDate.Format "2006-01-02"}} <br>
+							<div class="contact-things">
+								
+								<div class="c-text p-0">
+									<div class="card-body">
+										<div class="row line-height-4">
+											<div class="col-md-2 col-sm-12 text-center">
+												
+												<br><b>{{.userinfo.Username}} </b>
+											</div>
+											<div class="col-4 col-sm-5">
+												<span class="text-muted">文章数：</span>{{.userinfo.ArticlesCnt}}<br>
+												<span class="text-muted">回复数：</span>{{.userinfo.ReplysCnt}}<br>
+												<span class="text-muted">用户组：</span>{{.userinfo.Group.Name}} <br>
+												<span class="text-muted">创建时间：</span>{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
+												<span class="text-muted">最后登录：</span>{{.userinfo.LoginDate.Format "2006-01-02"}} <br>
+											
+											</div>
+											<div class="col-auto">
+												</div>
+										</div>
+										{{/*<a role="button" class="btn btn-danger confirm btn-block my-3" data-confirm-text="确定删除用户？" data-method="post" href="?mod-deleteuser-1.htm">删除用户</a>*/}}
+									</div>				
+								</div>
 							</div>
 						</div>
-						{{/*<a role="button" class="btn btn-danger confirm btn-block my-3" data-confirm-text="确定删除用户？" data-method="post" href="?mod-deleteuser-1.htm">删除用户</a>*/}}
+						<!-- colsm6 -->
 					</div>
+					<!-- row -->
 				</div>
+				<!-- /.contact-me -->
 			</div>
+			<!-- colm9 -->
+			
+			
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
+
 {{ template "layout/footer" .}}

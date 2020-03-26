@@ -1,31 +1,39 @@
 {{ template "layout/header" .}}
-<style> .tagactive {
-        color: #9B703F;
-        font-weight: bold;
-        background-color: papayawhip;
-    }
-</style>
 <script src="/static/ckeditor/ckeditor.js"></script>
-<main id="body">
-	<div class="container">
+<!-- ==================== single-blog-section start ====================-->
+<section id="single-blog-section" class="single-blog-section w100dt mb-50">
+	<div class="container">	
 		<div class="row">
-			<div class="col-lg-10 mx-auto">
-				<div class="card">
-					<div class="card-header"> 发表文章 </div>
-					<div class="card-body">
-						<form action="/api/article" method="post" id="articleform">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="标题" name="title" value="" id="title2">
+			<div class="col m1"></div>
+			<div class="col m10 s12">
+				<nav class="breadcrumb-nav w100dt">
+					<div class="page-name hide-on-small-only left">
+						<h4>写文章</h4>
+					</div>
+					<div class="nav-wrapper right">
+						<a href="/" class="breadcrumb">首页</a>
+						<a href="/newsaying.html" class="breadcrumb active">写说说</a>
+					</div>
+					<!-- /.nav-wrapper -->
+				</nav><br>
+				<div class="blogs mb-30">
+					<div class="card">
+						<form action="/api/article" method="post" id="articleform" class="contact-form">
+							<label for="title">标题</label>
+							<div class="contact-input">
+								<input type="text" class="validate" placeholder="标题" name="title" value="" id="title2">
 							</div>
-							<div class="form-group">
+							<label for="title">内容</label>
+							<div class="contact-input">
 								<div class="edui-container" style="width: 100%; z-index: 999;">
 									<div class="edui-editor-body message">
 										<textarea class="form-control" placeholder="内容" name="message" id="message" style="height: 300px; display: none;"></textarea>
 									</div>
 								</div>
 							</div>
-							{{ template "layout/captcha" .}}
+							{{ template "layout/captcha" .}}<br>
 							<div class="d-flex justify-content-between">
+								{{if eq .sessions.Isadmin "1"}}
 								<div class="attachlist_parent">
 									<a class="small text-left" href="javascript:void(0)">
 										<label class="addattach" id="addattach">
@@ -33,18 +41,25 @@
 										</label>
 									</a>
 								</div>
-								<div class="text-right">
+								{{end}}
+								<div class="right">
 									<button type="button" class="btn btn-primary" id="articlesubmit" data-loading-text="正在提交..."> 提交 </button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
-				
+				<!-- /.blogs -->
 			</div>
+			<!-- colm8 -->
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#single-blog-section -->
+<!-- ==================== single-blog-section end ====================-->
+
 <script>
 	//判断是否已登录  如未登录 跳转到登录页
 	if (!{{.islogin }}) {
@@ -151,7 +166,7 @@
 			// return;
 			if (code == 200) {
 				afterAddNewArticle()
-				$.alert(message);
+				alert(message);
 				setTimeout(function() {
 					location.href = "/"
 				}, 1000)
@@ -164,7 +179,7 @@
 	});
 
 	function afterAddNewArticle() {
-		var jsubmit = $('#replysubmit')
+		var jsubmit = $('#articlesubmit')
 		jsubmit.button('reset');
 	}
 
@@ -243,8 +258,5 @@
 		return "newarticle" + timestamp + tmp
 	}
 	$('form[method="POST"]').append('<input type="hidden" name="xss_token" value="' + "uid" + {{.sessions.Userid}} + randomChar(11) + '" />');
-	function toggleclass(ele) {
-		$(ele).toggleClass("tagactive")
-	}
 </script>
 {{ template "layout/footer" .}}

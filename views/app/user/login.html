@@ -4,50 +4,49 @@
         location.href = "/"
     }
 </script>
-<main id="body">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 mx-auto">
-                <div class="card">
-                    <div class="card-header">
-                        用户登录
+            <div class="col m4 s12"></div>
+            <div class="col m4 s12">
+                <div class="contact-me">
+                    <div class="sidebar-title center-align">
+                        <h2>用户登录</h2>
                     </div>
-                    <div class="card-body ajax_modal_body">
-                        <form action="/api/login" method="post" id="form">
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
+                    <hr><br>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <form class="contact-form" action="/api/login" method="post" id="form">
+                                <label for="username">用户名</label>
+                                <div class="contact-input">
+                                    <input type="text" id="username" name="username"  class="validate">
                                 </div>
-                                <input type="text" class="form-control" placeholder="用户名" id="username"
-                                    name="username">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon icon-lock icon-fw"></i></span>
+                                <label for="password">密码</label>
+                                <div class="contact-input">
+                                    <input type="password" id="password" name="password"  class="validate">
                                 </div>
-                                <input type="password" class="form-control" placeholder="密码" id="password"
-                                    name="password">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary btn-block" id="submit">登录</button>
-                            </div>
-                            <div class="media">
-                                <div>
-                                </div>
-                                <div class="media-body text-right">
-                                    <a href="/register.html" class="text-muted"><small>用户注册</small></a>
-                                </div>
-                            </div>
-                        </form>
+                                <button type="button" class="waves-effect waves-light right" id="submit">登录</button>
+                            </form>  
+                            <a href="/register.html" class="text-muted right"><small>用户注册</small></a>
+                            <!-- /.contact-things -->
+                        </div>
+                        <!-- colsm6 -->
                     </div>
+                    <!-- row -->
                 </div>
+                <!-- /.contact-me -->
             </div>
+            <!-- colm9 -->
         </div>
+        <!-- row -->
     </div>
-</main>
+    <!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
 
+<!-- /.sidebar-testimonial -->
 <script>
     var jform = $('#form');
     var jsubmit = $('#submit');
@@ -64,12 +63,12 @@
             acync: false,
             success: function (res) {
                 if (res.code == 200) {
-                    $.alert("登录成功")
+                    //alert("登录成功")
                     setTimeout(function () {
                         $.location("/")
-                    }, 500)
+                    }, 100)
                 } else {
-                    $.alert("用户名或密码错误")
+                    //alert("用户名或密码错误")
                     jsubmit.button('reset');
                 }
             }

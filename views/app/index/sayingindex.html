@@ -1,99 +1,68 @@
 {{ template "layout/header" .}}
-<main id="body">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-9 main">
-				<div class="card card-articlelist">
-					<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs">
-							<li class="nav-item">
-								<a class="nav-link active" href="/">说说</a>
-							</li>
-						</ul>
-					</div>
-					<div class="card-body">
-						<ul class="list-unstyled articlelist mb-0">
-							{{$isadmin := .sessions.Isadmin}}
-							{{$sesid := .sessions.Userid}}
-							{{ range .commentList }}
-							<li class="media article tap  " data-href="/saying/{{.SayingID}}/detail.html" data-tid="22">
-								{{if eq $isadmin "1"}}
-								<input type="checkbox" name="modtid" class="mt-3 mr-2" value="{{.ID}}">
-								{{end}}
-								<a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" tabindex="-1" class="ml-1 mt-1 mr-3">
-									<img class="avatar-3" src="{{.User.Avatar}}">
+<!-- ==================== blog-section start ==================== -->
+<section id="blog-section" class="blog-section w100dt mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 l8">
+                {{$isadmin := .sessions.Isadmin}}
+                {{$sesid := .sessions.Userid}}
+                {{ range .commentList }}
+                <div class="blogs mb-30">
+                    <div class="card">
+                        <div class="card-content w100dt">
+                            <div class="left">
+								<a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}">
+									<img style="height: 40px; width: 40px;" src="{{.User.Avatar}}" alt="Image">
 								</a>
-								<a href="/saying/{{.SayingID}}/detail.html">
-									<div class="media-body">
-										<div class="d-flex justify-content-between small mt-1">
-											<div>
-												<span class="username text-grey mr-1 " uid="1">{{.User.Username}}</span>
-												<span class="date text-grey">{{.CreatedAt.Unix | strtime}}</span>
-											</div>
-											<div class="text-muted small">
-												<span class="ml-2"><i class="icon-eye"></i> {{.Saying.ViewsCnt}}</span>
-												<span class="ml-2"><i class="icon-comment-o"></i> {{.Saying.CommentsCnt}}</span>
-											</div>
-										</div>
-										{{.MessageFmt | unescaped}}
-									</div>
-								</a>
-							</li>
-							{{end}}
-						</ul>
-					</div>
-				</div>
-				{{ template "mod/saying_list_mod.inc" .}}
-				<nav class="my-3">
+							</div>
+                            <ul>
+                                <li>
+                                    <ul class="post-mate-time left">
+                                        <li>
+                                            <p class="hero left">
+                                                &nbsp;&nbsp;&nbsp; By - <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">{{.User.Username}}</a>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <i class="icofont icofont-ui-calendar"></i>&nbsp;{{.CreatedAt.Unix | strtime}}</li>
+                                    </ul>
+                                    <ul>&nbsp;&nbsp;&nbsp;
+										<a href="/saying/{{.SayingID}}/detail.html">
+											{{$length := len .MessageFmt}}
+											{{if ge $length 35}}
+												{{truncate .MessageFmt 35 | unescaped}}...
+											{{else}}
+												{{.MessageFmt | unescaped}}
+											{{end}}
+										</a>   
+                                    </ul>
+                                </li>  
+                            </ul>
+                        </div>
+                        <!-- /.card-content -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                {{end}}
+                <!-- /.blogs -->
+                <nav class="my-3">
 					<ul class="pagination justify-content-center flex-wrap">
 						{{.pages | unescaped}}
 					</ul>
 				</nav>
-			</div>
-			<div class="col-lg-3 d-none d-lg-block aside">
+            </div>
+            <!-- colm8 -->
+            <div class="col s12 m4 l4">
 				{{ template "layout/addnewarticle" .}}
-				<div class="card card-site-info">
-					<div class="m-3">
-						<h5 class="text-center">{{.webname}}</h5>
-						<div class="small line-height-3">{{.description}}</div>
-					</div>
-					<div class="card-footer p-2">
-						<table class="w-100 small">
-							<tbody>
-								<tr align="center">
-									<td>
-										<span class="text-muted">说说数</span><br>
-										<b>{{.sayings_num}}</b>
-									</td>
-									<td>
-										<span class="text-muted">评论数</span><br>
-										<b>{{.comments_num}}</b>
-									</td>
-									<td>
-										<span class="text-muted">用户数</span><br>
-										<b>{{.users_num}}</b>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="card card-newuser">
-					<div class="card-header text-grey">注册用户</div>
-					<div class="card-body small">
-						<div class="row">
-							{{range .newestuser}}
-							<div class="col-3 mb-1 text-center">
-								<a class="small text-muted text-nowrap" href="{{if eq .ID $sesid}} /my.html {{else}}/user/{{.ID}}/info.html{{end}}" data-toggle="tooltip" title="myzone"
-								 data-original-title="myzone">
-									<img src="{{.Avatar}}" alt="{{.Username}}" width="28" height="28" class="img-circle"><br>{{.Username}} </a>
-							</div>
-							{{end}}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
+				<br>
+                {{ template "layout/sidebar" }}
+            </div>
+            <!-- colm4 -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</section>
+<!-- /#blog-section -->
+<!-- ==================== blog-section end ==================== -->
 {{ template "layout/footer" }}

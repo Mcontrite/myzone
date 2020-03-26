@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>404页面</title>
-		<meta name="renderer" content="webkit" />
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
-		<link rel="stylesheet" type="text/css" href="/static/css/404style.css">
-		<link rel="shortcut icon" href="http://uqseo.com/favicon.ico">
-	</head>
-	<body>
-		<div class="container">
-			<img class="bg" src="/static/img/404.png" />
-			<div class="btn">
-				<a class="goindex" onclick="history.back()">返回</a>
-				<a href="http://wpa.qq.com/msgrd?v=3&uin=68179285&site=qq&menu=yes" target="_blank" class="lx">咨询站长</a>
-				<div style="clear:both;"></div>
+{{ template "layout/header" .}}
+<!-- ==================== error-section start ==================== -->
+<section id="error-section" class="error-section w100dt mb-50">
+	<div class="container">
+		<nav class="breadcrumb-nav w100dt">
+			<div class="page-name hide-on-small-only left">
+				<h4>404 ERROR</h4>
 			</div>
+			<div class="nav-wrapper right">
+				<a href="/" class="breadcrumb">Home</a>
+				<a href="404.html" class="breadcrumb active">404 ERROR</a>
+			</div>
+			<!-- /.nav-wrapper -->
+		</nav>
+		<br>
+		<div class="error-contant center-align">
+			<h2 class="error-head-title">404</h2>
+			<p> It looks like that page no longer exists. Would you like to go to <a href="/">Home</a> instead?
+			</p>
 		</div>
-	</body>
-</html>
+		<!-- /.error-contant -->
+	</div>
+	<!-- container -->
+</section>
+<!-- /#error-section -->
+<!-- ==================== error-section end ==================== -->
+{{ template "layout/footer" }}
