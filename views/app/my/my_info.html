@@ -2,31 +2,36 @@
 <!-- ==================== contact-section start ==================== -->
 <section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
-		<div class="row">
-			<div class="col m9 s12">
-				<div class="sidebar-title left-align">
-					<a href="/my.html"><h2>个人资料</h2></a>
+		<div class="row">			
+			<nav class="breadcrumb-nav w100dt">
+				<div class="center" role="group">
+					<a class="btn active" href="/my.html">个人资料</a>
+					<a class="btn-flat active" href="/my_edit.html">修改资料</a>
 				</div>
+			</nav>
+		</div><br>
+		<div class="row">
+			<div class="col m9 s12">	
 				<div class="contact-me">
 					<div class="row">
-						<div class="col m6 s12">
-							<div class="ppic left">
-								<img src="{{.sessions.Useravatar}}" alt="Image">
-								<h4>{{.sessions.Username}}</h4>
-							</div>
+						<div class="col m2 s12"></div>
+						<div class="col m8 s12">
 							<div class="contact-things">
-								<div class="c-icon">
-									<i class="icofont icofont-location-pin"></i>
-								</div>
 								<div class="c-text p-0">
-									<p>452 Town road, Big House</p>
-									<span class="text-muted">文章数：</span>{{.userinfo.ArticlesCnt}}<br>
-									<span class="text-muted">回复数：</span>{{.userinfo.ReplysCnt}}<br>
-									<span class="text-muted">收藏数：</span><a href="?my-favorites.htm" target="_blank">{{.userinfo.FavouriteCnt}}</a><br>
-									<span class="text-muted">说说数：</span>{{.userinfo.SayingsCnt}}<br>
-									<span class="text-muted">评论数：</span>{{.userinfo.CommentsCnt}}<br>							
-									<span class="text-muted">注册时间：</span>{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
-									<span class="text-muted">上次登录：</span>{{.userinfo.LoginDate.Format "2006-01-02"}}<br>								
+									<span class="text-muted">用户头像：</span>&nbsp;
+									<div class="right">
+									<img src="{{.sessions.Useravatar}}" alt="Image" style="height: 120px; width: 120px;">
+									</div>
+								</div>
+								<div class="c-text p-0"><br>
+									<span class="text-muted">用户名：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.sessions.Username}}<br>
+									<span class="text-muted">收藏数：</span><a href="?my-favorites.htm" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.userinfo.FavouriteCnt}}</a><br>
+									<span class="text-muted">文章数：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.userinfo.ArticlesCnt}}<br>
+									<span class="text-muted">回复数：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.userinfo.ReplysCnt}}<br>
+									<span class="text-muted">说说数：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.userinfo.SayingsCnt}}<br>
+									<span class="text-muted">评论数：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{.userinfo.CommentsCnt}}<br>							
+									<span class="text-muted">注册时间：</span>&nbsp;&nbsp;{{.userinfo.CreatedAt.Format "2006-01-02"}}<br>
+									<span class="text-muted">上次登录：</span>&nbsp;&nbsp;{{.userinfo.LoginDate.Format "2006-01-02"}}<br>								
 								</div>
 							</div>
 						</div>
@@ -37,49 +42,7 @@
 				<!-- /.contact-me -->
 			</div>
 			<!-- colm9 -->
-			<div class="col m3 s12">
-				<div class="sidebar-title left-align">
-					<h2>Get Social</h2>
-				</div>
-				<ul class="social-link">
-					<li>
-						<a href="#" class="facebook">
-							<span class="s-icon left"><i class="icofont icofont-social-facebook"></i></span>
-							<span class="s-name">Facebook</span>
-							<span class="s-likes right">53K</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" class="twitter">
-							<span class="s-icon left"><i class="icofont icofont-social-twitter"></i></span>
-							<span class="s-name">Twitter</span>
-							<span class="s-likes right">652</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" class="google-plus">
-							<span class="s-icon left"><i class="icofont icofont-social-google-plus"></i></span>
-							<span class="s-name">Google+</span>
-							<span class="s-likes right">25K</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" class="instagram">
-							<span class="s-icon left"><i class="icofont icofont-social-instagram"></i></span>
-							<span class="s-name">Instagram</span>
-							<span class="s-likes right">10K</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" class="dribbble">
-							<span class="s-icon left"><i class="icofont icofont-social-dribbble"></i></span>
-							<span class="s-name">Dribbble</span>
-							<span class="s-likes right">543</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<!-- colm3 -->
+			{{ template "my/sidebar" }}
 		</div>
 		<!-- row -->
 	</div>

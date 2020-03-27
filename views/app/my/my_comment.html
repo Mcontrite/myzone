@@ -5,8 +5,8 @@
 			<nav class="breadcrumb-nav w100dt">
 				<div class="center" role="group">
 					<a class="btn-flat active" href="/my_favorite.html">我的收藏</a>
-					<a class="btn active" href="/my_article.html">我的文章</a>
-					<a class="btn-flat active" href="/my_reply.html">我的回复</a>
+					<a class="btn-flat active" href="/my_article.html">我的文章</a>
+					<a class="btn active" href="/my_reply.html">我的回复</a>
 					<a class="btn-flat active" href="/my_saying.html">我的说说</a>
 					<a class="btn-flat active" href="/my_comment.html">我的评论</a>
 				</div>
@@ -22,26 +22,26 @@
 									<th></th>
 									<th width="60"><h5>序号</h5></th>
 									<th width="120"><h5>作者</h5></th>
-									<th width="180"><h5>标题</h5></th>
-									<th width="180"><h5>发表时间</h5></th>
-									<th width="70"><h5>浏览数</h5></th>
-									<th width="70"><h5>回复数</h5></th>
-									<th width="80"><h5>被收藏数</h5></th>
-									<th width="80"><h5>编辑</h5></th>
+									<th width="180"><h5>内容</h5></th>
+									<th width="180"><h5>回复时间</h5></th>
+									<th><h5></h5></th>
+									<th width="220"><h5>更新时间</h5></th>
+									<th><h5></h5></th>
+									<th width="80"><h5></h5></th>
 								</tr>
 							</thead>
 							<tbody id="userlist">
-								{{range .myarticles}}
+								{{range .comments}}
 								<tr uid="{{.ID}}">
 									<td></td>
-									<td>{{.ID}}</td>
-									<td uid="{{.User.ID}}">{{.User.Username}}</td>
-									<td><a href="/article/{{.ID}}/detail.html">{{.Article.Title}}</a></td>
-									<td>{{.Article.CreatedAt.Format "2006.01.02  15:04:05"}}</td>
-									<td>{{.Article.ViewsCnt}}</td>
-									<td>{{.Article.ReplysCnt}}</td>
-									<td>{{.Article.FavouriteCnt}}</td>
-									<td><a href="/article/{{.ID}}/edit.html">编辑</a></td>
+									<td>{{.Comment.ID}}</td>
+									<td uid="{{.User.ID}}">000</td>
+									<td><a href="/saying/{{.Comment.SayingID}}/detail.html">{{.Comment.Message | unescaped}}</a></td>
+									<td>{{.CreatedAt.Format "2006.01.02  15:04:05"}}</td>
+									<td></td>
+									<td>{{.CreatedAt.Format "2006.01.02  15:04:05"}}</td>
+									<td></td>
+									<td></td>
 								</tr>
 								{{end}}
 							</tbody>

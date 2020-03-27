@@ -55,34 +55,10 @@ func MyInfo(c *gin.Context) {
 	})
 }
 
-func MyPassword(c *gin.Context) {
+func MyEdit(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
-	tpl := "my_password.html"
-	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"webname":     webname,
-		"description": description,
-	})
-}
-
-func MyAvatar(c *gin.Context) {
-	islogin := user.IsLogin(c)
-	sessions := user.GetSessions(c)
-	tpl := "my_avatar.html"
-	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"webname":     webname,
-		"description": description,
-	})
-}
-
-func MyUsername(c *gin.Context) {
-	islogin := user.IsLogin(c)
-	sessions := user.GetSessions(c)
-	tpl := "my_name.html"
+	tpl := "my_edit.html"
 	c.HTML(200, tpl, gin.H{
 		"islogin":     islogin,
 		"sessions":    sessions,

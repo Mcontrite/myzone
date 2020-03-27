@@ -107,6 +107,9 @@ a.custom-btn {
  padding: 10px 15px;
  background-color: #2962ff;
 }
+a.mybtn {
+  background-color: white;
+ }
 .tag,
 p.hero {
   text-align: left;
@@ -1228,11 +1231,11 @@ ul.pagination li:hover a {
 /*  - 9 - breadcrumb-section - Start
 ==================================================================================================== */
 .breadcrumb-section {
-  margin-top: 130px;
+  margin-top: 120px;
 }
 
 .breadcrumb-nav {
-  padding: 20px;
+  padding: 10px;
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.14);
@@ -1268,7 +1271,7 @@ ul.pagination li:hover a {
 /*  - 10 - footer-section - Start
 ==================================================================================================== */
 .footer-section {
-  padding: 50px 0px;
+  padding: 10px 0px;
   background-color: #fff;
 }
 ul.footer-social-links li {

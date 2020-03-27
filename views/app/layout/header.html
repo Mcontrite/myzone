@@ -20,6 +20,7 @@
 							<li><a href="/">首页</a></li>
 							<li><a href="/sayings">说说</a></li>
 							{{if .islogin}}
+							<li><a href="/my_favorite.html">个人中心</a></li>
 							<li class="active"><a href="/my.html">{{.sessions.Username}}</a></li>
 							{{if eq .sessions.Isadmin "1"}}
 							<li><a id="adminindex" href="/admin/index.html">后台管理</a></li>
@@ -67,7 +68,7 @@
     $("#logout").on('click', function () {
         $.xget("/api/logout", function (code, message) {
             console.log(code, message)
-            //$.alert("退出成功,1秒后跳转到首页")
+            alert("退出成功")
             setTimeout(function () {
                 location.href = "/"
             }, 500)

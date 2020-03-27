@@ -74,14 +74,10 @@ func InitRouter() *gin.Engine {
 		// 高级回复
 		web.GET("/article/:id/areply.html", webservice.ArticleAddReply)
 		web.GET("/saying/:id/acomment.html", webservice.SayingAddComment)
-		// 我的信息概览
+		// 我的信息
 		web.GET("/my.html", webservice.MyInfo)
-		// 修改密码
-		web.GET("/my_password.html", webservice.MyPassword)
-		// 修改头像
-		web.GET("/my_avatar.html", webservice.MyAvatar)
-		// 修改用户名
-		web.GET("/my_rename.html", webservice.MyUsername)
+		// 修改信息
+		web.GET("/my_edit.html", webservice.MyEdit)
 		// 我的文章说说列表
 		web.GET("/my_article.html", webservice.MyArticle)
 		web.GET("/my_saying.html", webservice.MySaying)

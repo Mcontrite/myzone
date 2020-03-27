@@ -1,0 +1,215 @@
+{{ template "layout/header" .}}
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
+	<div class="container">
+		<div class="row">			
+			<nav class="breadcrumb-nav w100dt">
+				<div class="center" role="group">
+					<a class="btn-flat active" href="/my.html">个人资料</a>
+					<a class="btn active" href="/my_edit.html">修改资料</a>
+				</div>
+			</nav>
+		</div><br>
+		<div class="row">
+			<div class="col m9 s12">
+				<div class="contact-me">
+					<div class="row">
+						<div class="col m1 s12"></div>
+						<div class="col m10 s12">
+							<h1 class="center">你好 ! {{.sessions.Username}}</h1><br>
+							<div class="sidebar-title left-align">
+								<h5><i class="icofont icofont-ui-edit"></i> 更改用户名：</h5>
+							</div><br>
+							<div class="contact-input">
+								<div class="c-text p-0">
+									<form action="/api/user/{{.sessions.Userid}}/name/reset" method="post" id="nameform" class="contact-form">
+										<div class="contact-input">
+											<div class="contact-input">
+												<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
+											</div>
+											<input type="text" class="validate" placeholder="当前用户名：{{.sessions.Username}}" name="old_username" id="old_username" disabled="">
+										</div>
+										<div class="contact-input input-group">
+											<div class="contact-input">
+												<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
+											</div>
+											<input type="text" class="validate" placeholder="输入新用户名" name="user_name" id="new_username">
+										</div>
+										<div>
+											<button type="button" class="waves-effect waves-light right" id="namesubmit" data-loading-text="正在提交...">更改用户名</button>
+										</div>
+									</form>		
+								</div>
+							</div>
+							<div class="sidebar-title left-align">
+								<h5><i class="icofont icofont-ui-edit"></i> 更换头像：</h5>
+							</div><br>
+							<div class="ppic">
+								<img src="{{.sessions.Useravatar}}" alt="Image" style="height: 200px; width: 200px;">
+							</div><br>
+							<div class="contact-input">
+								<div class="c-text p-0">
+									<form id="avatarform" action="/api/user/{{.sessions.Userid}}/avatar/reset" enctype="multipart/form-data">
+										<div class="contact-input">
+											<input type="file" name="avatar" id="avatar_upload" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp"
+											 class="upload validate" value="头像">
+										</div>
+									</form>
+									<div class="progress mt-2">
+										<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+										 aria-valuemin="0" aria-valuemax="100" style="width: 0%; display: none;" id="avatar_progress"></div>
+									</div>							
+								</div>
+							</div>
+							<div class="sidebar-title left-align">
+								<h5><i class="icofont icofont-ui-edit"></i> 修改密码：</h5>
+							</div><br>
+							<div class="contact-input">
+								<div class="c-text p-0">
+									<form action="/api/user/{{.sessions.Userid}}/password/reset" method="post" id="reset_form" class="contact-form">
+										<div class="contact-input input-group">
+											<i class="icofont icofont-lock"></i>
+											<input type="password" class="validate" id="password_old" name="password_old" placeholder="当前密码" required="">
+											<div class="invalid-feedback"></div>
+										</div>
+										<div class="contact-input input-group">
+											<i class="icofont icofont-lock"></i>
+											<input type="password" class="validate" id="password_new" name="password_new" placeholder="新密码" required="">
+											<div class="invalid-feedback"></div>
+										</div>
+										<div class="contact-input input-group">
+											<i class="icofont icofont-lock"></i>
+											<input type="password" class="validate" id="password_new_repeat" name="password_new_repeat" placeholder="重复新密码"
+											 required="">
+											<div class="invalid-feedback"></div>
+										</div>
+										<div>
+											<button type="button" class="waves-effect waves-light right" id="pasubmit" data-loading-text="正在提交...">修改密码</button>
+										</div>
+									</form>					
+								</div>
+							</div>
+						</div>
+						<!-- colsm6 -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- /.contact-me -->
+			</div>
+			<!-- colm9 -->
+			{{ template "my/sidebar" }}
+		</div>
+		<!-- row -->
+	</div>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
+<script>
+	var avaform = $("#avatarform");
+	var uploader = $("#avatar_upload");
+	uploader.on('change', function() {
+		var fd = new FormData()
+		image = $('#avatar_upload')[0].files[0]
+		fd.append("avatar", image)
+		$.ajax({
+			url: avaform.attr("action"),
+			data: fd,
+			type: "POST",
+			contentType: false,
+			processData: false,
+			success: function(res) {
+				//成功
+				console.log(res)
+				// return
+				if (res.code == 200) {
+					alert("修改成功")
+					setTimeout(function() {
+						location.reload()
+					}, 500)
+				} else {
+					$.alert(res.message)
+					return
+				}
+			}
+		})
+	});
+</script>
+<script>
+	document.getElementById('new_username').focus()
+	var naform = $('#nameform');
+	var nasubmit = $('#namesubmit');
+	var jnewname = $('#new_username');
+	jnewname.on('blur', function() {
+		$.ajax({
+			url: "/api/checkname",
+			data: {
+				"username": jnewname.val()
+			},
+			type: "GET",
+			success: function(res) {
+				//成功
+				console.log(res.data.is_used)
+				used = res.data.is_used
+				if (used == 1) {
+					console.log("使用了")
+					alert("用户名已经用了")
+					nasubmit.button('reset');
+					nasubmit.attr("disabled", true)
+				} else {
+					naform.find('[name="new_username"]').focus().alert("可用");
+					nasubmit.attr("disabled", false)
+				}
+			}
+		})
+	})
+	nasubmit.on('click', function() {
+		naform.reset();
+		nasubmit.button('loading');
+		var replydata = naform.serializeObject();
+		$.xpost(naform.attr('action'), replydata, function(code, message) {
+			if (code == 200) {
+				alert("修改成功")
+				setTimeout(function() {
+					location.reload()
+				}, 500)
+			}
+		});
+		return false;
+	});
+</script>
+<script>
+	var qrform = $("#reset_form")
+	var jsubmit = $('#pasubmit');
+	jsubmit.on('click', function() {
+		var oldpass = $("#password_old").val().trim()
+		var newpass = $("#password_new").val().trim()
+		var repnewpass = $("#password_new_repeat").val().trim()
+		if (oldpass.length == 0 || newpass.length == 0) {
+			alert("密码不能为空")
+			return
+		}
+		if (newpass != repnewpass) {
+			alert("两次输入的密码不同，请重新输入")
+			return
+		}
+		qrform.reset();
+		jsubmit.button('loading');
+		var replydata = qrform.serializeObject();
+		console.log(replydata)
+		$.xpost(qrform.attr('action'), replydata, function(code, message) {
+			console.log(code, ":", message)
+			if (code == 200) {
+				alert("密码修改成功")
+				setTimeout(function() {
+					location.reload()
+				}, 500)
+			} else {
+				alert("密码修改失败")
+				jsubmit.button('reset');
+			}
+		});
+		return false;
+	});
+</script>
+{{ template "layout/footer" .}}

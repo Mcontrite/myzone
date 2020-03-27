@@ -154,7 +154,7 @@
 					</form>
 					{{else}}
 					<li class="reply newreply media">
-						<a role="button" class="btn btn-default btn-block xn-back col-lg-6 mx-auto mb-3" target="_blank" href="/login.html">登录可回复</a>
+						<a role="button" class="btn btn-default btn-block xn-back col-lg-6 mx-auto mb-3" target="_blank" href="/login.html">登录后可回复</a>
 					</li>
 					{{end}}
 					<!-- /.comment-area -->
@@ -262,7 +262,7 @@
 				alert("回复成功")
 				setTimeout(function() {
 					location.reload()
-				}, 1000)
+				}, 500)
 			} else if (code < 0) {
 				alert(message);
 				jsubmit.button('reset');

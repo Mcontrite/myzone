@@ -63,12 +63,12 @@
             acync: false,
             success: function (res) {
                 if (res.code == 200) {
-                    //alert("登录成功")
+                    alert("登录成功")
                     setTimeout(function () {
                         $.location("/")
                     }, 100)
                 } else {
-                    //alert("用户名或密码错误")
+                    alert("用户名或密码错误")
                     jsubmit.button('reset');
                 }
             }
