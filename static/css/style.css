@@ -1303,11 +1303,11 @@ ul.footer-social-links li a.instagram:before {
   transition: .2s all ease-in-out;
 }
 
-ul.footer-social-links li a.facebook {color: #3b599a;}
-ul.footer-social-links li a.facebook:before {background-color: #3b599a;}
+ul.footer-social-links li a.facebook {color: black;}
+ul.footer-social-links li a.facebook:before {background-color: black;}
 
-ul.footer-social-links li a.twitter {color: #50abf1;}
-ul.footer-social-links li a.twitter:before {background-color: #50abf1;}
+ul.footer-social-links li a.twitter {color: #12d61c;}
+ul.footer-social-links li a.twitter:before {background-color: #12d61c;}
 
 ul.footer-social-links li a.google-plus {color: #df4a32;}
 ul.footer-social-links li a.google-plus:before {background-color: #df4a32;}

@@ -1,59 +1,90 @@
 {{ template "layout/adminheader" .}}
-<main id="body">
+<section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="btn-group mb-3" role="group">
-					<a role="button" class="btn btn-secondary active" href="/admin/user/list.html">用户列表</a>
-					<a role="button" class="btn btn-secondary" href="/admin/user/group.html">用户组</a>
-					<a role="button" class="btn btn-secondary" href="/admin/user/create.html">创建用户</a>
+		<div class="row">			
+			<nav class="breadcrumb-nav w100dt">
+				<div class="center" role="group">
+					<a class="btn-flat active" href="/admin/index.html">后台首页</a>
+					<a class="btn active" href="/admin/user/list.html">用户列表</a>
+					<a class="btn-flat active" href="/admin/user/create.html">创建用户</a>
 				</div>
-			</div>
-		</div>
+			</nav>
+		</div><br>
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table" style="min-width: 800px">
-								<thead>
-									<tr>
-										<th width="60" class="text-center">删除</th>
-										<th width="50">ID：</th>
-										<th width="150">用户名</th>
-										<th width="100">用户组</th>
-										<th width="100">创建时间</th>
-										<th width="100">创建 IP</th>
-										<th width="60">操作</th>
-									</tr>
-								</thead>
-								<tbody id="userlist">
-									{{range .users}}
-									<tr uid="{{.ID}}">
-										<td class="text-center"><input type="checkbox" name="delete" value="{{.ID}}"></td>
-										<td>{{.ID}}</td>
-										<td>{{.Username}}</td>
-										<td>{{if eq .GroupID 0}}游客
-											{{else}}{{.Group.Name}}{{end}}</td>
-										<td>{{.CreatedAt.Format "2006/01/02  15:04:05"}}</td>
-										<td><a href="#" target="_blank">{{.CreateIp | strip}}</a></td>
-										<td>
-											<a href="/admin/user/edit.html?id={{.ID}}">编辑</a>
-										</td>
-									</tr>
-									{{end}}
-								</tbody>
-							</table>
-						</div>
-						<hr class="mt-0">
-						<p><button class="btn btn-sm ml-3" id="confirm">删除</button></p>
-					</div>
+			<div class="card">
+				<div class="table-responsive">
+					<table class="table" style="min-width: 800px">
+						<thead>
+							<tr>
+								<th width="60"><h5>序号</h5></th>
+								<th width="120"><h5>用户名</h5></th>
+								<th width="80"><h5>用户组</h5></th>
+								<th width="200"><h5>注册时间</h5></th>
+								<th width="70"><h5>文章数</h5></th>
+								<th width="70"><h5>回复数</h5></th>
+								<th width="80"><h5>说说数</h5></th>
+								<th width="80"><h5>评论数</h5></th>
+								<th width="80"><h5>收藏数</h5></th>
+								<th width="80"><h5>登录数</h5></th>
+								<th width="120"><h5>创建IP</h5></th>
+								<th width="80"><h5>登录IP</h5></th>
+								<th width="80"><h5>编辑</h5></th>
+								<th width="80"><h5>删除</h5></th>
+							</tr>
+						</thead>
+						<tbody id="userlist">
+							{{$sesid := .sessions.Userid}}
+							{{range .users}}
+							<tr uid="{{.ID}}">
+								<td>{{.ID}}</td>
+								<td uid="{{.ID}}">
+									<a href="{{if eq .ID $sesid}} /my.html {{else}}/user/{{.ID}}/info.html{{end}}" class="l-blue">
+										{{.Username}}
+									</a>
+								</td>
+								<td>{{if eq .GroupID 0}}游客{{else}}{{.Group.Name}}{{end}}</td>
+								<td>{{.CreatedAt.Format "2006.01.02  15:04:05"}}</td>
+								<td>{{.ArticlesCnt}}</td>
+								<td>{{.ReplysCnt}}</td>
+								<td>{{.SayingsCnt}}</td>
+								<td>{{.CommentsCnt}}</td>
+								<td>000</td>
+								<td>{{.LoginsCnt}}</td>
+								<td>{{.CreateIp}}</td>
+								<td>000</td>
+								<td><a href="/admin/user/edit.html?id={{.ID}}">编辑</a></td>
+								<td><a onclick="delet(this, {{.ID}})" href="#">删除</a></td>
+							</tr>
+							{{end}}
+						</tbody>
+					</table>
 				</div>
-				<nav>
-					<ul class="pagination justify-content-center"></ul>
-				</nav>
 			</div>
 		</div>
 	</div>
-</main>
+</section>
+
+<script>
+	function delet(elem, userid) {
+		$.ajax({
+			url: "/api/user/" + userid + "/delete?token=" + admintoken,
+			data: {
+				"tidarr": userid,
+			},
+			method: "post",
+			success: function(res) {
+				if (res.code == 200) {
+					$(elem).parent().parent().parent().parent().parent().remove()
+					$.alert("用户删除成功 ！")
+					setTimeout(function () {
+                        location.reload()
+                    }, 500)
+				} else {
+					$.alert(res.message)
+				}
+			}
+		})
+	}
+	$('#nav li.nav-item-article').addClass('active');
+</script>
 {{ template "layout/adminfooter" .}}

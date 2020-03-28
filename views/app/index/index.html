@@ -16,7 +16,10 @@
                                     <p class="hero left"> By - <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">{{.User.Username}}</a></p>
                                 </li>
                                 <li>
-									<i class="icofont icofont-ui-calendar"></i>{{.CreatedAt.Unix | strtime}}
+									发布于<i class="icofont icofont-clock-time"></i>{{.CreatedAt.Unix | strtime}}
+                                </li>
+                                <li>
+									更新于<i class="icofont icofont-time"></i>{{.UpdatedAt.Unix | strtime}}
 								</li>
                             </ul>
                             <ul class="post-mate right">

@@ -1,24 +1,60 @@
 {{ template "layout/adminheader" .}}
-<main id="body">
+<!-- ==================== contact-section start ==================== -->
+<section id="contact-section" class="contact-section w100dt mb-50">
 	<div class="container">
-		<div class="row line-height-3">
-			<div class="col-12">
-				<h3>后台首页</h3>
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">站点统计信息</h5>
-						<div class="row">
-							<div class="col-md-4"><span class="text-muted">文章数：</span>{{.counts.articles}}</div>
-							<div class="col-md-4"><span class="text-muted">回复数：</span>{{.counts.replys}}</div>
-							<div class="col-md-4"><span class="text-muted">用户数：</span>{{.counts.users}}</div>
-							<div class="col-md-4"><span class="text-muted">附件总数：</span>{{.counts.attachs}}</div>
+		<div class="row">			
+			<nav class="breadcrumb-nav w100dt">
+				<div class="center" role="group">
+					<a class="btn active" href="/admin/index.html">后台首页</a>
+					<a class="btn-flat active" href="/admin/article/list.html?type=1&status=0">所有文章</a>
+					<a class="btn-flat active" href="/admin/saying/list.html?type=1&status=0">所有说说</a>
+				</div>
+			</nav>
+		</div><br>
+		<div class="row">
+			<div class="contact-me">
+				<div class="row">
+					<div class="col m2 s12"></div>
+					<div class="col m8 s12">
+						<div class="contact-things">
+							<h4 class="card-title ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<i class="icofont icofont-mathematical-alt-1"></i>&nbsp;
+								<b>站点统计信息</b>
+							</h4>
+							<div class="col m6">
+								<div class="c-text p-0 left"><br>
+									<span class="text-muted">用户数：<br>
+									<span class="text-muted">文章数：<br>
+									<span class="text-muted">回复数：<br>
+									<span class="text-muted">说说数：<br>
+									<span class="text-muted">评论数：<br>							
+									<span class="text-muted">文件数：<br>							
+								</div>
+							</div>
+							<div class="col m6">
+								<div class="c-text p-0 right"><br>
+									<span class="text-muted">{{.counts.users}}<br>
+									<span class="text-muted">{{.counts.articles}}<br>
+									<span class="text-muted">{{.counts.replys}}<br>
+									<span class="text-muted">{{.counts.sayings}}<br>
+									<span class="text-muted">{{.counts.comments}}<br>							
+									<span class="text-muted">{{.counts.attachs}}<br>							
+								</div>
+							</div>
 						</div>
 					</div>
+					<!-- colsm6 -->
 				</div>
+				<!-- row -->
 			</div>
+			<!-- /.contact-me -->
 		</div>
+		<!-- row -->
 	</div>
-</main>
+	<!-- container -->
+</section>
+<!-- /#contact-section -->
+<!-- ==================== contact-section end ==================== -->
 <script>
 </script>
 {{ template "layout/adminfooter" .}}

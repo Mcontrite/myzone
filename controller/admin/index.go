@@ -11,6 +11,8 @@ func AdminIndex(c *gin.Context) {
 	sessions := user.GetSessions(c)
 	articlesNum, _ := model.CountArticlesNum()
 	replysNum, _ := model.CountReplyNum()
+	sayingsNum, _ := model.CountSayingsNum()
+	commentsNum, _ := model.CountCommentNum()
 	usersNum, _ := model.CountUserNum()
 	attachsNum, _ := model.CountAttachsNum()
 	c.HTML(
@@ -21,6 +23,8 @@ func AdminIndex(c *gin.Context) {
 			"counts": map[string]interface{}{
 				"articles": articlesNum,
 				"replys":   replysNum,
+				"sayings":  sayingsNum,
+				"comments": commentsNum,
 				"users":    usersNum,
 				"attachs":  attachsNum,
 			},

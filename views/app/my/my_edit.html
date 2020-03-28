@@ -24,15 +24,9 @@
 								<div class="c-text p-0">
 									<form action="/api/user/{{.sessions.Userid}}/name/reset" method="post" id="nameform" class="contact-form">
 										<div class="contact-input">
-											<div class="contact-input">
-												<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
-											</div>
 											<input type="text" class="validate" placeholder="当前用户名：{{.sessions.Username}}" name="old_username" id="old_username" disabled="">
 										</div>
 										<div class="contact-input input-group">
-											<div class="contact-input">
-												<span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
-											</div>
 											<input type="text" class="validate" placeholder="输入新用户名" name="user_name" id="new_username">
 										</div>
 										<div>

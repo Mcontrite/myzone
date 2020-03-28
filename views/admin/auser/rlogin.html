@@ -1,29 +1,39 @@
 {{ template "layout/adminheader" .}}
-<main id="body">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-5 mx-auto">
-				<div class="card">
-					<div class="card-body">
-						<h4>管理员登录</h4>
-						<form action="/admin/login" method="post" id="form">
-							<div class="form-group">为了您的安全，请再次输入账户密码：</div>
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="icon-lock"></i></span>
-								</div>
-								<input type="password" class="form-control" placeholder="密码" id="password" name="password">
-							</div>
-							<div class="form-group text-right">
-								<button type="button" class="btn btn-primary btn-block" id="submit" data-loading-text="正在提交...">登录 </button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
+<section id="contact-section" class="contact-section w100dt mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col m4 s12"></div>
+            <div class="col m4 s12">
+                <div class="contact-me">
+                    <div class="sidebar-title center-align">
+						<h2><i class="icofont icofont-key-hole"></i>管理员登录</h2>
+                    </div>
+                    <hr><br>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <form class="contact-form" action="/admin/login" method="post" id="form">
+								<h5>需要再次输入密码</h5><br>
+								<label for="password">密码</label>
+                                <div class="contact-input">
+                                    <input type="password" id="password" name="password"  class="validate">
+                                </div>
+                                <button type="button" class="waves-effect waves-light right" id="submit">登录</button>
+                            </form>
+                            <!-- /.contact-things -->
+                        </div>
+                        <!-- colsm6 -->
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- /.contact-me -->
+            </div>
+            <!-- colm9 -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</section>
+
 <script>
 	if (admintoken) {
 		$.ajax({

@@ -31,64 +31,57 @@
 	</head>
 	<body>
 		<!-- ==================== header-section Start ==================== -->
-<header id="header-section" class="header-section w100dt navbar-fixed">
-	<nav class="nav-extended main-nav">
-		<div class="container">
-			<div class="row">
-				<div class="nav-wrapper w100dt">
-					<div class="logo left">
-						<a href="/" class="brand-logo">
-							<img src="/static/img/logo.png" alt="brand-logo">
-						</a>
+	<header id="header-section" class="header-section w100dt navbar-fixed">
+		<nav class="nav-extended main-nav">
+			<div class="container">
+				<div class="row">
+					<div class="nav-wrapper w100dt">
+						<div class="logo left">
+							<a href="/" class="brand-logo">
+								<img src="/static/img/logo.png" alt="brand-logo">
+							</a>
+						</div>
+						<!-- logo -->
+						<div>
+							<a href="#" data-activates="mobile-demo" class="button-collapse">
+								<i class="icofont icofont-navigation-menu"></i>
+							</a>
+							<ul id="nav-mobile" class="main-menu center-align hide-on-med-and-down">
+								<li><a href="/admin/index.html">后台首页</a></li>
+								<li><a href="/admin/article/list.html?type=1&status=0">文章列表</a></li>
+								<li><a href="/admin/saying/list.html?type=1&status=0">说说列表</a></li>
+								<li><a href="/admin/user/list.html">用户列表</a></li>
+								<li><a href="/">前台</a></li>
+								<li><a id="adminlogout" href="#">退出</a></li>							
+							</ul>
+							<!-- /.main-menu -->
+							<!-- ******************** sidebar-menu ******************** -->
+							<ul class="side-nav" id="mobile-demo">
+								<li class="snavlogo center-align"><img src="/static/img/logo.png" alt="logo"></li>
+								<li><a href="/admin/index.html">后台首页</a></li>
+								<li><a href="/admin/article/list.html?type=1&status=0">文章列表</a></li>
+								<li><a href="/admin/saying/list.html?type=1&status=0">说说列表</a></li>
+								<li><a href="/admin/user/list.html">用户列表</a></li>
+								<li><a href="/">前台</a></li>
+								<li><a id="adminlogout" href="#">退出</a></li>	
+							</ul>
+						</div>
+						<!-- main-menu -->
 					</div>
-					<!-- logo -->
-					<div>
-						<a href="#" data-activates="mobile-demo" class="button-collapse">
-							<i class="icofont icofont-navigation-menu"></i>
-						</a>
-						<ul id="nav-mobile" class="main-menu center-align hide-on-med-and-down">
-							<li><a href="/admin/index.html">首页</a></li>
-							<li><a href="/admin/article/list.html?type=1&status=0">文章</a></li>
-							<li><a href="/admin/saying/list.html?type=1&status=0">说说</a></li>
-							<li><a href="/admin/user/list.html">用户</a></li>
-							<li><a href="/">前台</a></li>
-							<li><a id="adminlogout" href="#">退出</a></li>
-														
-						</ul>
-						<!-- /.main-menu -->
-						<!-- ******************** sidebar-menu ******************** -->
-						<ul class="side-nav" id="mobile-demo">
-							<li class="snavlogo center-align"><img src="/static/img/logo.png" alt="logo"></li>
-							<li class="active"><a href="/">HOME</a></li>
-							<li><a href="/articles">文章</a></li>
-							<li><a href="/sayings">说说</a></li>
-							{{if .islogin}}
-							<li><a href="/my.html">{{.sessions.Username}}</a></li>
-							{{if eq .sessions.Isadmin "1"}}
-							<li><a id="adminindex" href="/admin/index.html">后台管理</a></li>
-							{{end}}
-							<li><a id="logout" href="#">退出</a></li>
-							{{else}}
-							<li><a href="/login.html">登录</a></li>
-							{{end}}
-						</ul>
-					</div>
-					<!-- main-menu -->
+					<!-- /.nav-wrapper -->
 				</div>
-				<!-- /.nav-wrapper -->
+				<!-- row -->
 			</div>
-			<!-- row -->
-		</div>
-		<!-- container -->
-	</nav>
-</header>
-<!-- /#header-section -->
-<!-- ==================== header-section End ==================== -->
-<!-- ==================== blog-slider-section start ==================== -->
-<section id="blog-slider-section" class="blog-slider-section w100dt mb-40">
-</section>
-<!-- /#blog-slider-section -->
-<!-- ==================== blog-slider-section end ==================== -->
+			<!-- container -->
+		</nav>
+	</header>
+	<!-- /#header-section -->
+	<!-- ==================== header-section End ==================== -->
+	<!-- ==================== blog-slider-section start ==================== -->
+	<section id="blog-slider-section" class="blog-slider-section w100dt mb-40">
+	</section>
+	<!-- /#blog-slider-section -->
+	<!-- ==================== blog-slider-section end ==================== -->
 		<script>
 			admintoken = sessionStorage.getItem("admin_token")
 			$("#adminlogout").on('click', function() {

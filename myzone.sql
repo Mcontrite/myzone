@@ -384,4 +384,4 @@ CREATE TABLE `z_user` (
 -- Records of z_user
 -- ----------------------------
 INSERT INTO `z_user` (`id`, `group_id`, `username`, `password`, `articles_cnt`, `sayings_cnt`, `replys_cnt`, `comments_cnt`, `create_ip`, `create_date`, `login_ip`, `login_date`, `logins_cnt`, `avatar`, `created_at`, `updated_at`, `deleted_at`, `favourite_cnt`)
- VALUES ('1', '1', 'admin', '$2a$10$zzjAmJrsR0hk8UBbL9P3OOTLBBNEjtME1G5s3Vl2./.TwHrroDwkm', '0', '0', '0', '0', '0', '0', '0', '2019-08-21 13:49:12', '0', '/static/img/avatar.png', '2019-08-21 13:49:12', '2019-08-21 13:49:12', NULL, '0');
+ VALUES ('1', '1', 'Miao', '$2a$10$zzjAmJrsR0hk8UBbL9P3OOTLBBNEjtME1G5s3Vl2./.TwHrroDwkm', '0', '0', '0', '0', '0', '0', '0', '2019-08-21 13:49:12', '0', '/static/img/avatar.png', '2019-08-21 13:49:12', '2019-08-21 13:49:12', NULL, '0');

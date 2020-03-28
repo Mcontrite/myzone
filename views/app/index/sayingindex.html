@@ -24,7 +24,11 @@
                                             </p>
                                         </li>
                                         <li>
-                                            <i class="icofont icofont-ui-calendar"></i>&nbsp;{{.CreatedAt.Unix | strtime}}</li>
+                                            发布于<i class="icofont icofont-clock-time"></i>{{.CreatedAt.Unix | strtime}}
+                                        </li>
+                                        <li>
+                                            更新于<i class="icofont icofont-time"></i>{{.UpdatedAt.Unix | strtime}}
+                                        </li>
                                     </ul>
                                     <ul>&nbsp;&nbsp;&nbsp;
 										<a href="/saying/{{.SayingID}}/detail.html">

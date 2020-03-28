@@ -1,71 +1,63 @@
 {{ define "layout/sidebar" }}
 <div class="sidebar-testimonial mb-30">
     <div class="sidebar-title center-align">
-        <h2>个人信息</h2>
+        <h2>Welcome !</h2>
     </div>
     <!-- /.sidebar-title -->
-    <div class="carousel carousel-slider center" data-indicators="true">
+    <div class="carousel carousel-slider center" data-indicators="true"><br>
+        <img style="height: 200px; width: 200px;" src="/static/img/man.jpg" alt="Image">
         <div class="carousel-item">
-            {{if .islogin}}
-            {{.sessions.Username}}
-            <div class="item-img">
-                <img style="height: 40px; width: 40px;" src="{{.sessions.UserAvatar}}" alt="Image">
-            </div>
-            {{end}}
-            <h2>Rakibul Hassan</h2>
-            <small>{{.sessions.Username}}</small>
-            <p> Sedut perspiciatis unde omnis iste natus errorsit voluptatem accusantium doloremque. </p>
+            <br><br><br><br><br><br><br><br><br>
+            <h4><b>记录学习和生活</b></h4>
+            <p> 听说记笔记可以使学习更高效。 </p>
         </div>
         <div class="carousel-item">
-            <div class="item-img">
-                <span>O</span>
-            </div>
-            <h2>Rakibul Hassan</h2>
-            <small>Web Design & Development</small>
-            <p> Sedut perspiciatis unde omnis iste natus errorsit voluptatem accusantium doloremque. </p>
+            <br><br><br><br><br><br><br><br><br>
+            <h4><b>I M MIAO</b></h4>
+            <p> Welcome to visit here. It is said that taking notes can make learning more efficient. </p>
         </div>
     </div>
 </div>
 <!-- /.sidebar-testimonial -->
 <div class="sidebar-followme w100dt mb-30">
     <div class="sidebar-title center-align">
-        <h2>Follow Me</h2>
+        <h2>Contact Me</h2>
     </div>
     <!-- /.sidebar-title -->
     <ul class="followme-links w100dt">
         <li class="mrb15">
-            <a href="#" class="twitter">
+            <a href="#" class="twitter" title="@Mreminisce">
                 <i class="icofont icofont-social-qq"></i>
                 <small class="Followers white-text">QQ</small>
             </a>
         </li>
         <li class="mrb15">
-            <a href="#" class="linkedin">
+            <a href="#" class="linkedin" title="@舟">
                 <i class="icofont icofont-social-wechat"></i>
                 <small class="Followers white-text">微信</small>
             </a>
         </li>
         <li class="mrb15">
-            <a href="#" class="facebook">
+            <a href="#" class="facebook" title="1285149688@qq.com">
                 <i class="icofont icofont-envelope"></i>
                 <small class="Followers white-text">邮箱</small>
             </a>
         </li>
         <li>
-            <a href="#" class="google-plus">
+            <a href="https://music.163.com/#/user/home?id=1333662282" class="google-plus" title="@Mreminisce">
                 <i class="icofont icofont-music-disk"></i>
                 <small class="Followers white-text">网易云</small>
             </a>
         </li>
         <li class="mrb15">
-            <a href="#" class="pinterest">
+            <a href="https://space.bilibili.com/4411497" class="pinterest" title="@Mreminisce">
                 <i class="icofont icofont-ui-video-play"></i>
                 <small class="Followers white-text">Bilibili</small>
             </a>
         </li>
         <li>
-            <a href="#" class="instagram">
-                <i class="icofont icofont-social-github"></i>
+            <a href="https://github.com/Mreminisce" class="instagram">
+                <i class="icofont icofont-social-github" title="@Mreminisce"></i>
                 <small class="Followers white-text">Github</small>
             </a>
         </li>
