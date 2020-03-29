@@ -3407,7 +3407,12 @@ nav ul a span.badge {
   padding: 0px 15px;
   box-sizing: border-box;
 }
-
+.saycol {
+  float: left;
+  min-height: 1px;
+  padding: 0px 0px;
+  box-sizing: border-box;
+}
 .col[class*="push-"],
 .col[class*="pull-"] {
   position: relative;
@@ -3648,6 +3653,10 @@ nav ul a span.badge {
     margin-left: auto;
     left: auto;
     right: auto;
+  }
+  .saycol.saym1 {
+    width: 8.3333333333%;
+    margin-left: 2px;
   }
   .col.m2 {
     width: 16.6666666667%;
@@ -4051,7 +4060,7 @@ nav .nav-wrapper {
 }
 
 nav .button-collapse {
-  float: left;
+  float: right;
   position: relative;
   z-index: 1;
   height: 56px;

@@ -1,7 +1,7 @@
 
 /*  - 1 Fonts Load - Start
 ==================================================================================================== */
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Poppins:400,700');
+/* @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Poppins:400,700'); */
 /*  - 1 Fonts Load - End
 ==================================================================================================== */
 
@@ -669,20 +669,14 @@ ul.pagination li:hover a {
   overflow: hidden;
   border-radius: 3px;
   background-color: #fff;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0.14);
 }
 .peoples-comments .comment-area {
-  padding: 25px;
+  padding: 15px;
 }
 .peoples-comments .comment .ppic {
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  border-radius: 100%;
 }
 .peoples-comments .comment .pname {
-  padding: 0px 15px;
-  display: table;
 }
 .peoples-comments .comment ul.post-mate-time li a {
   color: #5e5e5e;
@@ -694,17 +688,12 @@ ul.pagination li:hover a {
 /* cmnt-reply
 .................................................. */
 .peoples-comments .cmnt-reply {
-  padding: 20px 0px 20px 100px;
+  padding: 0px 0px 0px 0px;
 }
 .peoples-comments .cmnt-reply .ppic {
-  width: 80px;
-  height: 80px;
-  overflow: hidden;
-  border-radius: 100%;
+
 }
 .peoples-comments .cmnt-reply .pname {
-  padding: 0px 15px;
-  display: table;
 }
 
 
@@ -716,7 +705,7 @@ ul.pagination li:hover a {
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.14);
 }
 .comment-area {
-  padding: 25px;
+  padding: 15px;
 }
 
 .leave-comment .validate,

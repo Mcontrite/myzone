@@ -7,46 +7,38 @@
                 {{$isadmin := .sessions.Isadmin}}
                 {{$sesid := .sessions.Userid}}
                 {{ range .commentList }}
-                <div class="blogs mb-30">
-                    <div class="card">
-                        <div class="card-content w100dt">
-                            <div class="left">
-								<a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}">
-									<img style="height: 40px; width: 40px;" src="{{.User.Avatar}}" alt="Image">
-								</a>
-							</div>
-                            <ul>
-                                <li>
-                                    <ul class="post-mate-time left">
-                                        <li>
-                                            <p class="hero left">
-                                                &nbsp;&nbsp;&nbsp; By - <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">{{.User.Username}}</a>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            发布于<i class="icofont icofont-clock-time"></i>{{.CreatedAt.Unix | strtime}}
-                                        </li>
-                                        <li>
-                                            更新于<i class="icofont icofont-time"></i>{{.UpdatedAt.Unix | strtime}}
-                                        </li>
-                                    </ul>
-                                    <ul>&nbsp;&nbsp;&nbsp;
-										<a href="/saying/{{.SayingID}}/detail.html">
-											{{$length := len .MessageFmt}}
-											{{if ge $length 35}}
-												{{truncate .MessageFmt 35 | unescaped}}...
-											{{else}}
-												{{.MessageFmt | unescaped}}
-											{{end}}
-										</a>   
-                                    </ul>
-                                </li>  
-                            </ul>
+                    <div class="peoples-comments w100dt mb-30">
+                        <div class="comment-area">
+                            <div class="saycol saym1 left">
+                                <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}">
+                                    <img style="height: 43px; width: 43px;" src="{{.User.Avatar}}" alt="Image">
+                                </a>
+                            </div>
+                            <div class="saycol">
+                                <p class="hero left">
+                                    <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">&nbsp;&nbsp;{{.User.Username}}</a>
+                                </p><br>
+                                <p class="s">
+                                    &nbsp;&nbsp;<i class="icofont icofont-clock-time"></i> {{.UpdatedAt.Format "2006.01.02  15:04:05"}}  
+                                </p>
+                            </div>
                         </div>
-                        <!-- /.card-content -->
+                        <div class="comment-area">
+                            <p class="mb-30">
+                                <a href="/saying/{{.SayingID}}/detail.html">
+                                    {{$length := len .MessageFmt}}
+                                    {{if ge $length 30}}
+                                        {{truncate .MessageFmt 30 | unescaped}}...
+                                    {{else}}
+                                        {{.MessageFmt | unescaped}}
+                                    {{end}}
+                                </a> 
+                            </p>
+                            <i class="icofont icofont-comment right">
+                                <a href="/saying/{{.SayingID}}/detail.html"> 评论</a>
+                            </i>
+                        </div>
                     </div>
-                    <!-- /.card -->
-                </div>
                 {{end}}
                 <!-- /.blogs -->
                 <nav class="my-3">

@@ -53,7 +53,7 @@ func InitRouter() *gin.Engine {
 	web := r.Group("")
 	{
 		// 首页
-		web.GET("/", webservice.Index)
+		web.GET("/", webservice.SayingIndex)
 		web.GET("/articles", webservice.Index)
 		web.GET("/sayings", webservice.SayingIndex)
 		// 注册页
