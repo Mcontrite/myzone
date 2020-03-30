@@ -4632,7 +4632,7 @@ small {
 }
 
 .card .card-content {
-  padding: 25px;
+  padding: 5px 25px;
   border-radius: 3px;
 }
 .card .card-content .card-title {
@@ -5535,7 +5535,7 @@ button.btn-floating {
 
 .side-nav .collapsible-body li a,
 .side-nav.fixed .collapsible-body li a {
-  padding: 0 23.5px 0 31px;
+  padding: 10px 23.5px 10px 31px;
 }
 
 .collapsible.popout {
@@ -6916,15 +6916,14 @@ input[type=range]:focus::-ms-fill-upper {
 
 .side-nav {
   position: fixed;
-  width: 300px;
-  left: 0;
+  width: 100%;  
   top: 0;
   margin: 0;
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
-  height: 100%;
-  height: calc(100% + 60px);
-  height: -moz-calc(100%);
+  height: 60%;
+  height: calc(60% + 60px);
+  height: -moz-calc(60%);
   padding-bottom: 60px;
   background-color: #fff;
   z-index: 999;
@@ -6940,7 +6939,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   -webkit-transform: translateX(105%);
           transform: translateX(105%);
-  left: auto;
+  left: 0;
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
 }
@@ -6960,7 +6959,7 @@ input[type=range]:focus::-ms-fill-upper {
 .side-nav a {
   color: rgba(0, 0, 0, 0.87);
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   height: 48px;
   line-height: 48px;

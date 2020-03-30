@@ -32,28 +32,36 @@
 						</ul>
 						<!-- /.main-menu -->
 						<!-- ******************** sidebar-menu ******************** -->
-						<ul class="side-nav" id="mobile-demo">
+						<ul class="side-nav" style="left: 0;" id="mobile-demo">
 							<li class="snavlogo center-align">
 								<a href="/"><img src="/static/img/logo.png" alt="logo"></a>
-							</li>
-							<li><a href="/articles">文章</a></li>
-							<li><a href="/sayings">说说</a></li>
+							</li><br>
+							<li><a class="btn" href="/articles">文章</a></li>
+							<li><a class="btn" href="/sayings">说说</a></li>
 							{{if .islogin}}
-							<li><a href="/my_favorite.html">个人中心</a></li>
-							<li class="active"><a href="/my.html">{{.sessions.Username}}</a></li>
+							<li><a class="btn" href="/my_favorite.html">个人中心</a></li>
+							<li class="active"><a class="btn" href="/my.html">{{.sessions.Username}}</a></li>
 							{{if eq .sessions.Isadmin "1"}}
-							<li><a id="adminindex" href="/admin/index.html">后台管理</a></li>
+							<li><a class="btn" id="adminindex" href="/admin/index.html">后台管理</a></li>
 							{{end}}
-							<li><a id="mlogout" href="#">退出</a></li>
+							<li><a class="btn" id="mlogout" href="#">退出</a></li>
 							{{else}}
-							<li><a href="/login.html">登录/注册</a></li>
+							<li><a class="btn" href="/login.html">登录/注册</a></li>
 							{{end}}
 						</ul>
 						<a href="#" data-activates="mobile-new" class="button-collapse" style="float: right;right: 15px;">
-							<i class="icofont icofont-ui-add"></i>
+							<i class="icofont icofont-ui-add" style="border: 1;"></i>
 						</a>
-						<ul class="" id="mobile-new">
-							<li><a href="/login.html">登录/注册</a></li>
+						<ul class="side-nav" style="left: 0;" id="mobile-new">
+							<li class="snavlogo center-align">
+								<a href="/"><img src="/static/img/logo.png" alt="logo"></a>
+							</li><br>
+							<li>
+								<a class="btn" href="/newarticle.html">写文章</a>
+							</li>
+							<li>
+								<a class="btn" href="/newsaying.html">写说说</a>
+							</li>
 						</ul>
 					</div>
 					<!-- main-menu -->

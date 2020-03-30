@@ -7,38 +7,38 @@
                 {{$isadmin := .sessions.Isadmin}}
                 {{$sesid := .sessions.Userid}}
                 {{ range .commentList }}
-                    <div class="peoples-comments w100dt mb-30">
-                        <div class="comment-area">
-                            <div class="saycol saym1 left">
-                                <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}">
-                                    <img style="height: 43px; width: 43px;" src="{{.User.Avatar}}" alt="Image">
-                                </a>
-                            </div>
-                            <div class="saycol">
-                                <p class="hero left">
-                                    <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">&nbsp;&nbsp;{{.User.Username}}</a>
-                                </p><br>
-                                <p class="s">
-                                    &nbsp;&nbsp;<i class="icofont icofont-clock-time"></i> {{.UpdatedAt.Format "2006.01.02  15:04:05"}}  
-                                </p>
-                            </div>
+                <div class="peoples-comments w100dt mb-30">
+                    <div class="comment-area">
+                        <div class="saycol saym1 left">
+                            <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}">
+                                <img style="height: 43px; width: 43px;" src="{{.User.Avatar}}" alt="Image">
+                            </a>
                         </div>
-                        <div class="comment-area">
-                            <p class="mb-30">
-                                <a href="/saying/{{.SayingID}}/detail.html">
-                                    {{$length := len .MessageFmt}}
-                                    {{if ge $length 30}}
-                                        {{truncate .MessageFmt 30 | unescaped}}...
-                                    {{else}}
-                                        {{.MessageFmt | unescaped}}
-                                    {{end}}
-                                </a> 
+                        <div class="saycol">
+                            <p class="hero left">
+                                <a href="{{if eq .User.ID $sesid}} /my.html {{else}}/user/{{.User.ID}}/info.html{{end}}" class="l-blue">&nbsp;&nbsp;{{.User.Username}}</a>
+                            </p><br>
+                            <p class="s">
+                                &nbsp;&nbsp;<i class="icofont icofont-clock-time"></i> {{.UpdatedAt.Format "2006.01.02  15:04:05"}}  
                             </p>
-                            <i class="icofont icofont-comment right">
-                                <a href="/saying/{{.SayingID}}/detail.html"> 评论</a>
-                            </i>
                         </div>
                     </div>
+                    <div class="comment-area">
+                        <p class="mb-30">
+                            <a href="/saying/{{.SayingID}}/detail.html">
+                                {{$length := len .MessageFmt}}
+                                {{if ge $length 30}}
+                                    {{truncate .MessageFmt 30 | unescaped}}...
+                                {{else}}
+                                    {{.MessageFmt | unescaped}}
+                                {{end}}
+                            </a> 
+                        </p>
+                        <i class="icofont icofont-comment right">
+                            <a href="/saying/{{.SayingID}}/detail.html"> 评论</a>
+                        </i>
+                    </div>
+                </div>
                 {{end}}
                 <!-- /.blogs -->
                 <nav class="my-3">

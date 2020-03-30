@@ -112,10 +112,10 @@ nav .button-collapse {
 }
 .side-nav {
 	z-index: 1001;
-	background-color: #2962ff;
+	background-color: transparent;
 }
 .side-nav > li a {
-	color: #fff;
+	color: black;
 }
 .side-nav li.active {
 	background-color: rgba(0, 0, 0, 0.09);
