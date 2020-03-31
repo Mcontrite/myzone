@@ -72,7 +72,7 @@
 		$.xpost(jform.attr('action'), replydata, function(code, message) {
 			console.log(message);
 			if (code == 200) {
-				$.alert("保存成功");
+				alert("保存成功");
 				jsubmit.text(message).delay(1000).button('reset');
 			} else {
 				jform.find('[name="' + code + '"]').alert(message).focus();

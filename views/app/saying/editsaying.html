@@ -56,7 +56,7 @@
 	    location.href="/login.html"
 	}
 	if ({{.saying.UserID}} != {{.sessions.Userid}}) {
-	    $.alert("您没有权限编辑")
+	    alert("您没有权限编辑")
 	    setTimeout(function () {
 	        location.href = "/"
 	    },500)

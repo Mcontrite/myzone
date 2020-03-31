@@ -56,6 +56,7 @@ func InitRouter() *gin.Engine {
 		web.GET("/", webservice.SayingIndex)
 		web.GET("/articles", webservice.Index)
 		web.GET("/sayings", webservice.SayingIndex)
+		web.GET("/contactme.html", webservice.ContactMe)
 		// 注册页
 		web.GET("/register.html", webservice.Register)
 		// 登录页

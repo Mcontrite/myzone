@@ -135,23 +135,23 @@
 		var captchaKey = getCaptchaKey()
 		captchaPass = virefyCaptcha(captcha, captchaKey)
 		if (captcha.length == 0) {
-			$.alert("验证码不能为空")
+			alert("验证码不能为空")
 			return
 		} else {
 			if (captchaPass != 200) {
-				$.alert("验证码错误")
+				alert("验证码错误")
 				refreshCaptcha()
 				return
 			}
 		}
 		var cktitle = $("#title2").val()
 		if (cktitle.length <= 1) {
-			$.alert("标题不能为空且不能小于1个字")
+			alert("标题不能为空且不能小于1个字")
 			return
 		}
 		var ckmessage = CKEDITOR.instances.message.getData();
 		if (ckmessage.length < 10) {
-			$.alert("内容不能为空且不能小于10字")
+			alert("内容不能为空且不能小于10字")
 			return
 		}
 		qrform.reset();
@@ -171,7 +171,7 @@
 					location.href = "/articles"
 				}, 500)
 			} else {
-				$.alert(message)
+				alert(message)
 				return
 			}
 		});
@@ -202,7 +202,7 @@
 		
 		console.log(attachfile.size)
 		if (filesSize > maxSize) {
-			$.alert("文件大于2M，不能上传")
+			alert("文件大于2M，不能上传")
 			return
 		}
 		fd.append("upload", attachfile)
@@ -224,9 +224,9 @@
 					}
 					message = res.data
 					addAttachLi(message.url, message.filetype, 1, message.orgfilename)
-					$.alert("上传成功")
+					alert("上传成功")
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					return
 				}
 			}

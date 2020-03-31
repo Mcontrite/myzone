@@ -106,7 +106,7 @@
 	jsubmit.on('click', function() {
 		var ckmessage = CKEDITOR.instances.message.getData();
 		if (ckmessage.length < 1) {
-			$.alert("内容不能为空且不能小于1字")
+			alert("内容不能为空且不能小于1字")
 			return
 		}
 		qrform.reset();
@@ -125,7 +125,7 @@
 					location.href = "/sayings"
 				}, 500)
 			} else {
-				$.alert(message)
+				alert(message)
 				return
 			}
 		});

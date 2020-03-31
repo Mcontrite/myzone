@@ -64,16 +64,16 @@
 					admintoken = res.data.token
 					if (admintoken.length != 0) {
 						sessionStorage.setItem("admin_token", admintoken)
-						$.alert("管理员登录成功")
+						alert("管理员登录成功")
 						setTimeout(function() {
 							location.href = "/admin/index.html?token=" + admintoken
 						}, 500)
 					} else {
-						$.alert("获取token失败")
+						alert("获取token失败")
 						return
 					}
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					setTimeout(function() {
 						location.reload()
 					}, 500)

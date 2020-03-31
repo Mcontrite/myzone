@@ -191,7 +191,7 @@
 	var jsubmit = $('#replysubmit');
 	jsubmit.on('click', function() {
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
-			$.alert("写点什么再提交吧 ^_^")
+			alert("写点什么再提交吧 ^_^")
 			return;
 		}
 		qrform.reset();

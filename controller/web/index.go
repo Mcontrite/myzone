@@ -76,3 +76,16 @@ func SayingIndex(c *gin.Context) {
 		},
 	)
 }
+
+func ContactMe(c *gin.Context) {
+	islogin := user.IsLogin(c)
+	sessions := user.GetSessions(c)
+	c.HTML(
+		http.StatusOK,
+		"contactme.html",
+		gin.H{
+			"islogin":  islogin,
+			"sessions": sessions,
+		},
+	)
+}

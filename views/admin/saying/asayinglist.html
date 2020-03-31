@@ -63,12 +63,12 @@
 			success: function(res) {
 				if (res.code == 200) {
 					$(elem).parent().parent().parent().parent().parent().remove()
-					$.alert("说说删除成功 ！")
+					alert("说说删除成功 ！")
 					setTimeout(function () {
                         location.reload()
                     }, 500)
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 				}
 			}
 		})

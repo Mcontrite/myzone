@@ -132,7 +132,7 @@
 	var jsubmit = $('#commentsubmit');
 	jsubmit.on('click', function() {
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
-			$.alert("写点什么再提交吧 ^_^")
+			alert("写点什么再提交吧 ^_^")
 			return;
 		}		
 		qrform.reset();
@@ -217,7 +217,7 @@
 						$(".haya-favorite-user-count").text(res.data.fav_num);
 					}
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					return
 				}
 			}

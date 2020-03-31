@@ -59,13 +59,13 @@
         reg = /^[a-zA-Z]\w{2,17}$/
         matchResult = jusername.match(reg)
         if (!matchResult) {
-            $.alert("用户名只能包3-17位的字母数字下划线必须以字母开头")
+            alert("用户名只能包3-17位的字母数字下划线必须以字母开头")
             return
         } else {
             reg = /admin|guest|myzone|root/gi
             matchResult = jusername.match(reg)
             if (matchResult) {
-                $.alert("包含非法的用户名字符")
+                alert("包含非法的用户名字符")
                 return
             }
             $.ajax({
@@ -83,7 +83,7 @@
                         isused = 1
                         console.log("使用了")
                         // jform.find('[name="new_username"]').focus().alert("用户名已经使用了");
-                        $.alert("用户名已经用了")
+                        alert("用户名已经用了")
                     }
                 }
             })
@@ -93,7 +93,7 @@
         }
 
         if($("#password").val() != $("#checkpassword").val()){
-            $.alert("两次密码输入不一致！")
+            alert("两次密码输入不一致！")
             return 
         }
 
@@ -102,25 +102,21 @@
         var captchaKey = getCaptchaKey()
         captchaPass = virefyCaptcha(captcha, captchaKey)
         if (captcha.length == 0) {
-            $.alert("验证码不能为空")
+            alert("验证码不能为空")
             return
         } else {
             if (captchaPass != 200) {
-                $.alert("验证码错误")
+                alert("验证码错误")
                 refreshCaptcha()
                 return
             }
         }
 
-
         jform.reset();
         jsubmit.button('loading');
         var replydata = jform.serializeObject();
-        // replydata.password = $.md5(replydata.password);
         $.xpost(jform.attr('action'), replydata, function (code, message) {
             if (code == 200) {
-                //sessionStorage.setItem("user_reg_username", jusername)
-                // $.alert("注册成功,1秒后跳转到登录窗口")
                 jsubmit.button(message).delay(500).location("/login.html");
             } else {
                 jform.find('[name="' + code + '"]').alert(message).focus();

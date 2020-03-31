@@ -43,7 +43,7 @@
 						</div>
 						<!-- logo -->
 						<div>
-							<a href="#" data-activates="mobile-demo" class="button-collapse">
+							<a href="#" data-activates="mobile-back" class="button-collapse" style="float: left;left: 15px;">
 								<i class="icofont icofont-navigation-menu"></i>
 							</a>
 							<ul id="nav-mobile" class="main-menu center-align hide-on-med-and-down">
@@ -56,14 +56,14 @@
 							</ul>
 							<!-- /.main-menu -->
 							<!-- ******************** sidebar-menu ******************** -->
-							<ul class="side-nav" id="mobile-demo">
+							<ul class="side-nav" style="left: 0;" id="mobile-back">
 								<li class="snavlogo center-align"><img src="/static/img/logo.png" alt="logo"></li>
-								<li><a href="/admin/index.html">后台首页</a></li>
-								<li><a href="/admin/article/list.html?type=1&status=0">文章列表</a></li>
-								<li><a href="/admin/saying/list.html?type=1&status=0">说说列表</a></li>
-								<li><a href="/admin/user/list.html">用户列表</a></li>
-								<li><a href="/">前台</a></li>
-								<li><a id="adminlogout" href="#">退出</a></li>	
+								<li><a class="btn" href="/admin/index.html">后台首页</a></li>
+								<li><a class="btn" href="/admin/article/list.html?type=1&status=0">文章列表</a></li>
+								<li><a class="btn" href="/admin/saying/list.html?type=1&status=0">说说列表</a></li>
+								<li><a class="btn" href="/admin/user/list.html">用户列表</a></li>
+								<li><a class="btn" href="/">前台</a></li>
+								<li><a class="btn" id="adminlogout" href="#">退出</a></li>	
 							</ul>
 						</div>
 						<!-- main-menu -->
@@ -86,7 +86,7 @@
 			admintoken = sessionStorage.getItem("admin_token")
 			$("#adminlogout").on('click', function() {
 				sessionStorage.removeItem("admin_token")
-				$.alert("管理员退出登录")
+				alert("管理员退出登录")
 				setTimeout(function() {
 					location.href = "/admin/login.html"
 				}, 500)

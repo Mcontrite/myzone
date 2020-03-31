@@ -86,7 +86,7 @@
 	    location.href="/login.html"
 	}
 	if ({{.article.UserID}} != {{.sessions.Userid}}) {
-	    $.alert("您没有权限编辑")
+	    alert("没有权限进行编辑")
 	    setTimeout(function () {
 	        location.href = "/"
 	    },500)
@@ -186,7 +186,7 @@
 		var filesSize = attachfile.size		
 		console.log(attachfile.size)
 		if (filesSize > maxSize) {
-			$.alert("文件大于2M，不能上传")
+			alert("文件大于2M，不能上传")
 			return
 		}
 		fd.append("upload", attachfile)
@@ -211,9 +211,9 @@
 					
 					message = res.data
 					addAttachLi(message.url, message.filetype, 1, message.orgfilename)
-					$.alert("上传成功")
+					alert("上传成功")
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					return
 				}
 			}
@@ -248,7 +248,7 @@
 						$(elem).parent().remove()
 					}
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					return
 				}
 			}

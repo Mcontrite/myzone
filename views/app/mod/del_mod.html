@@ -94,12 +94,12 @@
 						//成功
 						console.log("返回值", res)
 						if (res.code == 200) {
-							$.alert("删除成功")
+							alert("删除成功")
 							setTimeout(function() {
 								location.reload()
 							}, 200)
 						} else {
-							$.alert(res.message)
+							alert(res.message)
 							jsubmit.reset()
 							return
 						}

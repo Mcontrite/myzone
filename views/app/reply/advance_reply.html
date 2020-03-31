@@ -125,7 +125,7 @@
 		}
 		// return
 		if (CKEDITOR.instances.editor1.getData().length == 0) {
-			$.alert("写点什么再提交吧 ^_^")
+			alert("写点什么再提交吧 ^_^")
 			return;
 		}
 		qrform.reset();
@@ -176,7 +176,7 @@
 		
 		console.log(attachfile.size)
 		if (filesSize > maxSize) {
-			$.alert("文件大于1M，不能上传")
+			alert("文件大于1M，不能上传")
 			return
 		}
 		fd.append("upload", attachfile)
@@ -199,12 +199,12 @@
 					
 					message = res.data
 					addAttachLi(message.url, message.filetype, 1, message.orgfilename)
-					$.alert("上传成功")
+					alert("上传成功")
 					setTimeout(function(){
 					    location.reload()
 					}, 500)
 				} else {
-					$.alert(res.message)
+					alert(res.message)
 					return
 				}
 			}
