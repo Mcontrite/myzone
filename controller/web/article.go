@@ -27,7 +27,7 @@ func Article(c *gin.Context) {
 	attachs, _ := model.GetAttachsByReplyId(int(freply.ID))
 	isfav, _ := model.CheckFavourite(sessions.Userid, articleId)
 	model.UpdateArticleViewsCnt(articleId)
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"article.html",
@@ -40,7 +40,6 @@ func Article(c *gin.Context) {
 			"reply_list_len": replylistLen,
 			"attachs":        attachs,
 			"isfav":          isfav,
-			"description":    description,
 		},
 	)
 }
@@ -49,15 +48,14 @@ func ArticleAddReply(c *gin.Context) {
 	articleId, _ := strconv.Atoi(c.Param("id"))
 	sessions := user.GetSessions(c)
 	islogin := user.IsLogin(c)
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"advance_reply.html",
 		gin.H{
-			"sessions":    sessions,
-			"islogin":     islogin,
-			"article_id":  articleId,
-			"description": description,
+			"sessions":   sessions,
+			"islogin":    islogin,
+			"article_id": articleId,
 		},
 	)
 }
@@ -65,14 +63,13 @@ func ArticleAddReply(c *gin.Context) {
 func NewArticle(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"newarticle.html",
 		gin.H{
-			"islogin":     islogin,
-			"sessions":    sessions,
-			"description": description,
+			"islogin":  islogin,
+			"sessions": sessions,
 		},
 	)
 }
@@ -85,18 +82,17 @@ func EditArticle(c *gin.Context) {
 	sessions := user.GetSessions(c)
 	attachs, _ := model.GetAttachsByReplyId(int(freply.ID))
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"editarticle.html",
 		gin.H{
-			"article":     article,
-			"freply":      freply,
-			"islogin":     islogin,
-			"sessions":    sessions,
-			"attachs":     attachs,
-			"webname":     webname,
-			"description": description,
+			"article":  article,
+			"freply":   freply,
+			"islogin":  islogin,
+			"sessions": sessions,
+			"attachs":  attachs,
+			"webname":  webname,
 		},
 	)
 }

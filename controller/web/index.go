@@ -25,7 +25,7 @@ func Index(c *gin.Context) {
 	replysNum, _ := model.CountReplyNum()
 	usersNum, _ := model.CountUserNum()
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"index.html",
@@ -39,7 +39,6 @@ func Index(c *gin.Context) {
 			"replys_num":   replysNum,
 			"users_num":    usersNum,
 			"webname":      webname,
-			"description":  description,
 		},
 	)
 }
@@ -57,7 +56,7 @@ func SayingIndex(c *gin.Context) {
 	commentsNum, _ := model.CountCommentNum()
 	usersNum, _ := model.CountUserNum()
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"sayingindex.html",
@@ -72,7 +71,6 @@ func SayingIndex(c *gin.Context) {
 			"comments_num": commentsNum,
 			"users_num":    usersNum,
 			"webname":      webname,
-			"description":  description,
 		},
 	)
 }

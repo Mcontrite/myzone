@@ -56,7 +56,6 @@ type Server struct {
 	Sitepre        string
 	Siteurl        string
 	Sitename       string
-	Sitebrief      string
 	Siteseoword    string
 	Timezone       string
 	Lang           string

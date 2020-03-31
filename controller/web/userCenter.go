@@ -31,13 +31,11 @@ const (
 )
 
 var (
-	webname     string
-	description string
+	webname string
 )
 
 func init() {
 	webname = setting.ServerSetting.Sitename
-	description = setting.ServerSetting.Sitebrief
 }
 
 func MyInfo(c *gin.Context) {
@@ -47,11 +45,10 @@ func MyInfo(c *gin.Context) {
 	userinfo, _ := user.GetUserByID(uid)
 	tpl := "my_info.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"userinfo": userinfo,
+		"webname":  webname,
 	})
 }
 
@@ -60,10 +57,9 @@ func MyEdit(c *gin.Context) {
 	sessions := user.GetSessions(c)
 	tpl := "my_edit.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"webname":  webname,
 	})
 }
 
@@ -75,11 +71,10 @@ func MyArticle(c *gin.Context) {
 	myArticles, _ := model.GetMyArticleList(uid, page, 20, "created_at desc")
 	tpl := "my_article.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"myarticles":  myArticles,
-		"webname":     webname,
-		"description": description,
+		"islogin":    islogin,
+		"sessions":   sessions,
+		"myarticles": myArticles,
+		"webname":    webname,
 	})
 }
 
@@ -91,11 +86,10 @@ func MySaying(c *gin.Context) {
 	mySayings, _ := model.GetMySayingList(uid, page, 20, "created_at desc")
 	tpl := "my_saying.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"mysayings":   mySayings,
-		"webname":     webname,
-		"description": description,
+		"islogin":   islogin,
+		"sessions":  sessions,
+		"mysayings": mySayings,
+		"webname":   webname,
 	})
 }
 
@@ -106,11 +100,10 @@ func MyFavorite(c *gin.Context) {
 	favArticles, _ := model.GetMyFavouriteList(uid, 1, 200, "created_at desc")
 	tpl := "my_favorite.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"articles":    favArticles,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"articles": favArticles,
+		"webname":  webname,
 	})
 }
 
@@ -122,11 +115,10 @@ func MyReply(c *gin.Context) {
 	replys, _ := model.GetMyReplyList(uid, page, 20, "created_at desc")
 	tpl := "my_reply.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"replys":      replys,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"replys":   replys,
+		"webname":  webname,
 	})
 }
 
@@ -138,11 +130,10 @@ func MyComment(c *gin.Context) {
 	comments, _ := model.GetMyCommentList(uid, page, 20, "created_at desc")
 	tpl := "my_comment.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"comments":    comments,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"comments": comments,
+		"webname":  webname,
 	})
 }
 
@@ -171,11 +162,10 @@ func UserInfo(c *gin.Context) {
 	userinfo, _ := user.GetUserByID(uid)
 	tpl := "u_info.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"userinfo": userinfo,
+		"webname":  webname,
 	})
 }
 
@@ -188,12 +178,11 @@ func UserArticle(c *gin.Context) {
 	myArticles, _ := model.GetMyArticleList(uid, page, 20, "created_at desc")
 	tpl := "u_articles.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"myarticles":  myArticles,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":    islogin,
+		"sessions":   sessions,
+		"myarticles": myArticles,
+		"userinfo":   userinfo,
+		"webname":    webname,
 	})
 }
 
@@ -206,12 +195,11 @@ func UserSaying(c *gin.Context) {
 	mySayings, _ := model.GetMySayingList(uid, page, 20, "created_at desc")
 	tpl := "u_sayings.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"mysayings":   mySayings,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":   islogin,
+		"sessions":  sessions,
+		"mysayings": mySayings,
+		"userinfo":  userinfo,
+		"webname":   webname,
 	})
 }
 
@@ -224,12 +212,11 @@ func UserReply(c *gin.Context) {
 	replys, _ := model.GetMyReplyList(uid, page, 20, "created_at desc")
 	tpl := "u_replys.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"replys":      replys,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"replys":   replys,
+		"userinfo": userinfo,
+		"webname":  webname,
 	})
 }
 
@@ -242,11 +229,10 @@ func UserComment(c *gin.Context) {
 	comments, _ := model.GetMyCommentList(uid, page, 20, "created_at desc")
 	tpl := "u_comments.html"
 	c.HTML(200, tpl, gin.H{
-		"islogin":     islogin,
-		"sessions":    sessions,
-		"comments":    comments,
-		"userinfo":    userinfo,
-		"webname":     webname,
-		"description": description,
+		"islogin":  islogin,
+		"sessions": sessions,
+		"comments": comments,
+		"userinfo": userinfo,
+		"webname":  webname,
 	})
 }

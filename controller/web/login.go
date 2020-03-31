@@ -12,7 +12,7 @@ func Login(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+	
 	c.HTML(
 		http.StatusOK,
 		"login.html",
@@ -20,7 +20,7 @@ func Login(c *gin.Context) {
 			"title":       "Home Page",
 			"islogin":     islogin,
 			"sessions":    sessions,
-			"description": description,
+			
 			"webname":     webname,
 		},
 	)

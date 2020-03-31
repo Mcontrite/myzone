@@ -12,7 +12,7 @@ func Register(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+	
 	c.HTML(
 		http.StatusOK,
 		"register.html",
@@ -21,7 +21,7 @@ func Register(c *gin.Context) {
 			"islogin":     islogin,
 			"sessions":    sessions,
 			"webname":     webname,
-			"description": description,
+			
 		},
 	)
 }

@@ -25,7 +25,6 @@ func Saying(c *gin.Context) {
 	commentlist, _ := model.GetSayingCommentListByTid(sayingId, 500, 1)
 	commentlistLen := len(commentlist)
 	model.UpdateSayingViewsCnt(sayingId)
-	description := setting.ServerSetting.Sitebrief
 	c.HTML(
 		http.StatusOK,
 		"saying.html",
@@ -36,7 +35,6 @@ func Saying(c *gin.Context) {
 			"sessions":         sessions,
 			"commentlist":      commentlist,
 			"comment_list_len": commentlistLen,
-			"description":      description,
 		},
 	)
 }
@@ -45,15 +43,14 @@ func SayingAddComment(c *gin.Context) {
 	sayingId, _ := strconv.Atoi(c.Param("id"))
 	sessions := user.GetSessions(c)
 	islogin := user.IsLogin(c)
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"advance_comment.html",
 		gin.H{
-			"sessions":    sessions,
-			"islogin":     islogin,
-			"saying_id":   sayingId,
-			"description": description,
+			"sessions":  sessions,
+			"islogin":   islogin,
+			"saying_id": sayingId,
 		},
 	)
 }
@@ -61,14 +58,13 @@ func SayingAddComment(c *gin.Context) {
 func NewSaying(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"newsaying.html",
 		gin.H{
-			"islogin":     islogin,
-			"sessions":    sessions,
-			"description": description,
+			"islogin":  islogin,
+			"sessions": sessions,
 		},
 	)
 }
@@ -80,17 +76,16 @@ func EditSaying(c *gin.Context) {
 	islogin := user.IsLogin(c)
 	sessions := user.GetSessions(c)
 	webname := setting.ServerSetting.Sitename
-	description := setting.ServerSetting.Sitebrief
+
 	c.HTML(
 		http.StatusOK,
 		"editsaying.html",
 		gin.H{
-			"saying":      saying,
-			"fcomment":    fcomment,
-			"islogin":     islogin,
-			"sessions":    sessions,
-			"webname":     webname,
-			"description": description,
+			"saying":   saying,
+			"fcomment": fcomment,
+			"islogin":  islogin,
+			"sessions": sessions,
+			"webname":  webname,
 		},
 	)
 }
